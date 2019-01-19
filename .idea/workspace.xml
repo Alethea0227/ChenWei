@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3adee13-cf02-44d5-b0c1-d5867cc522d6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/ClientTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/ServerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/client/SocketClientHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/client/SocketClientStarter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/common/AbstractHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/common/AbstractStarter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/common/SocketUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/common/ThreadPoolExecutorUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/server/SocketServerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Java/src/main/java/com/chenwei/java/study/socket/server/SocketServerStarter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -42,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+            <state relative-caret-position="102">
+              <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -163,7 +150,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547877335432" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547877637988" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -248,12 +235,12 @@
       <workItem from="1537682626914" duration="3970000" />
       <workItem from="1547696938987" duration="608000" />
       <workItem from="1547708324938" duration="2346000" />
-      <workItem from="1547858893123" duration="4830000" />
+      <workItem from="1547858893123" duration="5120000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11821000" />
+    <option name="totallyTimeSpent" value="12111000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -493,8 +480,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        <state relative-caret-position="102">
+          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
         </state>
       </provider>
     </entry>
