@@ -8,15 +8,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="auth" />
         <module name="file" />
+        <module name="Java" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="auth-server" target="1.8" />
-      <module name="core" target="1.8" />
-      <module name="file-server" target="1.8" />
-      <module name="oauth" target="1.8" />
-      <module name="oauth-server" target="1.8" />
-      <module name="static-file-server" target="1.8" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8" />
   </component>
 </project>
