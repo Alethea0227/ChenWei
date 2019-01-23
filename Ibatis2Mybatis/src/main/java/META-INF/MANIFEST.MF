@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.chenwei.ibatis2mybatis.util.ibatis2mybatis.Ibatis2Myba
+ tis
+
