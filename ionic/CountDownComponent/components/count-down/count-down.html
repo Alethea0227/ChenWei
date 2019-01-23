@@ -1,0 +1,15 @@
+<p>
+  开始时间：{{_startTime}}
+</p>
+<p>
+  结束时间：{{_endTime}}
+</p>
+<p>
+  <span *ngIf="showCountDown">还有{{timeDay}}天{{timeHour}}小时{{timeMinute}}分{{timeSecond}}秒</span>&nbsp;{{timerType}}
+</p>
+<p>
+  <ion-buttons>
+    <button ion-button (click)="start()">开始(子组件)</button>
+    <button ion-button (click)="stop()">结束(子组件)</button>
+  </ion-buttons>
+</p>

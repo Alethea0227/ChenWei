@@ -1,0 +1,16 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>count-down-default</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-buttons>
+    <button ion-button round (click)="start()">开始</button>
+    <button ion-button round (click)="stop()">结束</button>
+  </ion-buttons>
+  <count-down [startTime]="startTime" [endTime]="endTime" (onStatusChange)="onStatusChange($event)"></count-down>
+</ion-content>
