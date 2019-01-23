@@ -28,9 +28,6 @@ export class CountDownDefaultPage {
         break;
     }
   }
-  /**
-   * 启动结束方式二，直接控制子组件方法
-   */
 
   start() {
     this.countDown.start();
