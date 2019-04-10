@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_project_pre_amount">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.ProjectPreAmount">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+    <result column="pre_contract_amount" property="preContractAmount" jdbcType="VARCHAR"/>
+    <result column="pre_man_month" property="preManMonth" jdbcType="VARCHAR"/>
+    <result column="pre_amount" property="preAmount" jdbcType="VARCHAR"/>
+    <result column="project_begin_time" property="projectBeginTime" jdbcType="TIMESTAMP"/>
+    <result column="project_end_time" property="projectEndTime" jdbcType="TIMESTAMP"/>
+    <result column="completeness" property="completeness" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">id, project_no, pre_contract_amount, pre_man_month, pre_amount, project_begin_time, project_end_time, completeness</sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_project_pre_amount where id = #{id:VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_project_pre_amount where id = #{id:VARCHAR}</delete>
+  <insert id="insertSelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectPreAmount">insert into tbl_project_pre_amount 
+    <trim prefix="("> 
+      <if test="id != null">id ,</if>  
+      <if test="projectNo != null">project_no ,</if>  
+      <if test="preContractAmount != null">pre_contract_amount ,</if>  
+      <if test="preManMonth != null">pre_man_month ,</if>  
+      <if test="preAmount != null">pre_amount ,</if>  
+      <if test="projectBeginTime != null">project_begin_time ,</if>  
+      <if test="projectEndTime != null">project_end_time ,</if>  
+      <if test="completeness != null">completeness ,</if> )
+    </trim> values 
+    <trim prefix="("> 
+      <if test="id != null">#{id:VARCHAR} ,</if>  
+      <if test="projectNo != null">#{projectNo:VARCHAR} ,</if>  
+      <if test="preContractAmount != null">#{preContractAmount:VARCHAR} ,</if>  
+      <if test="preManMonth != null">#{preManMonth:VARCHAR} ,</if>  
+      <if test="preAmount != null">#{preAmount:VARCHAR} ,</if>  
+      <if test="projectBeginTime != null">#{projectBeginTime:TIMESTAMP} ,</if>  
+      <if test="projectEndTime != null">#{projectEndTime:TIMESTAMP} ,</if>  
+      <if test="completeness != null">#{completeness:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <insert id="export" parameterType="com.i2shopping.i2work.operation.core.contract.model.ContractAndPre">insert into tbl_project_pre_amount 
+    <trim prefix="("> 
+      <if test="preId != null">id ,</if>  
+      <if test="contractNo != null">project_no ,</if>  
+      <if test="preContractAmount != null">pre_contract_amount ,</if>  
+      <if test="preManMonth != null">pre_man_month ,</if>  
+      <if test="preAmount != null">pre_amount ,</if>  
+      <if test="projectBeginTime != null">project_begin_time ,</if>  
+      <if test="projectEndTime != null">project_end_time ,</if>  
+      <if test="completeness != null">completeness ,</if> )
+    </trim> values 
+    <trim prefix="("> 
+      <if test="preId != null">#{id:VARCHAR} ,</if>  
+      <if test="contractNo != null">#{contractNo:VARCHAR} ,</if>  
+      <if test="preContractAmount != null">#{preContractAmount:VARCHAR} ,</if>  
+      <if test="preManMonth != null">#{preManMonth:VARCHAR} ,</if>  
+      <if test="preAmount != null">#{preAmount:VARCHAR} ,</if>  
+      <if test="projectBeginTime != null">#{projectBeginTime:TIMESTAMP} ,</if>  
+      <if test="projectEndTime != null">#{projectEndTime:TIMESTAMP} ,</if>  
+      <if test="completeness != null">#{completeness:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectPreAmount">update tbl_project_pre_amount 
+    <trim prefix="set"> 
+      <if test="projectNo != null">project_no = #{projectNo:VARCHAR} ,</if>  
+      <if test="preContractAmount != null">pre_contract_amount = #{preContractAmount:VARCHAR} ,</if>  
+      <if test="preManMonth != null">pre_man_month = #{preManMonth:VARCHAR} ,</if>  
+      <if test="preAmount != null">pre_amount = #{preAmount:VARCHAR} ,</if>  
+      <if test="projectBeginTime != null">project_begin_time = #{projectBeginTime:TIMESTAMP} ,</if>  
+      <if test="projectEndTime != null">project_end_time = #{projectEndTime:TIMESTAMP} ,</if>  
+      <if test="completeness != null">completeness = #{completeness:VARCHAR} ,</if> 
+    </trim> where id = #{id:VARCHAR}
+  </update>
+  <select id="selectSelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectPreAmount" resultMap="BaseResultMap">select 
+    <include refid="Base_Column_List"/> from tbl_project_pre_amount where 1=1
+    <trim> 
+      <if test="id != null">id = #{id:VARCHAR}</if>  
+      <if test="projectNo != null">project_no = #{projectNo:VARCHAR}</if>  
+      <if test="preContractAmount != null">pre_contract_amount = #{preContractAmount:VARCHAR}</if>  
+      <if test="preManMonth != null">pre_man_month = #{preManMonth:VARCHAR}</if>  
+      <if test="preAmount != null">pre_amount = #{preAmount:VARCHAR}</if>  
+      <if test="projectBeginTime != null">project_begin_time = #{projectBeginTime:TIMESTAMP}</if>  
+      <if test="projectEndTime != null">project_end_time = #{projectEndTime:TIMESTAMP}</if>  
+      <if test="completeness != null">completeness = #{completeness:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <select id="selectByProjectNo" parameterType="java.lang.String" resultMap="BaseResultMap">select 
+    <include refid="Base_Column_List"/> from tbl_project_pre_amount where project_no=#{value:VARCHAR}
+  </select>
+</mapper>

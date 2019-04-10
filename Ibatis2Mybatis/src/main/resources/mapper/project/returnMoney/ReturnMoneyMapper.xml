@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_project_return_money">
+  <typeAlias alias="ReturnMoney" type="com.i2shopping.i2work.operation.core.project.model.ReturnMoney"/>
+  <resultMap id="BaseResultMap" type="ReturnMoney">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="return_date" property="returnDate" jdbcType="TIMESTAMP"/>
+    <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+    <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR"/>
+    <result column="contract_name" property="contractName" jdbcType="VARCHAR"/>
+    <result column="return_amount" property="returnAmount" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="PageListMap" extends="BaseResultMap" type="ReturnMoney">
+    <result property="supposedIncome" column="supposed_income" jdbcType="VARCHAR"/>
+    <result property="notIncome" column="not_income" jdbcType="VARCHAR"/>
+    <result property="customerShortName" column="customer_fullName" jdbcType="VARCHAR"/>
+    <result property="departmentName" column="DEPARTMENT_NAME" jdbcType="VARCHAR"/>
+  </resultMap>
+  <select id="count" resultType="java.lang.Integer" parameterType="ReturnMoney">select count(*) from tbl_project_return_money where 1=1
+    <if test="projectNo != null and projectNo != ''">and project_no=#{projectNo:varchar }</if>  
+    <if test="contractNo != null and contractNo != ''">and contract_no= #{contractNo:varchar }</if>  
+    <if test="projectName != null">and a.project_name LIKE '%$projectName$%'</if>  
+    <if test="contractName != null">and a.contract_name LIKE '%$contractName$%'</if>  
+    <if test="departmentName != null">and c.department_id LIKE '%$contractName$%'</if>  
+    <if test="customerShortName != null">and d.customer_fullName LIKE '%$customerShortName$%'</if>  
+    <if test="returnDate != null">a.return_date= #{returnDate:VARCHAR}</if> 
+  </select>
+  <select id="selectPageList" parameterType="ReturnMoney" resultMap="PageListMap">SELECT a.*, b.supposed_income, b.not_income, d.customer_fullName, e.DEPARTMENT_NAME FROM tbl_project_return_money a, tbl_customer_supposed_income b, tbl_project_info c, tbl_customer_info d, tbl_department_info e WHERE a.project_no = b.project_no AND a.project_no = c.contract_no AND b.customer_id = d.customer_id AND c.department_id = e.DEPARTMENT_ID
+    <if test="projectNo != null and projectNo != ''">and project_no=#{projectNo:varchar }</if>  
+    <if test="contractNo != null and contractNo != ''">and contract_no= #{contractNo:varchar }</if>  
+    <if test="projectName != null">and a.project_name LIKE '%$projectName$%'</if>  
+    <if test="contractName != null">and a.contract_name LIKE '%$contractName$%'</if>  
+    <if test="departmentName != null">and c.department_id LIKE '%$contractName$%'</if>  
+    <if test="customerShortName != null">and d.customer_fullName LIKE '%$customerShortName$%'</if>  
+    <if test="returnDate != null">a.return_date= #{returnDate:VARCHAR}</if> 
+  </select>
+  <insert id="insert" parameterType="ReturnMoney">insert into tbl_project_return_money(id,return_date, project_no, project_name, contract_no, contract_name, return_amount) values ( #{id:varchar }, #{returnDate: timestamp }, #{projectNo:varchar }, #{projectName:varchar }, #{contractNo:varchar }, #{contractName:varchar }, #{returnAmount:varchar } );</insert>
+  <update id="update" parameterType="ReturnMoney">update tbl_project_return_money set id =#{id:varchar }
+    <if test="returnDate != null and returnDate != ''">return_date=#{returnDate:timestamp } ,</if>  
+    <if test="projectNo != null and projectNo != ''">project_no=#{projectNo:timestamp } ,</if>  
+    <if test="projectName != null and projectName != ''">project_name=#{projectName:timestamp } ,</if>  
+    <if test="contractNo != null and contractNo != ''">contract_no=#{contractNo:timestamp } ,</if>  
+    <if test="contractName != null and contractName != ''">contract_name=#{contractName:timestamp } ,</if>  
+    <if test="returnAmount != null and returnAmount != ''">return_amount=#{returnAmount:timestamp } ,</if> where id=#{id:varchar }
+  </update>
+  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">select * from tbl_project_return_money where id =#{id:varchar };</select>
+</mapper>

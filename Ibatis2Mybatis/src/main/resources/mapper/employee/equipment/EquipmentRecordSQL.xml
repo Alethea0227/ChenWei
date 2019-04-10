@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_equipment_record">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecord">
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="EQUIMENT_ID" property="equipmentId" jdbcType="VARCHAR"/>
+    <result column="RECORD_ID" property="recordId" jdbcType="VARCHAR"/>
+    <result column="RECORD_BEGIN" property="recordBegin" jdbcType="TIMESTAMP"/>
+    <result column="RECORD_END" property="recordEnd" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecordVo">
+    <association column="EMPLOYEE_ID" property="employeeInfo" select="tbl_employee_info.selectEmpProject"/>
+    <association column="EQUIMENT_ID" property="equipmentInfo" select="tbl_equipment_info.selectBaseByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List">EMPLOYEE_ID, EQUIMENT_ID, RECORD_ID, RECORD_BEGIN, RECORD_END</sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_equipment_record where RECORD_ID = #{recordId:VARCHAR}
+  </select>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecord">select 
+    <include refid="Base_Column_List"/> from tbl_equipment_record where 1 = 1 
+    <if test="employeeId != null and employeeId != ''">EMPLOYEE_ID = #{employeeId:VARCHAR}</if>  
+    <if test="equipmentId != null and equipmentId != ''">EQUIMENT_ID = #{equipmentId:VARCHAR}</if>  
+    <if test="recordId != null and recordId != ''">RECORD_ID = #{recordId:VARCHAR}</if>  
+    <if test="recordBegin != null and recordBegin != ''">RECORD_BEGIN = #{recordBegin:TIMESTAMP}</if>  
+    <if test="recordEnd != null and recordEnd != ''">RECORD_END = #{recordEnd:TIMESTAMP}</if> 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_equipment_record where RECORD_ID = #{recordId:VARCHAR}</delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecord">insert into tbl_equipment_record 
+    <trim prefix="("> 
+      <if test="employeeId != null and employeeId != ''">EMPLOYEE_ID ,</if>  
+      <if test="equipmentId != null and equipmentId != ''">EQUIMENT_ID ,</if>  
+      <if test="recordId != null and recordId != ''">RECORD_ID ,</if>  
+      <if test="recordBegin != null and recordBegin != ''">RECORD_BEGIN ,</if>  
+      <if test="recordEnd != null and recordEnd != ''">RECORD_END ,</if> )
+    </trim> VALUES 
+    <trim prefix="("> 
+      <if test="employeeId != null and employeeId != ''">#{employeeId:VARCHAR} ,</if>  
+      <if test="equipmentId != null and equipmentId != ''">#{equipmentId:VARCHAR} ,</if>  
+      <if test="recordId != null and recordId != ''">#{recordId:VARCHAR} ,</if>  
+      <if test="recordBegin != null and recordBegin != ''">#{recordBegin:TIMESTAMP} ,</if>  
+      <if test="recordEnd != null and recordEnd != ''">#{recordEnd:TIMESTAMP} ,</if> )
+    </trim> 
+  </insert>
+  <update id="update" parameterType="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecord">update tbl_equipment_record 
+    <trim prefix="set"> 
+      <if test="employeeId != null and employeeId != ''">EMPLOYEE_ID = #{employeeId:VARCHAR} ,</if>  
+      <if test="equipmentId != null and equipmentId != ''">EQUIMENT_ID = #{equipmentId:VARCHAR} ,</if>  
+      <if test="recordId != null and recordId != ''">RECORD_ID = #{recordId:VARCHAR} ,</if>  
+      <if test="recordBegin != null and recordBegin != ''">RECORD_BEGIN = #{recordBegin:TIMESTAMP} ,</if>  
+      <if test="recordEnd != null and recordEnd != ''">RECORD_END = #{recordEnd:TIMESTAMP} ,</if> 
+    </trim> where RECORD_ID = #{recordId:VARCHAR}
+  </update>
+  <select id="export" resultMap="VoResultMap" parameterType="java.lang.String">SELECT 
+    <include refid="Base_Column_List"/> FROM tbl_equipment_record WHERE employee_id = #{eid :VARCHAR} ORDER BY RECORD_BEGIN DESC
+  </select>
+</mapper>

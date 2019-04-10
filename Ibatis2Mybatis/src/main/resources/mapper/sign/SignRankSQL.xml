@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_sign_ranking">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.sign.model.SignRank">
+    <result column="RANK_ID" property="rankId" jdbcType="VARCHAR"/>
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="SIGN_MULTIPLE_POINT" property="signMultiplePoint" jdbcType="DOUBLE"/>
+    <result column="SIGN_POINT_DATE" property="signPointDate" jdbcType="DATE"/>
+    <result column="BUSYNESS_GRADE" property="busynessGrade" jdbcType="DOUBLE"/>
+    <result column="CONTRACT_NO" property="contractNo" jdbcType="VARCHAR"/>
+    <result column="EMP_RANK" property="empRank" jdbcType="CHAR"/>
+    <result column="RANK_TYPE" property="rankType" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="BaseResultMapEx" extends="BaseResultMap" type="com.i2shopping.i2work.operation.core.sign.model.SignRank">
+    <result column="EMPLOYEE_NAME" property="employeeName" jdbcType="VARCHAR"/>
+    <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+    <result column="IMAGE_ID" property="imageId" jdbcType="VARCHAR"/>
+    <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Criteria_Where_Clause"> 
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate"> 
+      <if test="oredCriteria[].valid!= null and oredCriteria[].valid == 'true'.toString()">( 
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and">$oredCriteria[].criteriaWithoutValue[]$</iterate>  
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and">$oredCriteria[].criteriaWithSingleValue[].condition$ #{oredCriteria[].criteriaWithSingleValue[].value}</iterate>  
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and">$oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction=",">#{oredCriteria[].criteriaWithListValue[].values[]}</iterate> 
+        </iterate>  
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and">$oredCriteria[].criteriaWithBetweenValue[].condition$ #{oredCriteria[].criteriaWithBetweenValue[].values[0]} and #{oredCriteria[].criteriaWithBetweenValue[].values[1]}</iterate> )
+      </if> 
+    </iterate> 
+  </sql>
+  <sql id="tbl_sign_ranking.Sign_Rank_Where_Clause"> 
+    <if test="rankId != null and rankId != ''">and rank.RANK_ID = #{rankId:VARCHAR}</if>  
+    <if test="employeeId != null and employeeId != ''">and rank.EMPLOYEE_ID = #{employeeId:VARCHAR}</if>  
+    <if test="signMultiplePoint != null and signMultiplePoint != ''">and rank.SIGN_MULTIPLE_POINT = #{signMultiplePoint:DOUBLE}</if>  
+    <if test="signPointDate != null and signPointDate != ''">and rank.SIGN_POINT_DATE = #{signPointDate:DATE}</if>  
+    <if test="busynessGrade != null and busynessGrade != ''">and rank.BUSYNESS_GRADE = #{busynessGrade:DOUBLE}</if>  
+    <if test="contractNo != null and contractNo != ''">and rank.CONTRACT_NO = #{contractNo:VARCHAR}</if>  
+    <if test="empRank != null and empRank != ''">and rank.EMP_RANK = #{empRank:CHAR}</if>  
+    <if test="rankType != null and rankType != ''">and rank.RANK_TYPE = #{rankType:VARCHAR}</if>  
+    <if test="properties.beginTime != null and properties.beginTime != ''">and date_format(rank.sign_point_date,'%Y-%m-%d')&gt;= #{properties.beginTime:VARCHAR}</if>  
+    <if test="properties.endTime != null and properties.endTime != ''">and date_format(rank.sign_point_date,'%Y-%m-%d')&lt; #{properties.endTime:VARCHAR}</if>  
+    <if test="properties.companyId != null and properties.companyId != ''">and emp.BEYOND_COMPANY = #{properties.companyId:VARCHAR}</if> 
+  </sql>
+  <!-- 按条件查询优秀或差的员工 -->
+  <select id="selectBySignRank" resultMap="BaseResultMapEx" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRank">select rank.*,emp.employee_name,emp.image_id , pro.project_name, dep.department_name from tbl_sign_ranking rank, tbl_employee_info emp ,tbl_project_info pro , tbl_department_info dep where rank.employee_id = emp.employee_id and rank.contract_no = pro.contract_no and dep.department_id = emp.department_id AND emp.IS_ON_DUTY = '01'
+    <if test="properties.area != null and properties.area != ''">and dep.area = #{properties.area:VARCHAR}</if>  
+    <if test="properties.company != null and properties.company != ''">and emp.BEYOND_COMPANY = #{properties.company:VARCHAR}</if>  
+    <include refid="tbl_sign_ranking.Sign_Rank_Where_Clause"/> 
+  </select>
+  <!-- 按条件查询优秀或差的员工 -->
+  <select id="selectSignRank" resultMap="BaseResultMapEx" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRank">select rank.*,emp.employee_name,emp.image_id , pro.project_name , dep.department_name from tbl_sign_ranking rank, tbl_employee_info emp ,tbl_project_info pro , tbl_department_info dep where rank.employee_id = emp.employee_id and rank.contract_no = pro.contract_no and dep.department_id = emp.department_id
+    <if test="rankType != null and rankType != ''">and rank.RANK_TYPE = #{rankType:VARCHAR}</if>  
+    <if test="properties.beginTime != null and properties.beginTime != ''">and date_format(rank.sign_point_date,'%Y-%m-%d')&gt;= #{properties.beginTime:VARCHAR}</if>  
+    <if test="properties.endTime != null and properties.endTime != ''">and date_format(rank.sign_point_date,'%Y-%m-%d')&lt; #{properties.endTime:VARCHAR}</if>  
+    <if test="contractNo != null and contractNo != ''">and rank.contract_no = #{contractNo:VARCHAR}</if>  
+    <if test="properties.companyId != null and properties.companyId != ''">and emp.BEYOND_COMPANY = #{properties.companyId:VARCHAR}</if> 
+  </select>
+  <select id="selectByCriteria" resultMap="BaseResultMap" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRankCriteria"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> select RANK_ID, EMPLOYEE_ID, SIGN_MULTIPLE_POINT, SIGN_POINT_DATE, BUSYNESS_GRADE, CONTRACT_NO, EMP_RANK, RANK_TYPE from tbl_sign_ranking
+    <if test="_parameter != null"> 
+      <include refid="tbl_sign_ranking.Criteria_Where_Clause"/>  
+      <if test="orderByClause != null">order by ${orderByClause}</if> 
+    </if> 
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRank"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> select RANK_ID, EMPLOYEE_ID, SIGN_MULTIPLE_POINT, SIGN_POINT_DATE, BUSYNESS_GRADE, CONTRACT_NO, EMP_RANK, RANK_TYPE from tbl_sign_ranking where RANK_ID = #{rankId:VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRank"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> delete from tbl_sign_ranking where RANK_ID = #{rankId:VARCHAR}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRankCriteria"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> delete from tbl_sign_ranking 
+    <include refid="tbl_sign_ranking.Criteria_Where_Clause"/> 
+  </delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRank"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> insert into tbl_sign_ranking (RANK_ID, EMPLOYEE_ID, SIGN_MULTIPLE_POINT, SIGN_POINT_DATE, BUSYNESS_GRADE, CONTRACT_NO, EMP_RANK, RANK_TYPE) values (#{rankId:VARCHAR}, #{employeeId:VARCHAR}, #{signMultiplePoint:DOUBLE}, #{signPointDate:DATE}, #{busynessGrade:DOUBLE}, #{contractNo:VARCHAR}, #{empRank:CHAR}, #{rankType:VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRank"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> insert into tbl_sign_ranking 
+    <trim prefix="("> 
+      <if test="rankId != null">RANK_ID ,</if>  
+      <if test="employeeId != null">EMPLOYEE_ID ,</if>  
+      <if test="signMultiplePoint != null">SIGN_MULTIPLE_POINT ,</if>  
+      <if test="signPointDate != null">SIGN_POINT_DATE ,</if>  
+      <if test="busynessGrade != null">BUSYNESS_GRADE ,</if>  
+      <if test="contractNo != null">CONTRACT_NO ,</if>  
+      <if test="empRank != null">EMP_RANK ,</if>  
+      <if test="rankType != null">RANK_TYPE ,</if> )
+    </trim> values 
+    <trim prefix="("> 
+      <if test="rankId != null">#{rankId:VARCHAR} ,</if>  
+      <if test="employeeId != null">#{employeeId:VARCHAR} ,</if>  
+      <if test="signMultiplePoint != null">#{signMultiplePoint:DOUBLE} ,</if>  
+      <if test="signPointDate != null">#{signPointDate:DATE} ,</if>  
+      <if test="busynessGrade != null">#{busynessGrade:DOUBLE} ,</if>  
+      <if test="contractNo != null">#{contractNo:VARCHAR} ,</if>  
+      <if test="empRank != null">#{empRank:CHAR} ,</if>  
+      <if test="rankType != null">#{rankType:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <select id="countByCriteria" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRankCriteria" resultType="java.lang.Integer"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> select count(*) from tbl_sign_ranking 
+    <include refid="tbl_sign_ranking.Criteria_Where_Clause"/> 
+  </select>
+  <update id="updateByCriteriaSelective"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> update tbl_sign_ranking 
+    <trim prefix="set"> 
+      <if test="record.rankId != null">RANK_ID = #{record.rankId:VARCHAR} ,</if>  
+      <if test="record.employeeId != null">EMPLOYEE_ID = #{record.employeeId:VARCHAR} ,</if>  
+      <if test="record.signMultiplePoint != null">SIGN_MULTIPLE_POINT = #{record.signMultiplePoint:DOUBLE} ,</if>  
+      <if test="record.signPointDate != null">SIGN_POINT_DATE = #{record.signPointDate:DATE} ,</if>  
+      <if test="record.busynessGrade != null">BUSYNESS_GRADE = #{record.busynessGrade:DOUBLE} ,</if>  
+      <if test="record.contractNo != null">CONTRACT_NO = #{record.contractNo:VARCHAR} ,</if>  
+      <if test="record.empRank != null">EMP_RANK = #{record.empRank:CHAR} ,</if>  
+      <if test="record.rankType != null">RANK_TYPE = #{record.rankType:VARCHAR} ,</if> 
+    </trim>  
+    <if test="_parameter != null"> 
+      <include refid="tbl_sign_ranking.Criteria_Where_Clause"/> 
+    </if> 
+  </update>
+  <update id="updateByCriteria"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> update tbl_sign_ranking set RANK_ID = #{record.rankId:VARCHAR}, EMPLOYEE_ID = #{record.employeeId:VARCHAR}, SIGN_MULTIPLE_POINT = #{record.signMultiplePoint:DOUBLE}, SIGN_POINT_DATE = #{record.signPointDate:DATE}, BUSYNESS_GRADE = #{record.busynessGrade:DOUBLE}, CONTRACT_NO = #{record.contractNo:VARCHAR}, EMP_RANK = #{record.empRank:CHAR}, RANK_TYPE = #{record.rankType:VARCHAR}
+    <if test="_parameter != null"> 
+      <include refid="tbl_sign_ranking.Criteria_Where_Clause"/> 
+    </if> 
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRank"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> update tbl_sign_ranking 
+    <trim prefix="set"> 
+      <if test="employeeId != null">EMPLOYEE_ID = #{employeeId:VARCHAR} ,</if>  
+      <if test="signMultiplePoint != null">SIGN_MULTIPLE_POINT = #{signMultiplePoint:DOUBLE} ,</if>  
+      <if test="signPointDate != null">SIGN_POINT_DATE = #{signPointDate:DATE} ,</if>  
+      <if test="busynessGrade != null">BUSYNESS_GRADE = #{busynessGrade:DOUBLE} ,</if>  
+      <if test="contractNo != null">CONTRACT_NO = #{contractNo:VARCHAR} ,</if>  
+      <if test="empRank != null">EMP_RANK = #{empRank:CHAR} ,</if>  
+      <if test="rankType != null">RANK_TYPE = #{rankType:VARCHAR} ,</if> 
+    </trim> where RANK_ID = #{rankId:VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.i2shopping.i2work.operation.core.sign.model.SignRank"> 
+    <!--
+      WARNING - This element is automatically generated by Apache iBATIS ibator, do not modify.
+      This element was generated on Mon Aug 03 20:18:28 CST 2015.
+    --> update tbl_sign_ranking set EMPLOYEE_ID = #{employeeId:VARCHAR}, SIGN_MULTIPLE_POINT = #{signMultiplePoint:DOUBLE}, SIGN_POINT_DATE = #{signPointDate:DATE}, BUSYNESS_GRADE = #{busynessGrade:DOUBLE}, CONTRACT_NO = #{contractNo:VARCHAR}, EMP_RANK = #{empRank:CHAR}, RANK_TYPE = #{rankType:VARCHAR} where RANK_ID = #{rankId:VARCHAR}
+  </update>
+</mapper>

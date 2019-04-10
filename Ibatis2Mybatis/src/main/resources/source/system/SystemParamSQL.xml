@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="B2C_SYSTEMPARAM" >
+  <resultMap id="SystemparamResult" class="com.i2shopping.i2work.operation.core.system.model.SystemParam" >
+    <result column="PARAMTYPE" property="paramtype" jdbcType="VARCHAR2" />
+    <result column="PARAMVALUE" property="paramvalue" jdbcType="VARCHAR2" />
+    <result column="PARAMCODE" property="paramcode" jdbcType="VARCHAR2" />
+    <result column="PARAMNAME" property="paramname" jdbcType="VARCHAR2" />
+    <result column="PARAMSEQ" property="paramseq" jdbcType="INTEGER" />
+    <result column="PARAMDESC" property="paramdesc" jdbcType="VARCHAR2" />
+  </resultMap>
+    
+  <sql id="Criteria_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$
+            #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+    
+  <select id="selectByPrimaryKey" resultMap="SystemparamResult" parameterClass="com.i2shopping.i2work.operation.core.system.model.SystemParamKey" >
+    select PARAMTYPE, PARAMVALUE, PARAMCODE, PARAMNAME, PARAMSEQ, PARAMDESC
+    from B2C_SYSTEMPARAM
+    where PARAMTYPE = #paramtype:VARCHAR#
+      and PARAMCODE = #paramcode:VARCHAR#
+  </select>
+
+  <select id="selectAllParms" resultMap="SystemparamResult">
+    select PARAMTYPE, PARAMVALUE, PARAMCODE, PARAMNAME, PARAMSEQ, PARAMDESC
+    from B2C_SYSTEMPARAM order by PARAMTYPE 
+  </select>
+
+  <select id="selectByCriteria" resultMap="SystemparamResult" parameterClass="com.i2shopping.i2work.operation.core.system.dao.SystemparamCriteria" >
+    select PARAMTYPE, PARAMVALUE, PARAMCODE, PARAMNAME, PARAMSEQ, PARAMDESC
+    from B2C_SYSTEMPARAM
+    <isParameterPresent >
+      <include refid="B2C_SYSTEMPARAM.Criteria_Where_Clause" />
+    </isParameterPresent>
+  </select>
+  
+  <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.system.model.SystemParam">
+    INSERT INTO B2C_SYSTEMPARAM
+     (PARAMTYPE,PARAMCODE,PARAMNAME,PARAMVALUE,PARAMSEQ,PARAMDESC)
+     VALUES(#paramtype:VARCHAR#,#paramvalue:VARCHAR#,#paramcode:VARCHAR#,#paramname:VARCHAR#,#paramseq:INTEGER#,#paramdesc:VARCHAR#)
+
+  </insert>
+  <delete id="delete" parameterClass="java.lang.String">
+    delete from B2C_SYSTEMPARAM 
+    where paramcode=#value#
+  </delete>
+  <update id="updateByPrimaryKey" parameterClass="com.i2shopping.i2work.operation.core.system.model.SystemParam" >
+    update B2C_SYSTEMPARAM
+    set PARAMVALUE = #paramvalue:VARCHAR#
+     <dynamic prepend=",">
+     	<isNotEmpty property="paramdesc">
+     		PARAMDESC  = #paramdesc:VARCHAR#
+     	</isNotEmpty>
+     </dynamic>   
+    where PARAMTYPE = #paramtype:VARCHAR#
+      and PARAMCODE = #paramcode:VARCHAR#
+  </update>
+  
+  <select id="searchByTypeNotPwd" parameterClass="java.lang.String" resultMap="SystemparamResult">
+  	 <![CDATA[select * from B2C_SYSTEMPARAM where PARAMTYPE = #value:VARCHAR# and PARAMCODE !='04001' and PARAMCODE !='04002' and PARAMCODE !='05001' and PARAMCODE !='05002' order by PARAMSEQ]]>
+  </select>
+</sqlMap>

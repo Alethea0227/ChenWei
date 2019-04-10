@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_project_income_confirm">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="income_confirm_date" property="incomeConfirmDate" jdbcType="TIMESTAMP"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+        <result column="contract_no" property="contractNo" jdbcType="VARCHAR"/>
+        <result column="contract_name" property="contractName" jdbcType="VARCHAR"/>
+        <result column="purchase_income_amount" property="purchaseIncomeAmount" jdbcType="VARCHAR"/>
+        <result column="slef_dev_income_amount" property="slefDevIncomeAmount" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="TEXT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, income_confirm_date, project_no, project_name, contract_no, contract_name, purchase_income_amount, 
+    slef_dev_income_amount,summary
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_project_income_confirm
+        where id = #id:VARCHAR#
+    </select>
+    <delete id="deleteByPrimaryKey" parameterClass="java.lang.String">
+      delete from tbl_project_income_confirm
+      where id = #id:VARCHAR#
+    </delete>
+
+    <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm">
+        insert into tbl_project_income_confirm
+        <dynamic prepend="(">
+            <isNotNull prepend="," property="id">id</isNotNull>
+            <isNotNull prepend="," property="incomeConfirmDate">income_confirm_date</isNotNull>
+            <isNotNull prepend="," property="projectNo">project_no</isNotNull>
+            <isNotNull prepend="," property="projectName">project_name</isNotNull>
+            <isNotNull prepend="," property="contractNo">contract_no</isNotNull>
+            <isNotNull prepend="," property="contractName">contract_name</isNotNull>
+            <isNotNull prepend="," property="purchaseIncomeAmount">purchase_income_amount</isNotNull>
+            <isNotNull prepend="," property="slefDevIncomeAmount">slef_dev_income_amount</isNotNull>
+            <isNotNull prepend="," property="summary">summary</isNotNull>
+            )
+        </dynamic>
+        values
+        <dynamic prepend="(">
+            <isNotNull prepend="," property="id">#id:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="incomeConfirmDate">#incomeConfirmDate:TIMESTAMP#</isNotNull>
+            <isNotNull prepend="," property="projectNo">#projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectName">#projectName:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="contractNo">#contractNo:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="contractName">#contractName:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="purchaseIncomeAmount">#purchaseIncomeAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="slefDevIncomeAmount">#slefDevIncomeAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="summary">#summary:VARCHAR#</isNotNull>
+            )
+        </dynamic>
+    </insert>
+
+
+
+    <update id="updateByPrimaryKeySelective"
+            parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm">
+        update tbl_project_income_confirm
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="incomeConfirmDate">income_confirm_date =
+                #incomeConfirmDate:TIMESTAMP#
+            </isNotNull>
+            <isNotNull prepend="," property="projectNo">project_no = #projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectName">project_name = #projectName:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="contractNo">contract_no = #contractNo:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="contractName">contract_name = #contractName:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="purchaseIncomeAmount">purchase_income_amount =
+                #purchaseIncomeAmount:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend="," property="slefDevIncomeAmount">slef_dev_income_amount =
+                #slefDevIncomeAmount:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend="," property="summary">summary =
+                #summary:TEXT#
+            </isNotNull>
+        </dynamic>
+        where id = #id:VARCHAR#
+    </update>
+
+    <select id="selectSelective" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_project_income_confirm where 1=1
+        <dynamic>
+            <isNotNull prepend=" AND " property="incomeConfirmDate">income_confirm_date =
+                #incomeConfirmDate:TIMESTAMP#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="id">id = #id:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="projectNo">project_no = #projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="projectName">project_name = #projectName:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="contractNo">contract_no = #contractNo:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="contractName">contract_name = #contractName:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="purchaseIncomeAmount">purchase_income_amount =
+                #purchaseIncomeAmount:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend="," property="slefDevIncomeAmount">slef_dev_income_amount =
+                #slefDevIncomeAmount:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend="," property="summary">summary =
+                #summary:TEXT#
+            </isNotNull>
+        </dynamic>
+    </select>
+
+    <select id="count" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm"
+            resultClass="java.lang.Integer">
+        select count(id)
+        from tbl_project_income_confirm where 1=1
+        <dynamic>
+            <isNotNull prepend=" AND " property="incomeConfirmDate">income_confirm_date =
+                #incomeConfirmDate:TIMESTAMP#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="id">id = #id:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="projectNo">project_no = #projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="projectName">project_name = #projectName:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="contractNo">contract_no = #contractNo:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="contractName">contract_name = #contractName:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="purchaseIncomeAmount">purchase_income_amount =
+                #purchaseIncomeAmount:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="slefDevIncomeAmount">slef_dev_income_amount =
+                #slefDevIncomeAmount:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="summary">summary =
+                #summary:TEXT#
+            </isNotNull>
+        </dynamic>
+    </select>
+</sqlMap>

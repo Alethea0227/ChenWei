@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_equipment_info">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">
+    <result column="EQUIPMENT_ID" property="equipmentId" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_TYPE" property="equipmentType" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_SERIAL" property="equipmentSerial" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_PROVIDER" property="equipmentProvider" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_COM" property="equipmentCom" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_ORDER_NO" property="equipmentOrderNo" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_BRAND" property="equipmentBrand" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_MODEL" property="equipmentModel" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_PURCHASE" property="equipmentPurchase" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_USE_TYPE" property="equipmentUseType" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_RENT" property="equipmentRent" jdbcType="VARCHAR"/>
+    <result column="EQUIPMENT_IMAGE" property="equipmentImage" jdbcType="VARCHAR"/>
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="RECORD_ID" property="recordId" jdbcType="VARCHAR"/>
+    <result column="ISDELE" property="isDele" jdbcType="VARCHAR"/>
+    <result column="ORDER_BEGINTIME" property="orderBegintime" jdbcType="TIMESTAMP"/>
+    <result column="ORDER_ENDTIME" property="orderEndtime" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfoVo">
+    <association column="EMPLOYEE_ID" property="employeeInfo" select="tbl_employee_info.selectEmpProject"/>
+    <association column="RECORD_ID" property="equipmentRecord" select="tbl_equipment_record.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List">EQUIPMENT_ID, EQUIPMENT_TYPE, EQUIPMENT_SERIAL, EQUIPMENT_PROVIDER, EQUIPMENT_COM, EQUIPMENT_ORDER_NO, EQUIPMENT_BRAND, EQUIPMENT_MODEL, EQUIPMENT_PURCHASE, EQUIPMENT_USE_TYPE, EQUIPMENT_RENT, EQUIPMENT_IMAGE, EMPLOYEE_ID, RECORD_ID, ISDELE, ORDER_BEGINTIME, ORDER_ENDTIME</sql>
+  <select id="selectByPrimaryKey" resultMap="VoResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_equipment_info where EQUIPMENT_ID = #{equipmentId:VARCHAR} AND ISDELE = '0'
+  </select>
+  <select id="selectBaseByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_equipment_info where EQUIPMENT_ID = #{equipmentId:VARCHAR}
+  </select>
+  <select id="select" resultMap="VoResultMap" parameterType="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">select 
+    <include refid="Base_Column_List"/> from tbl_equipment_info where 1=1 AND ISDELE = '0'
+    <if test="equipmentId != null and equipmentId != ''">EQUIPMENT_ID = #{equipmentId:VARCHAR}</if>  
+    <if test="equipmentType != null and equipmentType != ''">EQUIPMENT_TYPE = #{equipmentType:VARCHAR}</if>  
+    <if test="equipmentSerial != null and equipmentSerial != ''">EQUIPMENT_SERIAL = #{equipmentSerial:VARCHAR}</if>  
+    <if test="equipmentProvider != null and equipmentProvider != ''">EQUIPMENT_PROVIDER = #{equipmentProvider:VARCHAR}</if>  
+    <if test="equipmentCom != null and equipmentCom != ''">EQUIPMENT_COM = #{equipmentCom:VARCHAR}</if>  
+    <if test="equipmentOrderNo != null and equipmentOrderNo != ''">EQUIPMENT_ORDER_NO = #{equipmentOrderNo:VARCHAR}</if>  
+    <if test="equipmentBrand != null and equipmentBrand != ''">EQUIPMENT_BRAND = #{equipmentBrand:VARCHAR}</if>  
+    <if test="equipmentModel != null and equipmentModel != ''">EQUIPMENT_MODEL = #{equipmentModel:VARCHAR}</if>  
+    <if test="equipmentPurchase != null and equipmentPurchase != ''">EQUIPMENT_PURCHASE = #{equipmentPurchase:VARCHAR}</if>  
+    <if test="equipmentUseType != null and equipmentUseType != ''">EQUIPMENT_USE_TYPE = #{equipmentUseType:VARCHAR}</if>  
+    <if test="equipmentRent != null and equipmentRent != ''">EQUIPMENT_RENT = #{equipmentRent:VARCHAR}</if>  
+    <if test="equipmentImage != null and equipmentImage != ''">EQUIPMENT_IMAGE = #{equipmentImage:VARCHAR}</if>  
+    <if test="employeeId != null and employeeId != ''">EMPLOYEE_ID = #{employeeId:VARCHAR}</if>  
+    <if test="recordId != null and recordId != ''">RECORD_ID = #{recordId:VARCHAR}</if>  
+    <if test="orderBegintime != null and orderBegintime != ''">ORDER_BEGINTIME = #{orderBegintime:TIMESTAMP}</if>  
+    <if test="orderEndtime != null and orderEndtime != ''">ORDER_ENDTIME = #{orderEndtime:TIMESTAMP}</if> 
+  </select>
+  <select id="count" resultType="java.lang.Integer">select count(EQUIPMENT_ID) from tbl_equipment_info where 1=1 AND ISDELE = '0'
+    <if test="equipmentId != null and equipmentId != ''">EQUIPMENT_ID = #{equipmentId:VARCHAR}</if>  
+    <if test="equipmentType != null and equipmentType != ''">EQUIPMENT_TYPE = #{equipmentType:VARCHAR}</if>  
+    <if test="equipmentSerial != null and equipmentSerial != ''">EQUIPMENT_SERIAL = #{equipmentSerial:VARCHAR}</if>  
+    <if test="equipmentProvider != null and equipmentProvider != ''">EQUIPMENT_PROVIDER = #{equipmentProvider:VARCHAR}</if>  
+    <if test="equipmentCom != null and equipmentCom != ''">EQUIPMENT_COM = #{equipmentCom:VARCHAR}</if>  
+    <if test="equipmentOrderNo != null and equipmentOrderNo != ''">EQUIPMENT_ORDER_NO = #{equipmentOrderNo:VARCHAR}</if>  
+    <if test="equipmentBrand != null and equipmentBrand != ''">EQUIPMENT_BRAND = #{equipmentBrand:VARCHAR}</if>  
+    <if test="equipmentModel != null and equipmentModel != ''">EQUIPMENT_MODEL = #{equipmentModel:VARCHAR}</if>  
+    <if test="equipmentPurchase != null and equipmentPurchase != ''">EQUIPMENT_PURCHASE = #{equipmentPurchase:VARCHAR}</if>  
+    <if test="equipmentUseType != null and equipmentUseType != ''">EQUIPMENT_USE_TYPE = #{equipmentUseType:VARCHAR}</if>  
+    <if test="equipmentRent != null and equipmentRent != ''">EQUIPMENT_RENT = #{equipmentRent:VARCHAR}</if>  
+    <if test="equipmentImage != null and equipmentImage != ''">EQUIPMENT_IMAGE = #{equipmentImage:VARCHAR}</if>  
+    <if test="employeeId != null and employeeId != ''">EMPLOYEE_ID = #{employeeId:VARCHAR}</if>  
+    <if test="recordId != null and recordId != ''">RECORD_ID = #{recordId:VARCHAR}</if>  
+    <if test="orderBegintime != null and orderBegintime != ''">ORDER_BEGINTIME = #{orderBegintime:TIMESTAMP}</if>  
+    <if test="orderEndtime != null and orderEndtime != ''">ORDER_ENDTIME = #{orderEndtime:TIMESTAMP}</if> 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_equipment_info where EQUIPMENT_ID = #{equipmentId:VARCHAR} AND ISDELE = '0'</delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">insert into tbl_equipment_info 
+    <trim prefix="("> 
+      <if test="equipmentId != null and equipmentId != ''">EQUIPMENT_ID ,</if>  
+      <if test="equipmentType != null and equipmentType != ''">EQUIPMENT_TYPE ,</if>  
+      <if test="equipmentSerial != null and equipmentSerial != ''">EQUIPMENT_SERIAL ,</if>  
+      <if test="equipmentProvider != null and equipmentProvider != ''">EQUIPMENT_PROVIDER ,</if>  
+      <if test="equipmentCom != null and equipmentCom != ''">EQUIPMENT_COM ,</if>  
+      <if test="equipmentOrderNo != null and equipmentOrderNo != ''">EQUIPMENT_ORDER_NO ,</if>  
+      <if test="equipmentBrand != null and equipmentBrand != ''">EQUIPMENT_BRAND ,</if>  
+      <if test="equipmentModel != null and equipmentModel != ''">EQUIPMENT_MODEL ,</if>  
+      <if test="equipmentPurchase != null and equipmentPurchase != ''">EQUIPMENT_PURCHASE ,</if>  
+      <if test="equipmentUseType != null and equipmentUseType != ''">EQUIPMENT_USE_TYPE ,</if>  
+      <if test="equipmentRent != null and equipmentRent != ''">EQUIPMENT_RENT ,</if>  
+      <if test="equipmentImage != null and equipmentImage != ''">EQUIPMENT_IMAGE ,</if>  
+      <if test="employeeId != null and employeeId != ''">EMPLOYEE_ID ,</if>  
+      <if test="recordId != null and recordId != ''">RECORD_ID ,</if>  
+      <if test="isDele != null and isDele != ''">ISDELE ,</if>  
+      <if test="orderBegintime != null and orderBegintime != ''">ORDER_BEGINTIME ,</if>  
+      <if test="orderEndtime != null and orderEndtime != ''">ORDER_ENDTIME ,</if> )
+    </trim> VALUES 
+    <trim prefix="("> 
+      <if test="equipmentId != null and equipmentId != ''">#{equipmentId:VARCHAR} ,</if>  
+      <if test="equipmentType != null and equipmentType != ''">#{equipmentType:VARCHAR} ,</if>  
+      <if test="equipmentSerial != null and equipmentSerial != ''">#{equipmentSerial:VARCHAR} ,</if>  
+      <if test="equipmentProvider != null and equipmentProvider != ''">#{equipmentProvider:VARCHAR} ,</if>  
+      <if test="equipmentCom != null and equipmentCom != ''">#{equipmentCom:VARCHAR} ,</if>  
+      <if test="equipmentOrderNo != null and equipmentOrderNo != ''">#{equipmentOrderNo:VARCHAR} ,</if>  
+      <if test="equipmentBrand != null and equipmentBrand != ''">#{equipmentBrand:VARCHAR} ,</if>  
+      <if test="equipmentModel != null and equipmentModel != ''">#{equipmentModel:VARCHAR} ,</if>  
+      <if test="equipmentPurchase != null and equipmentPurchase != ''">#{equipmentPurchase:VARCHAR} ,</if>  
+      <if test="equipmentUseType != null and equipmentUseType != ''">#{equipmentUseType:VARCHAR} ,</if>  
+      <if test="equipmentRent != null and equipmentRent != ''">#{equipmentRent:VARCHAR} ,</if>  
+      <if test="equipmentImage != null and equipmentImage != ''">#{equipmentImage:VARCHAR} ,</if>  
+      <if test="employeeId != null and employeeId != ''">#{employeeId:VARCHAR} ,</if>  
+      <if test="recordId != null and recordId != ''">#{recordId:VARCHAR} ,</if>  
+      <if test="isDele != null and isDele != ''">#{isDele:VARCHAR} ,</if>  
+      <if test="orderBegintime != null and orderBegintime != ''">#{orderBegintime:TIMESTAMP} ,</if>  
+      <if test="orderEndtime != null and orderEndtime != ''">#{orderEndtime:TIMESTAMP} ,</if> )
+    </trim> 
+  </insert>
+  <update id="update" parameterType="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">update tbl_equipment_info 
+    <trim prefix="set"> 
+      <if test="equipmentType != null and equipmentType != ''">EQUIPMENT_TYPE = #{equipmentType:VARCHAR} ,</if>  
+      <if test="equipmentSerial != null and equipmentSerial != ''">EQUIPMENT_SERIAL = #{equipmentSerial:VARCHAR} ,</if>  
+      <if test="equipmentProvider != null and equipmentProvider != ''">EQUIPMENT_PROVIDER = #{equipmentProvider:VARCHAR} ,</if>  
+      <if test="equipmentCom != null and equipmentCom != ''">EQUIPMENT_COM = #{equipmentCom:VARCHAR} ,</if>  
+      <if test="equipmentOrderNo != null and equipmentOrderNo != ''">EQUIPMENT_ORDER_NO = #{equipmentOrderNo:VARCHAR} ,</if>  
+      <if test="equipmentBrand != null and equipmentBrand != ''">EQUIPMENT_BRAND = #{equipmentBrand:VARCHAR} ,</if>  
+      <if test="equipmentModel != null and equipmentModel != ''">EQUIPMENT_MODEL = #{equipmentModel:VARCHAR} ,</if>  
+      <if test="equipmentPurchase != null and equipmentPurchase != ''">EQUIPMENT_PURCHASE = #{equipmentPurchase:VARCHAR} ,</if>  
+      <if test="equipmentUseType != null and equipmentUseType != ''">EQUIPMENT_USE_TYPE = #{equipmentUseType:VARCHAR} ,</if>  
+      <if test="equipmentRent != null and equipmentRent != ''">EQUIPMENT_RENT = #{equipmentRent:VARCHAR} ,</if>  
+      <if test="equipmentImage != null and equipmentImage != ''">EQUIPMENT_IMAGE = #{equipmentImage:VARCHAR} ,</if>  
+      <if test="employeeId != null and employeeId != ''">EMPLOYEE_ID = #{employeeId:VARCHAR} ,</if>  
+      <if test="recordId != null and recordId != ''">RECORD_ID = #{recordId:VARCHAR} ,</if>  
+      <if test="isDele != null and isDele != ''">ISDELE = #{isDele:VARCHAR} ,</if>  
+      <if test="orderBegintime != null and orderBegintime != ''">ORDER_BEGINTIME = #{orderBegintime:TIMESTAMP} ,</if>  
+      <if test="orderEndtime != null and orderEndtime != ''">ORDER_ENDTIME = #{orderEndtime:TIMESTAMP} ,</if> 
+    </trim> where EQUIPMENT_ID = #{equipmentId:VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">update tbl_equipment_info set EQUIPMENT_TYPE = #{equipmentType:VARCHAR}, EQUIPMENT_SERIAL = #{equipmentSerial:VARCHAR}, EQUIPMENT_PROVIDER = #{equipmentProvider:VARCHAR}, EQUIPMENT_COM = #{equipmentCom:VARCHAR}, EQUIPMENT_ORDER_NO = #{equipmentOrderNo:VARCHAR}, EQUIPMENT_BRAND = #{equipmentBrand:VARCHAR}, EQUIPMENT_MODEL = #{equipmentModel:VARCHAR}, EQUIPMENT_PURCHASE = #{equipmentPurchase:VARCHAR}, EQUIPMENT_USE_TYPE = #{equipmentUseType:VARCHAR}, EQUIPMENT_RENT = #{equipmentRent:VARCHAR}, EQUIPMENT_IMAGE = #{equipmentImage:VARCHAR}, EMPLOYEE_ID = #{employeeId:VARCHAR}, RECORD_ID = #{recordId:VARCHAR}, ISDELE = #{isDele:VARCHAR}, ORDER_BEGINTIME = #{orderBegintime:TIMESTAMP}, ORDER_ENDTIME = #{orderEndtime:TIMESTAMP} where EQUIPMENT_ID = #{equipmentId:VARCHAR}</update>
+</mapper>

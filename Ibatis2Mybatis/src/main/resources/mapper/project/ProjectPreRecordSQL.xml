@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_project_pre_record">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="be_pre_contract_amount" property="bePreContractAmount" jdbcType="VARCHAR"/>
+    <result column="be_pre_man_month" property="bePreManMonth" jdbcType="VARCHAR"/>
+    <result column="be_pre_amount" property="bePreAmount" jdbcType="VARCHAR"/>
+    <result column="be_project_begin_time" property="beProjectBeginTime" jdbcType="TIMESTAMP"/>
+    <result column="be_project_end_time" property="beProjectEndTime" jdbcType="TIMESTAMP"/>
+    <result column="be_completeness" property="beCompleteness" jdbcType="VARCHAR"/>
+    <result column="af_pre_contract_amount" property="afPreContractAmount" jdbcType="VARCHAR"/>
+    <result column="af_pre_man_month" property="afPreManMonth" jdbcType="VARCHAR"/>
+    <result column="af_pre_amount" property="afPreAmount" jdbcType="VARCHAR"/>
+    <result column="af_project_begin_time" property="afProjectBeginTime" jdbcType="TIMESTAMP"/>
+    <result column="af_project_end_time" property="afProjectEndTime" jdbcType="TIMESTAMP"/>
+    <result column="af_completeness" property="afCompleteness" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">id, project_no, employee_id, be_pre_contract_amount, be_pre_man_month, be_pre_amount, be_project_begin_time, be_project_end_time, be_completeness, af_pre_contract_amount, af_pre_man_month, af_pre_amount, af_project_begin_time, af_project_end_time, af_completeness</sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_project_pre_record where id =#{id:VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_project_pre_record where id =#{id:VARCHAR}</delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord">insert into tbl_project_pre_record 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">id ,</if>  
+      <if test="projectNo != null and projectNo != ''">project_no ,</if>  
+      <if test="employeeId != null and employeeId != ''">employee_id ,</if>  
+      <if test="bePreContractAmount != null and bePreContractAmount != ''">be_pre_contract_amount ,</if>  
+      <if test="bePreManMonth != null and bePreManMonth != ''">be_pre_man_month ,</if>  
+      <if test="bePreAmount != null and bePreAmount != ''">be_pre_amount ,</if>  
+      <if test="beProjectBeginTime != null and beProjectBeginTime != ''">be_project_begin_time ,</if>  
+      <if test="beProjectEndTime != null and beProjectEndTime != ''">be_project_end_time ,</if>  
+      <if test="beCompleteness != null and beCompleteness != ''">be_completeness ,</if>  
+      <if test="afPreContractAmount != null and afPreContractAmount != ''">af_pre_contract_amount ,</if>  
+      <if test="afPreManMonth != null and afPreManMonth != ''">af_pre_man_month ,</if>  
+      <if test="afPreAmount != null and afPreAmount != ''">af_pre_amount ,</if>  
+      <if test="afProjectBeginTime != null and afProjectBeginTime != ''">af_project_begin_time ,</if>  
+      <if test="afProjectEndTime != null and afProjectEndTime != ''">af_project_end_time ,</if>  
+      <if test="afCompleteness != null and afCompleteness != ''">af_completeness ,</if> )
+    </trim> values 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">#{id:VARCHAR} ,</if>  
+      <if test="projectNo != null and projectNo != ''">#{projectNo:VARCHAR} ,</if>  
+      <if test="employeeId != null and employeeId != ''">#{employeeId:VARCHAR} ,</if>  
+      <if test="bePreContractAmount != null and bePreContractAmount != ''">#{bePreContractAmount:VARCHAR} ,</if>  
+      <if test="bePreManMonth != null and bePreManMonth != ''">#{bePreManMonth:VARCHAR} ,</if>  
+      <if test="bePreAmount != null and bePreAmount != ''">#{bePreAmount:VARCHAR} ,</if>  
+      <if test="beProjectBeginTime != null and beProjectBeginTime != ''">#{beProjectBeginTime:TIMESTAMP} ,</if>  
+      <if test="beProjectEndTime != null and beProjectEndTime != ''">#{beProjectEndTime:TIMESTAMP} ,</if>  
+      <if test="beCompleteness != null and beCompleteness != ''">#{beCompleteness:VARCHAR} ,</if>  
+      <if test="afPreContractAmount != null and afPreContractAmount != ''">#{afPreContractAmount:VARCHAR} ,</if>  
+      <if test="afPreManMonth != null and afPreManMonth != ''">#{afPreManMonth:VARCHAR} ,</if>  
+      <if test="afPreAmount != null and afPreAmount != ''">#{afPreAmount:VARCHAR} ,</if>  
+      <if test="afProjectBeginTime != null and afProjectBeginTime != ''">#{afProjectBeginTime:TIMESTAMP} ,</if>  
+      <if test="afProjectEndTime != null and afProjectEndTime != ''">#{afProjectEndTime:TIMESTAMP} ,</if>  
+      <if test="afCompleteness != null and afCompleteness != ''">#{afCompleteness:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord">update tbl_project_pre_record 
+    <trim prefix="set"> 
+      <if test="projectNo != null and projectNo != ''">project_no =#{projectNo:VARCHAR} ,</if>  
+      <if test="employeeId != null and employeeId != ''">employee_id =#{employeeId:VARCHAR} ,</if>  
+      <if test="bePreContractAmount != null and bePreContractAmount != ''">be_pre_contract_amount =#{bePreContractAmount:VARCHAR} ,</if>  
+      <if test="bePreManMonth != null and bePreManMonth != ''">be_pre_man_month =#{bePreManMonth:VARCHAR} ,</if>  
+      <if test="bePreAmount != null and bePreAmount != ''">be_pre_amount =#{bePreAmount:VARCHAR} ,</if>  
+      <if test="beProjectBeginTime != null and beProjectBeginTime != ''">be_project_begin_time =#{beProjectBeginTime:TIMESTAMP} ,</if>  
+      <if test="beProjectEndTime != null and beProjectEndTime != ''">be_project_end_time =#{beProjectEndTime:TIMESTAMP} ,</if>  
+      <if test="beCompleteness != null and beCompleteness != ''">be_completeness =#{beCompleteness:VARCHAR} ,</if>  
+      <if test="afPreContractAmount != null and afPreContractAmount != ''">af_pre_contract_amount =#{afPreContractAmount:VARCHAR} ,</if>  
+      <if test="afPreManMonth != null and afPreManMonth != ''">af_pre_man_month =#{afPreManMonth:VARCHAR} ,</if>  
+      <if test="afPreAmount != null and afPreAmount != ''">af_pre_amount =#{afPreAmount:VARCHAR} ,</if>  
+      <if test="afProjectBeginTime != null and afProjectBeginTime != ''">af_project_begin_time =#{afProjectBeginTime:TIMESTAMP} ,</if>  
+      <if test="afProjectEndTime != null and afProjectEndTime != ''">af_project_end_time =#{afProjectEndTime:TIMESTAMP} ,</if>  
+      <if test="afCompleteness != null and afCompleteness != ''">af_completeness =#{afCompleteness:VARCHAR} ,</if> 
+    </trim> where id =#{id:VARCHAR}
+  </update>
+  <select id="select" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord" resultMap="BaseResultMap">select 
+    <include refid="Base_Column_List"/> from tbl_project_pre_record where 1 = 1 
+    <trim> 
+      <if test="projectNo != null and projectNo != ''">project_no =#{projectNo:VARCHAR}</if>  
+      <if test="employeeId != null and employeeId != ''">employee_id =#{employeeId:VARCHAR}</if>  
+      <if test="bePreContractAmount != null and bePreContractAmount != ''">be_pre_contract_amount =#{bePreContractAmount:VARCHAR}</if>  
+      <if test="bePreManMonth != null and bePreManMonth != ''">be_pre_man_month =#{bePreManMonth:VARCHAR}</if>  
+      <if test="bePreAmount != null and bePreAmount != ''">be_pre_amount =#{bePreAmount:VARCHAR}</if>  
+      <if test="beProjectBeginTime != null and beProjectBeginTime != ''">be_project_begin_time =#{beProjectBeginTime:TIMESTAMP}</if>  
+      <if test="beProjectEndTime != null and beProjectEndTime != ''">be_project_end_time =#{beProjectEndTime:TIMESTAMP}</if>  
+      <if test="beCompleteness != null and beCompleteness != ''">be_completeness =#{beCompleteness:VARCHAR}</if>  
+      <if test="afPreContractAmount != null and afPreContractAmount != ''">af_pre_contract_amount =#{afPreContractAmount:VARCHAR}</if>  
+      <if test="afPreManMonth != null and afPreManMonth != ''">af_pre_man_month =#{afPreManMonth:VARCHAR}</if>  
+      <if test="afPreAmount != null and afPreAmount != ''">af_pre_amount =#{afPreAmount:VARCHAR}</if>  
+      <if test="afProjectBeginTime != null and afProjectBeginTime != ''">af_project_begin_time =#{afProjectBeginTime:TIMESTAMP}</if>  
+      <if test="afProjectEndTime != null and afProjectEndTime != ''">af_project_end_time =#{afProjectEndTime:TIMESTAMP}</if>  
+      <if test="afCompleteness != null and afCompleteness != ''">af_completeness =#{afCompleteness:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <select id="count" resultType="java.lang.Integer" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord">select count(id) from tbl_project_pre_record where 1 = 1
+    <trim> 
+      <if test="projectNo != null and projectNo != ''">project_no =#{projectNo:VARCHAR}</if>  
+      <if test="employeeId != null and employeeId != ''">employee_id =#{employeeId:VARCHAR}</if>  
+      <if test="bePreContractAmount != null and bePreContractAmount != ''">be_pre_contract_amount =#{bePreContractAmount:VARCHAR}</if>  
+      <if test="bePreManMonth != null and bePreManMonth != ''">be_pre_man_month =#{bePreManMonth:VARCHAR}</if>  
+      <if test="bePreAmount != null and bePreAmount != ''">be_pre_amount =#{bePreAmount:VARCHAR}</if>  
+      <if test="beProjectBeginTime != null and beProjectBeginTime != ''">be_project_begin_time =#{beProjectBeginTime:TIMESTAMP}</if>  
+      <if test="beProjectEndTime != null and beProjectEndTime != ''">be_project_end_time =#{beProjectEndTime:TIMESTAMP}</if>  
+      <if test="beCompleteness != null and beCompleteness != ''">be_completeness =#{beCompleteness:VARCHAR}</if>  
+      <if test="afPreContractAmount != null and afPreContractAmount != ''">af_pre_contract_amount =#{afPreContractAmount:VARCHAR}</if>  
+      <if test="afPreManMonth != null and afPreManMonth != ''">af_pre_man_month =#{afPreManMonth:VARCHAR}</if>  
+      <if test="afPreAmount != null and afPreAmount != ''">af_pre_amount =#{afPreAmount:VARCHAR}</if>  
+      <if test="afProjectBeginTime != null and afProjectBeginTime != ''">af_project_begin_time =#{afProjectBeginTime:TIMESTAMP}</if>  
+      <if test="afProjectEndTime != null and afProjectEndTime != ''">af_project_end_time =#{afProjectEndTime:TIMESTAMP}</if>  
+      <if test="afCompleteness != null and afCompleteness != ''">af_completeness =#{afCompleteness:VARCHAR}</if> 
+    </trim> 
+  </select>
+</mapper>

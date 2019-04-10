@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_customer_info">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR"/>
+    <result column="customer_no" property="customerNo" jdbcType="VARCHAR"/>
+    <result column="customer_fullName" property="customerFullname" jdbcType="VARCHAR"/>
+    <result column="customer_shortName" property="customerShortname" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">customer_id, customer_no, customer_fullName, customer_shortName</sql>
+  <select id="selectCustomerListCount" parameterType="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo" resultType="java.lang.Integer">select count(*) from tbl_customer_info 
+    <if test="customerFullname != null">customer_fullName like concat('%', #{customerFullname:VARCHAR}, '%')</if> 
+  </select>
+  <select id="selectCustomerListByPage" resultMap="BaseResultMap" parameterType="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">select * from tbl_customer_info 
+    <if test="customerFullname != null">customer_fullName like concat('%', #{customerFullname:VARCHAR}, '%')</if> 
+  </select>
+  <select id="selectCustomerList" resultMap="BaseResultMap">select * from tbl_customer_info</select>
+  <insert id="addCustomer" parameterType="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">insert into tbl_customer_info (customer_id, customer_no, customer_fullName, customer_shortName) values (#{customerId:VARCHAR}, #{customerNo:VARCHAR}, #{customerFullname:VARCHAR}, #{customerShortname:varchar})</insert>
+  <update id="changeCustomer" parameterType="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">update tbl_customer_info set customer_fullName = #{customerFullname:VARCHAR}, customer_shortName = #{customerShortname:varchar} where customer_id = #{customerId:VARCHAR}</update>
+  <delete id="deleteCustomer" parameterType="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">delete from tbl_customer_info where customer_id = #{customerId:VARCHAR}</delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">select 
+    <include refid="Base_Column_List"/> from tbl_customer_info where customer_id=#{value:VARCHAR}
+  </select>
+</mapper>

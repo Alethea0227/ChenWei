@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_role_department" >
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.department.model.DepartmentInfo" >
+        <result column="DEPARTMENT_ID" property="departmentId" jdbcType="CHAR" />
+        <result column="DEPARTMENT_NAME" property="departmentName" jdbcType="VARCHAR" />
+        <result column="BEYOND_COMPANY" property="beyondCompany" jdbcType="VARCHAR" />
+        <result column="AREA" property="area" jdbcType="VARCHAR" />
+    </resultMap>
+    <delete id="deleteByRoleId" parameterClass="java.lang.String" >
+        delete from tbl_role_department
+        where ROLE_ID = #roleId:CHAR#
+    </delete>
+    <insert id="insertByRoleAndDep" parameterClass="com.i2shopping.i2work.operation.core.role.model.RoleAndDep" >
+        insert into tbl_role_department (Role_ID,DEPARTMENT_ID)
+        values (#roleId:VARCHAR#, #departmentId:VARCHAR#)
+    </insert>
+</sqlMap>

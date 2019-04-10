@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_project_cost_logging">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="cost_logging_date" property="costLoggingDate" jdbcType="VARCHAR"/>
+    <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+    <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+    <result column="all_salary" property="allSalary" jdbcType="VARCHAR"/>
+    <result column="all_expense" property="allExpense" jdbcType="VARCHAR"/>
+    <result column="purchase_amount" property="purchaseAmount" jdbcType="VARCHAR"/>
+    <result column="amount_in_total" property="amountInTotal" jdbcType="VARCHAR"/>
+    <result column="summary" property="summary" jdbcType="TEXT"/>
+  </resultMap>
+  <sql id="Base_Column_List">id, cost_logging_date, project_no, project_name, all_salary, all_expense, purchase_amount, amount_in_total,summary</sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_project_cost_logging where id = #{id:VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_project_cost_logging where id = #{id:VARCHAR}</delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging">insert into tbl_project_cost_logging 
+    <trim prefix="("> 
+      <if test="id != null">id ,</if>  
+      <if test="costLoggingDate != null">cost_logging_date ,</if>  
+      <if test="projectNo != null">project_no ,</if>  
+      <if test="projectName != null">project_name ,</if>  
+      <if test="allSalary != null">all_salary ,</if>  
+      <if test="allExpense != null">all_expense ,</if>  
+      <if test="purchaseAmount != null">purchase_amount ,</if>  
+      <if test="amountInTotal != null">amount_in_total ,</if>  
+      <if test="summary != null">summary ,</if> )
+    </trim> values 
+    <trim prefix="("> 
+      <if test="id != null">#{id:VARCHAR} ,</if>  
+      <if test="costLoggingDate != null">#{costLoggingDate:VARCHAR} ,</if>  
+      <if test="projectNo != null">#{projectNo:VARCHAR} ,</if>  
+      <if test="projectName != null">#{projectName:VARCHAR} ,</if>  
+      <if test="allSalary != null">#{allSalary:VARCHAR} ,</if>  
+      <if test="allExpense != null">#{allExpense:VARCHAR} ,</if>  
+      <if test="purchaseAmount != null">#{purchaseAmount:VARCHAR} ,</if>  
+      <if test="amountInTotal != null">#{amountInTotal:VARCHAR} ,</if>  
+      <if test="summary != null">#{summary:TEXT} ,</if> )
+    </trim> 
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging">update tbl_project_cost_logging 
+    <trim prefix="set"> 
+      <if test="costLoggingDate != null">cost_logging_date = #{costLoggingDate:VARCHAR} ,</if>  
+      <if test="projectNo != null">project_no = #{projectNo:VARCHAR} ,</if>  
+      <if test="projectName != null">project_name = #{projectName:VARCHAR} ,</if>  
+      <if test="allSalary != null">all_salary = #{allSalary:VARCHAR} ,</if>  
+      <if test="allExpense != null">all_expense = #{allExpense:VARCHAR} ,</if>  
+      <if test="purchaseAmount != null">purchase_amount = #{purchaseAmount:VARCHAR} ,</if>  
+      <if test="amountInTotal != null">amount_in_total = #{amountInTotal:VARCHAR} ,</if>  
+      <if test="summary != null">summary = #{summary:TEXT} ,</if> 
+    </trim> where id = #{id:VARCHAR}
+  </update>
+  <select id="selectSelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging" resultMap="BaseResultMap">select 
+    <include refid="Base_Column_List"/> from tbl_project_cost_logging where 1=1 
+    <trim> 
+      <if test="id != null">id = #{id:VARCHAR}</if>  
+      <if test="costLoggingDate != null">cost_logging_date = #{costLoggingDate:VARCHAR}</if>  
+      <if test="projectNo != null">project_no = #{projectNo:VARCHAR}</if>  
+      <if test="projectName != null">project_name = #{projectName:VARCHAR}</if>  
+      <if test="allSalary != null">all_salary = #{allSalary:VARCHAR}</if>  
+      <if test="allExpense != null">all_expense = #{allExpense:VARCHAR}</if>  
+      <if test="purchaseAmount != null">purchase_amount = #{purchaseAmount:VARCHAR}</if>  
+      <if test="amountInTotal != null">amount_in_total = #{amountInTotal:VARCHAR}</if>  
+      <if test="summary != null">summary = #{summary:TEXT}</if> 
+    </trim> 
+  </select>
+  <select id="count" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging" resultType="java.lang.Integer">select count(id) from tbl_project_cost_logging where 1=1
+    <trim> 
+      <if test="id != null">id = #{id:VARCHAR}</if>  
+      <if test="costLoggingDate != null">cost_logging_date = #{costLoggingDate:VARCHAR}</if>  
+      <if test="projectNo != null">project_no = #{projectNo:VARCHAR}</if>  
+      <if test="projectName != null">project_name = #{projectName:VARCHAR}</if>  
+      <if test="allSalary != null">all_salary = #{allSalary:VARCHAR}</if>  
+      <if test="allExpense != null">all_expense = #{allExpense:VARCHAR}</if>  
+      <if test="purchaseAmount != null">purchase_amount = #{purchaseAmount:VARCHAR}</if>  
+      <if test="amountInTotal != null">amount_in_total = #{amountInTotal:VARCHAR}</if>  
+      <if test="summary != null">summary = #{summary:TEXT}</if> 
+    </trim> 
+  </select>
+</mapper>

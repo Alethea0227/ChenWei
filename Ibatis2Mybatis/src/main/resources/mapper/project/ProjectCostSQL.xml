@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_project_cost">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.ProjectCost">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="department_id" property="departmentId" jdbcType="VARCHAR"/>
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR"/>
+    <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+    <result column="detail_type" property="detailType" jdbcType="VARCHAR"/>
+    <result column="service_income" property="serviceIncome" jdbcType="VARCHAR"/>
+    <result column="out_income" property="outIncome" jdbcType="VARCHAR"/>
+    <result column="lobar_cost" property="lobarCost" jdbcType="VARCHAR"/>
+    <result column="operation_cost" property="operationCost" jdbcType="VARCHAR"/>
+    <result column="out_buy" property="outBuy" jdbcType="VARCHAR"/>
+    <result column="total_cost" property="totalCost" jdbcType="VARCHAR"/>
+    <result column="total_income" property="totalIncome" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">id, department_id, contract_no, project_name, detail_type, service_income, out_income, lobar_cost, operation_cost, out_buy, total_cost, total_income</sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_project_cost where id = #{id:VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_project_cost where id = #{id:VARCHAR}</delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCost">insert into tbl_project_cost (id, department_id, contract_no, project_name, detail_type, service_income, out_income, lobar_cost, operation_cost, out_buy) values (#{id:VARCHAR}, #{departmentId:VARCHAR}, #{contractNo:VARCHAR}, #{projectName:VARCHAR}, #{detailType:VARCHAR}, #{serviceIncome:VARCHAR}, #{outIncome:VARCHAR}, #{lobarCost:VARCHAR}, #{operationCost:VARCHAR}, #{outBuy:VARCHAR})</insert>
+  <insert id="insertSelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCost">insert into tbl_project_cost 
+    <trim prefix="("> 
+      <if test="id != null">id ,</if>  
+      <if test="departmentId != null">department_id ,</if>  
+      <if test="contractNo != null">contract_no ,</if>  
+      <if test="projectName != null">project_name ,</if>  
+      <if test="detailType != null">detail_type ,</if>  
+      <if test="serviceIncome != null">service_income ,</if>  
+      <if test="outIncome != null">out_income ,</if>  
+      <if test="lobarCost != null">lobar_cost ,</if>  
+      <if test="operationCost != null">operation_cost ,</if>  
+      <if test="outBuy != null">out_buy ,</if>  
+      <if test="totalCost != null">total_cost ,</if>  
+      <if test="totalIncome != null">total_income ,</if> )
+    </trim> values 
+    <trim prefix="("> 
+      <if test="id != null">#{id:VARCHAR} ,</if>  
+      <if test="departmentId != null">#{departmentId:VARCHAR} ,</if>  
+      <if test="contractNo != null">#{contractNo:VARCHAR} ,</if>  
+      <if test="projectName != null">#{projectName:VARCHAR} ,</if>  
+      <if test="detailType != null">#{detailType:VARCHAR} ,</if>  
+      <if test="serviceIncome != null">#{serviceIncome:VARCHAR} ,</if>  
+      <if test="outIncome != null">#{outIncome:VARCHAR} ,</if>  
+      <if test="lobarCost != null">#{lobarCost:VARCHAR} ,</if>  
+      <if test="operationCost != null">#{operationCost:VARCHAR} ,</if>  
+      <if test="outBuy != null">#{outBuy:VARCHAR} ,</if>  
+      <if test="totalCost != null">#{totalCost:VARCHAR} ,</if>  
+      <if test="totalIncome != null">#{totalIncome:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCost">update tbl_project_cost 
+    <trim prefix="set"> 
+      <if test="departmentId != null">department_id = #{departmentId:VARCHAR} ,</if>  
+      <if test="contractNo != null">contract_no = #{contractNo:VARCHAR} ,</if>  
+      <if test="projectName != null">project_name = #{projectName:VARCHAR} ,</if>  
+      <if test="detailType != null">detail_type = #{detailType:VARCHAR} ,</if>  
+      <if test="serviceIncome != null">service_income = #{serviceIncome:VARCHAR} ,</if>  
+      <if test="outIncome != null">out_income = #{outIncome:VARCHAR} ,</if>  
+      <if test="lobarCost != null">lobar_cost = #{lobarCost:VARCHAR} ,</if>  
+      <if test="operationCost != null">operation_cost = #{operationCost:VARCHAR} ,</if>  
+      <if test="outBuy != null">out_buy = #{outBuy:VARCHAR} ,</if>  
+      <if test="totalCost != null">total_cost = #{totalCost:VARCHAR} ,</if>  
+      <if test="totalIncome != null">total_income = #{totalIncome:VARCHAR} ,</if> 
+    </trim> where id = #{id:VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCost">update tbl_project_cost set department_id = #{departmentId:VARCHAR}, contract_no = #{contractNo:VARCHAR}, project_name = #{projectName:VARCHAR}, detail_type = #{detailType:VARCHAR}, service_income = #{serviceIncome:VARCHAR}, out_income = #{outIncome:VARCHAR}, lobar_cost = #{lobarCost:VARCHAR}, operation_cost = #{operationCost:VARCHAR}, out_buy = #{outBuy:VARCHAR} where id = #{id:VARCHAR}</update>
+  <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCost">select 
+    <include refid="Base_Column_List"/> from tbl_project_cost where 1=1
+    <trim> 
+      <if test="id != null">id = #{id:VARCHAR}</if>  
+      <if test="departmentId != null">department_id = #{departmentId:VARCHAR}</if>  
+      <if test="contractNo != null">contract_no = #{contractNo:VARCHAR}</if>  
+      <if test="projectName != null">project_name = #{projectName:VARCHAR}</if>  
+      <if test="detailType != null">detail_type = #{detailType:VARCHAR},</if>  
+      <if test="serviceIncome != null">service_income = #{serviceIncome:VARCHAR}</if>  
+      <if test="outIncome != null">out_income = #{outIncome:VARCHAR},</if>  
+      <if test="lobarCost != null">lobar_cost = #{lobarCost:VARCHAR}</if>  
+      <if test="operationCost != null">operation_cost = #{operationCost:VARCHAR}</if>  
+      <if test="outBuy != null">out_buy = #{outBuy:VARCHAR}</if>  
+      <if test="totalCost != null">total_cost = #{totalCost:VARCHAR}</if>  
+      <if test="totalIncome != null">total_income = #{totalIncome:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <select id="count" resultType="java.lang.Integer" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectCost">select count(id) from tbl_project_cost where 1=1
+    <trim> 
+      <if test="id != null">id = #{id:VARCHAR}</if>  
+      <if test="departmentId != null">department_id = #{departmentId:VARCHAR}</if>  
+      <if test="contractNo != null">contract_no = #{contractNo:VARCHAR}</if>  
+      <if test="projectName != null">project_name = #{projectName:VARCHAR}</if>  
+      <if test="detailType != null">detail_type = #{detailType:VARCHAR}</if>  
+      <if test="serviceIncome != null">service_income = #{serviceIncome:VARCHAR}</if>  
+      <if test="outIncome != null">out_income = #{outIncome:VARCHAR}</if>  
+      <if test="lobarCost != null">lobar_cost = #{lobarCost:VARCHAR}</if>  
+      <if test="operationCost != null">operation_cost = #{operationCost:VARCHAR}</if>  
+      <if test="outBuy != null">out_buy = #{outBuy:VARCHAR}</if>  
+      <if test="totalCost != null">total_cost = #{totalCost:VARCHAR}</if>  
+      <if test="totalIncome != null">total_income = #{totalIncome:VARCHAR}</if> 
+    </trim> 
+  </select>
+</mapper>

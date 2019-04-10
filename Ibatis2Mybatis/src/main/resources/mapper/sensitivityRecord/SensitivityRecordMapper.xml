@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_sensitivity_record">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.sensitivityRecord.model.SensitivityRecord">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="operation_date" property="operationDate" jdbcType="TIMESTAMP"/>
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="operation_url" property="operationUrl" jdbcType="VARCHAR"/>
+    <result column="property" property="property" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" extends="BaseResultMap" type="com.i2shopping.i2work.operation.core.sensitivityRecord.model.SensitivityRecord">
+    <result column="params" property="params" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">id, operation_date, employee_id, operation_url, property</sql>
+  <sql id="Blob_Column_List">params</sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> , 
+    <include refid="Blob_Column_List"/> from tbl_sensitivity_record where id = #{id:VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_sensitivity_record where id = #{id:VARCHAR}</delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.sensitivityRecord.model.SensitivityRecord">insert into tbl_sensitivity_record (id, operation_date, employee_id, operation_url, property, params ) values (#{id:VARCHAR}, #{operationDate:TIMESTAMP}, #{employeeId:VARCHAR}, #{operationUrl:VARCHAR}, #{property:VARCHAR}, #{params:VARCHAR} )</insert>
+  <insert id="insertSelective" parameterType="com.i2shopping.i2work.operation.core.sensitivityRecord.model.SensitivityRecord">insert into tbl_sensitivity_record 
+    <trim prefix="("> 
+      <if test="id != null">id ,</if>  
+      <if test="operationDate != null">operation_date ,</if>  
+      <if test="employeeId != null">employee_id ,</if>  
+      <if test="operationUrl != null">operation_url ,</if>  
+      <if test="property != null">property ,</if>  
+      <if test="params != null">params ,</if> )
+    </trim>  
+    <trim prefix="values("> 
+      <if test="id != null">#{id:VARCHAR}, ,</if>  
+      <if test="operationDate != null">#{operationDate:TIMESTAMP}, ,</if>  
+      <if test="employeeId != null">#{employeeId:VARCHAR}, ,</if>  
+      <if test="operationUrl != null">#{operationUrl:VARCHAR}, ,</if>  
+      <if test="property != null">#{property:VARCHAR}, ,</if>  
+      <if test="params != null">#{params:VARCHAR}, ,</if> )
+    </trim> 
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.i2shopping.i2work.operation.core.sensitivityRecord.model.SensitivityRecord">update tbl_sensitivity_record 
+    <trim prefix="set"> 
+      <if test="operationDate != null">operation_date = #{operationDate:TIMESTAMP}, ,</if>  
+      <if test="employeeId != null">employee_id = #{employeeId:VARCHAR}, ,</if>  
+      <if test="operationUrl != null">operation_url = #{operationUrl:VARCHAR}, ,</if>  
+      <if test="property != null">property = #{property:VARCHAR}, ,</if>  
+      <if test="params != null">params = #{params:VARCHAR}, ,</if> 
+    </trim> where id = #{id:VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.i2shopping.i2work.operation.core.sensitivityRecord.model.SensitivityRecord">update tbl_sensitivity_record set operation_date = #{operationDate:TIMESTAMP}, employee_id = #{employeeId:VARCHAR}, operation_url = #{operationUrl:VARCHAR}, property = #{property:VARCHAR}, params = #{params:VARCHAR} where id = #{id:VARCHAR}</update>
+  <update id="updateByPrimaryKey" parameterType="com.i2shopping.i2work.operation.core.sensitivityRecord.model.SensitivityRecord">update tbl_sensitivity_record set operation_date = #{operationDate:TIMESTAMP}, employee_id = #{employeeId:VARCHAR}, operation_url = #{operationUrl:VARCHAR}, property = #{property:VARCHAR} where id = #{id:VARCHAR}</update>
+</mapper>

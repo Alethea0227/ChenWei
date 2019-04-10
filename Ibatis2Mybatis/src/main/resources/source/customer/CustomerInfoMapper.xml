@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_customer_info">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">
+        <result column="customer_id" property="customerId" jdbcType="VARCHAR"/>
+        <result column="customer_no" property="customerNo" jdbcType="VARCHAR"/>
+        <result column="customer_fullName" property="customerFullname" jdbcType="VARCHAR"/>
+        <result column="customer_shortName" property="customerShortname" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    customer_id, customer_no, customer_fullName, customer_shortName
+  </sql>
+    <select id="selectCustomerListCount" parameterClass="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo"
+            resultClass="java.lang.Integer">
+        select count(*) from tbl_customer_info
+        <isNotNull prepend="where" property="customerFullname">
+            customer_fullName like concat('%', #customerFullname:VARCHAR#, '%')
+        </isNotNull>
+    </select>
+    <select id="selectCustomerListByPage" resultMap="BaseResultMap"
+            parameterClass="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">
+        select * from tbl_customer_info
+        <isNotNull prepend="where" property="customerFullname">
+            customer_fullName like concat('%', #customerFullname:VARCHAR#, '%')
+        </isNotNull>
+    </select>
+    <select id="selectCustomerList" resultMap="BaseResultMap">
+        select * from tbl_customer_info
+    </select>
+    <insert id="addCustomer" parameterClass="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">
+      insert into tbl_customer_info (customer_id, customer_no, customer_fullName, customer_shortName)
+      values (#customerId:VARCHAR#, #customerNo:VARCHAR#, #customerFullname:VARCHAR#, #customerShortname:varchar#)
+  </insert>
+    <update id="changeCustomer" parameterClass="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">
+       update tbl_customer_info
+       set customer_fullName = #customerFullname:VARCHAR#, customer_shortName = #customerShortname:varchar#
+       where customer_id = #customerId:VARCHAR#
+   </update>
+    <delete id="deleteCustomer" parameterClass="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">
+        delete from tbl_customer_info where customer_id = #customerId:VARCHAR#
+    </delete>
+    <select id="selectByPrimaryKey" parameterClass="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from tbl_customer_info
+        where customer_id=#value:VARCHAR#
+    </select>
+</sqlMap>

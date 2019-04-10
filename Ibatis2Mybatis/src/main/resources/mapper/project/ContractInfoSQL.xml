@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  Generate by autoSQLMap Powered by duxing@Taobao -->
+<mapper namespace="tbl_contract_info">
+  <typeAlias alias="TblContractInfoDO" type="com.i2shopping.i2work.operation.core.contract.model.ContractInfo"/>
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.contract.model.ContractInfo">
+    <result property="id" column="ID" jdbcType="VARCHAR"/>
+    <result property="currentYear" column="CURRENT_YEAR" jdbcType="VARCHAR"/>
+    <result property="employeeId" column="EMPLOYEE_ID" jdbcType="VARCHAR"/>
+    <result property="departmentId" column="DEPARTMENT_ID" jdbcType="VARCHAR"/>
+    <result property="customerId" column="CUSTOMER_ID" jdbcType="VARCHAR"/>
+    <result property="isbid" column="ISBID" jdbcType="VARCHAR"/>
+    <result property="projectActualNo" column="PROJECT_ACTUAL_NO" jdbcType="VARCHAR"/>
+    <result property="actualNoPs" column="ACTUAL_NO_PS" jdbcType="VARCHAR"/>
+    <result property="contractNo" column="CONTRACT_NO" jdbcType="VARCHAR"/>
+    <result property="projectName" column="PROJECT_NAME" jdbcType="VARCHAR"/>
+    <result property="contractMoney" column="CONTRACT_MONEY" jdbcType="VARCHAR"/>
+    <result property="signTime" column="SIGN_TIME" jdbcType="VARCHAR"/>
+    <result property="startTime" column="START_TIME" jdbcType="VARCHAR"/>
+    <result property="endTime" column="END_TIME" jdbcType="VARCHAR"/>
+    <result property="rate" column="RATE" jdbcType="VARCHAR"/>
+    <result property="prove" column="PROVE" jdbcType="VARCHAR"/>
+    <result property="type" column="TYPE" jdbcType="VARCHAR"/>
+    <result property="initialTestTime" column="INITIAL_TEST_TIME" jdbcType="VARCHAR"/>
+    <result property="finalTime" column="FINAL_TIME" jdbcType="VARCHAR"/>
+    <result property="payStyle" column="PAY_STYLE" jdbcType="VARCHAR"/>
+    <result property="contractName" column="CONTRACT_NAME" jdbcType="VARCHAR"/>
+    <result property="projectType" column="project_type" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.i2shopping.i2work.operation.core.contract.model.ContractInfoVo">
+    <association property="projectInfo" column="CONTRACT_NO" select="tbl_project_info.selectByPrimaryKeyS"/>
+    <association property="customerInfo" column="CUSTOMER_ID" select="tbl_customer_info.selectByPrimaryKey"/>
+    <association property="projectPreAmount" column="CONTRACT_NO" select="tbl_project_pre_amount.selectByProjectNo"/>
+  </resultMap>
+  <sql id="allCols">`ID` ,`CURRENT_YEAR`,`EMPLOYEE_ID`,`DEPARTMENT_ID`,`CUSTOMER_ID`,`ISBID` ,`PROJECT_ACTUAL_NO`,`ACTUAL_NO_PS`,`CONTRACT_NO`,`PROJECT_NAME`,`CONTRACT_MONEY` ,`SIGN_TIME`,`START_TIME`,`END_TIME`,`RATE` ,`PROVE`,`TYPE`,`INITIAL_TEST_TIME` ,`FINAL_TIME`,`PAY_STYLE`,`CONTRACT_NAME`,`PROJECT_TYPE`</sql>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.contract.model.ContractInfo">INSERT INTO `tbl_contract_info` 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">ID ,</if>  
+      <if test="currentYear != null and currentYear != ''">CURRENT_YEAR ,</if>  
+      <if test="employeeId != null and employeeId != ''">EMPLOYEE_ID ,</if>  
+      <if test="departmentId != null and departmentId != ''">DEPARTMENT_ID ,</if>  
+      <if test="customerId != null and customerId != ''">CUSTOMER_ID ,</if>  
+      <if test="isbid != null and isbid != ''">ISBID ,</if>  
+      <if test="projectActualNo != null and projectActualNo != ''">PROJECT_ACTUAL_NO ,</if>  
+      <if test="actualNoPs != null and actualNoPs != ''">ACTUAL_NO_PS ,</if>  
+      <if test="contractNo != null and contractNo != ''">CONTRACT_NO ,</if>  
+      <if test="projectName != null and projectName != ''">PROJECT_NAME ,</if>  
+      <if test="contractMoney != null and contractMoney != ''">CONTRACT_MONEY ,</if>  
+      <if test="signTime != null and signTime != ''">SIGN_TIME ,</if>  
+      <if test="startTime != null and startTime != ''">START_TIME ,</if>  
+      <if test="endTime != null and endTime != ''">END_TIME ,</if>  
+      <if test="rate != null and rate != ''">RATE ,</if>  
+      <if test="prove != null and prove != ''">PROVE ,</if>  
+      <if test="type != null and type != ''">TYPE ,</if>  
+      <if test="initialTestTime != null and initialTestTime != ''">INITIAL_TEST_TIME ,</if>  
+      <if test="finalTime != null and finalTime != ''">FINAL_TIME ,</if>  
+      <if test="payStyle != null and payStyle != ''">PAY_STYLE ,</if>  
+      <if test="contractName != null and contractName != ''">CONTRACT_NAME ,</if>  
+      <if test="projectType != null and projectType != ''">project_type ,</if> )
+    </trim> VALUES 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">#{id:VARCHAR} ,</if>  
+      <if test="currentYear != null and currentYear != ''">#{currentYear:VARCHAR} ,</if>  
+      <if test="employeeId != null and employeeId != ''">#{employeeId:VARCHAR} ,</if>  
+      <if test="departmentId != null and departmentId != ''">#{departmentId:VARCHAR} ,</if>  
+      <if test="customerId != null and customerId != ''">#{customerId:VARCHAR} ,</if>  
+      <if test="isbid != null and isbid != ''">#{isbid:VARCHAR} ,</if>  
+      <if test="projectActualNo != null and projectActualNo != ''">#{projectActualNo:VARCHAR} ,</if>  
+      <if test="actualNoPs != null and actualNoPs != ''">#{actualNoPs:VARCHAR} ,</if>  
+      <if test="contractNo != null and contractNo != ''">#{contractNo:VARCHAR} ,</if>  
+      <if test="projectName != null and projectName != ''">#{projectName:VARCHAR} ,</if>  
+      <if test="contractMoney != null and contractMoney != ''">#{contractMoney:VARCHAR} ,</if>  
+      <if test="signTime != null and signTime != ''">#{signTime:VARCHAR} ,</if>  
+      <if test="startTime != null and startTime != ''">#{startTime:VARCHAR} ,</if>  
+      <if test="endTime != null and endTime != ''">#{endTime:VARCHAR} ,</if>  
+      <if test="rate != null and rate != ''">#{rate:VARCHAR} ,</if>  
+      <if test="prove != null and prove != ''">#{prove:VARCHAR} ,</if>  
+      <if test="type != null and type != ''">#{type:VARCHAR} ,</if>  
+      <if test="initialTestTime != null and initialTestTime != ''">#{initialTestTime:VARCHAR} ,</if>  
+      <if test="finalTime != null and finalTime != ''">#{finalTime:VARCHAR} ,</if>  
+      <if test="payStyle != null and payStyle != ''">#{payStyle:VARCHAR} ,</if>  
+      <if test="contractName != null and contractName != ''">#{contractName:VARCHAR} ,</if>  
+      <if test="projectType != null and projectType != ''">#{projectType:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <insert id="export" parameterType="com.i2shopping.i2work.operation.core.contract.model.ContractAndPre">INSERT INTO `tbl_contract_info` 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">ID ,</if>  
+      <if test="currentYear != null and currentYear != ''">CURRENT_YEAR ,</if>  
+      <if test="employeeId != null and employeeId != ''">EMPLOYEE_ID ,</if>  
+      <if test="departmentId != null and departmentId != ''">DEPARTMENT_ID ,</if>  
+      <if test="customerId != null and customerId != ''">CUSTOMER_ID ,</if>  
+      <if test="isbid != null and isbid != ''">ISBID ,</if>  
+      <if test="projectActualNo != null and projectActualNo != ''">PROJECT_ACTUAL_NO ,</if>  
+      <if test="actualNoPs != null and actualNoPs != ''">ACTUAL_NO_PS ,</if>  
+      <if test="contractNo != null and contractNo != ''">CONTRACT_NO ,</if>  
+      <if test="projectName != null and projectName != ''">PROJECT_NAME ,</if>  
+      <if test="contractMoney != null and contractMoney != ''">CONTRACT_MONEY ,</if>  
+      <if test="signTime != null and signTime != ''">SIGN_TIME ,</if>  
+      <if test="startTime != null and startTime != ''">START_TIME ,</if>  
+      <if test="endTime != null and endTime != ''">END_TIME ,</if>  
+      <if test="rate != null and rate != ''">RATE ,</if>  
+      <if test="prove != null and prove != ''">PROVE ,</if>  
+      <if test="type != null and type != ''">TYPE ,</if>  
+      <if test="initialTestTime != null and initialTestTime != ''">INITIAL_TEST_TIME ,</if>  
+      <if test="finalTime != null and finalTime != ''">FINAL_TIME ,</if>  
+      <if test="payStyle != null and payStyle != ''">PAY_STYLE ,</if>  
+      <if test="contractName != null and contractName != ''">CONTRACT_NAME ,</if>  
+      <if test="projectType != null and projectType != ''">project_type ,</if> )
+    </trim> VALUES 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">#{id:VARCHAR} ,</if>  
+      <if test="currentYear != null and currentYear != ''">#{currentYear:VARCHAR} ,</if>  
+      <if test="employeeId != null and employeeId != ''">#{employeeId:VARCHAR} ,</if>  
+      <if test="departmentId != null and departmentId != ''">#{departmentId:VARCHAR} ,</if>  
+      <if test="customerId != null and customerId != ''">#{customerId:VARCHAR} ,</if>  
+      <if test="isbid != null and isbid != ''">#{isbid:VARCHAR} ,</if>  
+      <if test="projectActualNo != null and projectActualNo != ''">#{projectActualNo:VARCHAR} ,</if>  
+      <if test="actualNoPs != null and actualNoPs != ''">#{actualNoPs:VARCHAR} ,</if>  
+      <if test="contractNo != null and contractNo != ''">#{contractNo:VARCHAR} ,</if>  
+      <if test="projectName != null and projectName != ''">#{projectName:VARCHAR} ,</if>  
+      <if test="contractMoney != null and contractMoney != ''">#{contractMoney:VARCHAR} ,</if>  
+      <if test="signTime != null and signTime != ''">#{signTime:VARCHAR} ,</if>  
+      <if test="startTime != null and startTime != ''">#{startTime:VARCHAR} ,</if>  
+      <if test="endTime != null and endTime != ''">#{endTime:VARCHAR} ,</if>  
+      <if test="rate != null and rate != ''">#{rate:VARCHAR} ,</if>  
+      <if test="prove != null and prove != ''">#{prove:VARCHAR} ,</if>  
+      <if test="type != null and type != ''">#{type:VARCHAR} ,</if>  
+      <if test="initialTestTime != null and initialTestTime != ''">#{initialTestTime:VARCHAR} ,</if>  
+      <if test="finalTime != null and finalTime != ''">#{finalTime:VARCHAR} ,</if>  
+      <if test="payStyle != null and payStyle != ''">#{payStyle:VARCHAR} ,</if>  
+      <if test="contractName != null and contractName != ''">#{contractName:VARCHAR} ,</if>  
+      <if test="projectType != null and projectType != ''">#{projectType:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <update id="update" parameterType="com.i2shopping.i2work.operation.core.contract.model.ContractInfo">UPDATE `tbl_contract_info` 
+    <trim prefix="set"> 
+      <if test="currentYear != null and currentYear != ''">`CURRENT_YEAR` = #{currentYear:VARCHAR}</if>  
+      <if test="employeeId != null and employeeId != ''">`EMPLOYEE_ID` = #{employeeId:VARCHAR}</if>  
+      <if test="departmentId != null and departmentId != ''">`DEPARTMENT_ID` = #{departmentId:VARCHAR}</if>  
+      <if test="customerId != null and customerId != ''">`CUSTOMER_ID` = #{customerId:VARCHAR}</if>  
+      <if test="isbid != null and isbid != ''">`ISBID` = #{isbid:VARCHAR}</if>  
+      <if test="projectActualNo != null and projectActualNo != ''">`PROJECT_ACTUAL_NO` = #{projectActualNo:VARCHAR}</if>  
+      <if test="actualNoPs != null and actualNoPs != ''">`ACTUAL_NO_PS` = #{actualNoPs:VARCHAR}</if>  
+      <if test="contractNo != null and contractNo != ''">`CONTRACT_NO` = #{contractNo:VARCHAR}</if>  
+      <if test="projectName != null and projectName != ''">`PROJECT_NAME` = #{projectName:VARCHAR}</if>  
+      <if test="contractMoney != null and contractMoney != ''">`CONTRACT_MONEY` = #{contractMoney:VARCHAR}</if>  
+      <if test="signTime != null and signTime != ''">`SIGN_TIME` = #{signTime:VARCHAR}</if>  
+      <if test="startTime != null and startTime != ''">`START_TIME` = #{startTime:VARCHAR}</if>  
+      <if test="endTime != null and endTime != ''">`END_TIME` = #{endTime:VARCHAR}</if>  
+      <if test="rate != null and rate != ''">`RATE` = #{rate:VARCHAR}</if>  
+      <if test="prove != null and prove != ''">`PROVE` = #{prove:VARCHAR}</if>  
+      <if test="type != null and type != ''">`TYPE` = #{type:VARCHAR}</if>  
+      <if test="initialTestTime != null and initialTestTime != ''">`INITIAL_TEST_TIME` = #{initialTestTime:VARCHAR}</if>  
+      <if test="finalTime != null and finalTime != ''">`FINAL_TIME` = #{finalTime:VARCHAR}</if>  
+      <if test="payStyle != null and payStyle != ''">`PAY_STYLE` = #{payStyle:VARCHAR}</if>  
+      <if test="contractName != null and contractName != ''">`CONTRACT_NAME` = #{contractName:VARCHAR}</if>  
+      <if test="projectType != null and projectType != ''">`PROJECT_TYPE` = #{projectType:VARCHAR}</if> 
+    </trim> WHERE `ID` = #{id:VARCHAR};
+  </update>
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.String"> <![CDATA[
+        SELECT
+        ]]>  
+    <include refid="allCols"/>  <![CDATA[
+        FROM tbl_contract_info WHERE ID = #{id:VARCHAR};
+        ]]> 
+  </select>
+  <select id="queryList" resultMap="BaseResultMap"> <![CDATA[
+        SELECT
+        ]]>  
+    <include refid="allCols"/>  <![CDATA[
+        FROM `tbl_contract_info` WHERE 1
+        ]]>  
+    <trim> 
+      <if test="currentYear != null and currentYear != ''">`CURRENT_YEAR` = #{currentYear:VARCHAR}</if>  
+      <if test="employeeId != null and employeeId != ''">`EMPLOYEE_ID` = #{employeeId:VARCHAR}</if>  
+      <if test="departmentId != null and departmentId != ''">`DEPARTMENT_ID` = #{departmentId:VARCHAR}</if>  
+      <if test="customerId != null and customerId != ''">`CUSTOMER_ID` = #{customerId:VARCHAR}</if>  
+      <if test="isbid != null and isbid != ''">`ISBID` = #{isbid:VARCHAR}</if>  
+      <if test="projectActualNo != null and projectActualNo != ''">`PROJECT_ACTUAL_NO` = #{projectActualNo:VARCHAR}</if>  
+      <if test="actualNoPs != null and actualNoPs != ''">`ACTUAL_NO_PS` = #{actualNoPs:VARCHAR}</if>  
+      <if test="contractNo != null and contractNo != ''">`CONTRACT_NO` = #{contractNo:VARCHAR}</if>  
+      <if test="projectName != null and projectName != ''">`PROJECT_NAME` like concat('%', #{projectName:VARCHAR }, '%')</if>  
+      <if test="contractMoney != null and contractMoney != ''">`CONTRACT_MONEY` = #{contractMoney}</if>  
+      <if test="signTime != null and signTime != ''">`SIGN_TIME` = #{signTime:VARCHAR}</if>  
+      <if test="startTime != null and startTime != ''">`START_TIME` = #{startTime:VARCHAR}</if>  
+      <if test="endTime != null and endTime != ''">`END_TIME` = #{endTime:VARCHAR}</if>  
+      <if test="rate != null and rate != ''">`RATE` = #{rate:VARCHAR}</if>  
+      <if test="prove != null and prove != ''">`PROVE` = #{prove:VARCHAR}</if>  
+      <if test="type != null and type != ''">`TYPE` = #{type:VARCHAR}</if>  
+      <if test="initialTestTime != null and initialTestTime != ''">`INITIAL_TEST_TIME` = #{initialTestTime:VARCHAR}</if>  
+      <if test="finalTime != null and finalTime != ''">`FINAL_TIME` = #{finalTime:VARCHAR}</if>  
+      <if test="payStyle != null and payStyle != ''">`PAY_STYLE` = #{payStyle:VARCHAR}</if>  
+      <if test="contractName != null and contractName != ''">`CONTRACT_NAME` = #{contractName:VARCHAR}</if>  
+      <if test="projectType != null and projectType != ''">`PROJECT_TYPE` = #{projectType:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <select id="selectVo" resultMap="VoResultMap"> <![CDATA[
+        SELECT
+        ]]>  
+    <include refid="allCols"/>  <![CDATA[
+        FROM `tbl_contract_info` WHERE 1
+        ]]>  
+    <trim> 
+      <if test="currentYear != null and currentYear != ''">`CURRENT_YEAR` = #{currentYear:VARCHAR}</if>  
+      <if test="employeeId != null and employeeId != ''">`EMPLOYEE_ID` = #{employeeId:VARCHAR}</if>  
+      <if test="departmentId != null and departmentId != ''">`DEPARTMENT_ID` = #{departmentId:VARCHAR}</if>  
+      <if test="customerId != null and customerId != ''">`CUSTOMER_ID` = #{customerId:VARCHAR}</if>  
+      <if test="isbid != null and isbid != ''">`ISBID` = #{isbid:VARCHAR}</if>  
+      <if test="projectActualNo != null and projectActualNo != ''">`PROJECT_ACTUAL_NO` = #{projectActualNo:VARCHAR}</if>  
+      <if test="actualNoPs != null and actualNoPs != ''">`ACTUAL_NO_PS` = #{actualNoPs:VARCHAR}</if>  
+      <if test="contractNo != null and contractNo != ''">`CONTRACT_NO` = #{contractNo:VARCHAR}</if>  
+      <if test="projectName != null and projectName != ''">`PROJECT_NAME` like concat('%', #{projectName:VARCHAR }, '%')</if>  
+      <if test="contractMoney != null and contractMoney != ''">`CONTRACT_MONEY` = #{contractMoney}</if>  
+      <if test="signTime != null and signTime != ''">`SIGN_TIME` = #{signTime:VARCHAR}</if>  
+      <if test="startTime != null and startTime != ''">`START_TIME` = #{startTime:VARCHAR}</if>  
+      <if test="endTime != null and endTime != ''">`END_TIME` = #{endTime:VARCHAR}</if>  
+      <if test="rate != null and rate != ''">`RATE` = #{rate:VARCHAR}</if>  
+      <if test="prove != null and prove != ''">`PROVE` = #{prove:VARCHAR}</if>  
+      <if test="type != null and type != ''">`TYPE` = #{type:VARCHAR}</if>  
+      <if test="initialTestTime != null and initialTestTime != ''">`INITIAL_TEST_TIME` = #{initialTestTime:VARCHAR}</if>  
+      <if test="finalTime != null and finalTime != ''">`FINAL_TIME` = #{finalTime:VARCHAR}</if>  
+      <if test="payStyle != null and payStyle != ''">`PAY_STYLE` = #{payStyle:VARCHAR}</if>  
+      <if test="contractName != null and contractName != ''">`CONTRACT_NAME` = #{contractName:VARCHAR}</if>  
+      <if test="projectType != null and projectType != ''">`PROJECT_TYPE` = #{projectType:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <select id="queryCount" resultType="java.lang.Integer"> <![CDATA[
+        SELECT
+        COUNT(*)
+        FROM `tbl_contract_info` WHERE  1
+        ]]>  
+    <trim> 
+      <if test="id != null and id != ''">`ID` = #{id:VARCHAR}</if>  
+      <if test="currentYear != null and currentYear != ''">`CURRENT_YEAR` = #{currentYear:VARCHAR}</if>  
+      <if test="employeeId != null and employeeId != ''">`EMPLOYEE_ID` = #{employeeId:VARCHAR}</if>  
+      <if test="departmentId != null and departmentId != ''">`DEPARTMENT_ID` = #{departmentId:VARCHAR}</if>  
+      <if test="customerId != null and customerId != ''">`CUSTOMER_ID` = #{customerId:VARCHAR}</if>  
+      <if test="isbid != null and isbid != ''">`ISBID` = #{isbid:VARCHAR}</if>  
+      <if test="projectActualNo != null and projectActualNo != ''">`PROJECT_ACTUAL_NO` = #{projectActualNo:VARCHAR}</if>  
+      <if test="actualNoPs != null and actualNoPs != ''">`ACTUAL_NO_PS` = #{actualNoPs:VARCHAR}</if>  
+      <if test="contractNo != null and contractNo != ''">`CONTRACT_NO` = #{contractNo:VARCHAR}</if>  
+      <if test="projectName != null and projectName != ''">`PROJECT_NAME` like concat('%', #{projectName:VARCHAR }, '%')</if>  
+      <if test="contractMoney != null and contractMoney != ''">`CONTRACT_MONEY` = #{contractMoney}</if>  
+      <if test="signTime != null and signTime != ''">`SIGN_TIME` = #{signTime:VARCHAR}</if>  
+      <if test="startTime != null and startTime != ''">`START_TIME` = #{startTime:VARCHAR}</if>  
+      <if test="endTime != null and endTime != ''">`END_TIME` = #{endTime:VARCHAR}</if>  
+      <if test="rate != null and rate != ''">`RATE` = #{rate:VARCHAR}</if>  
+      <if test="prove != null and prove != ''">`PROVE` = #{prove:VARCHAR}</if>  
+      <if test="type != null and type != ''">`TYPE` = #{type:VARCHAR}</if>  
+      <if test="initialTestTime != null and initialTestTime != ''">`INITIAL_TEST_TIME` = #{initialTestTime:VARCHAR}</if>  
+      <if test="finalTime != null and finalTime != ''">`FINAL_TIME` = #{finalTime:VARCHAR}</if>  
+      <if test="payStyle != null and payStyle != ''">`PAY_STYLE` = #{payStyle:VARCHAR}</if>  
+      <if test="contractName != null and contractName != ''">`CONTRACT_NAME` = #{contractName:VARCHAR}</if>  
+      <if test="projectType != null and projectType != ''">`PROJECT_TYPE` = #{projectType:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <update id="delete">UPDATE `tbl_contract_info` SET `{DELETE_KEY}` = '1' WHERE `ID` = #{id:VARCHAR};</update>
+  <select id="selectByProjectNo" parameterType="java.lang.String" resultMap="VoResultMap">select 
+    <include refid="allCols"/> from tbl_contract_info where CONTRACT_NO=#{value:VARCHAR}
+  </select>
+  <select id="queryContractVo" resultMap="VoResultMap" parameterType="com.i2shopping.i2work.operation.core.contract.model.ContractInfo">SELECT 
+    <include refid="allCols"/> FROM `tbl_contract_info` WHERE 1 
+    <trim> 
+      <if test="currentYear != null and currentYear != ''">`CURRENT_YEAR` = #{currentYear:VARCHAR}</if>  
+      <if test="employeeId != null and employeeId != ''">`EMPLOYEE_ID` = #{employeeId:VARCHAR}</if>  
+      <if test="departmentId != null and departmentId != ''">`DEPARTMENT_ID` = #{departmentId:VARCHAR}</if>  
+      <if test="customerId != null and customerId != ''">`CUSTOMER_ID` = #{customerId:VARCHAR}</if>  
+      <if test="isbid != null and isbid != ''">`ISBID` = #{isbid:VARCHAR}</if>  
+      <if test="projectActualNo != null and projectActualNo != ''">`PROJECT_ACTUAL_NO` = #{projectActualNo:VARCHAR}</if>  
+      <if test="actualNoPs != null and actualNoPs != ''">`ACTUAL_NO_PS` = #{actualNoPs:VARCHAR}</if>  
+      <if test="contractNo != null and contractNo != ''">`CONTRACT_NO` = #{contractNo:VARCHAR}</if>  
+      <if test="projectName != null and projectName != ''">`PROJECT_NAME` like concat('%', #{projectName:VARCHAR }, '%')</if>  
+      <if test="contractMoney != null and contractMoney != ''">`CONTRACT_MONEY` = #{contractMoney}</if>  
+      <if test="signTime != null and signTime != ''">`SIGN_TIME` = #{signTime:VARCHAR}</if>  
+      <if test="startTime != null and startTime != ''">`START_TIME` = #{startTime:VARCHAR}</if>  
+      <if test="endTime != null and endTime != ''">`END_TIME` = #{endTime:VARCHAR}</if>  
+      <if test="rate != null and rate != ''">`RATE` = #{rate:VARCHAR}</if>  
+      <if test="prove != null and prove != ''">`PROVE` = #{prove:VARCHAR}</if>  
+      <if test="type != null and type != ''">`TYPE` = #{type:VARCHAR}</if>  
+      <if test="initialTestTime != null and initialTestTime != ''">`INITIAL_TEST_TIME` = #{initialTestTime:VARCHAR}</if>  
+      <if test="finalTime != null and finalTime != ''">`FINAL_TIME` = #{finalTime:VARCHAR}</if>  
+      <if test="payStyle != null and payStyle != ''">`PAY_STYLE` = #{payStyle:VARCHAR}</if>  
+      <if test="contractName != null and contractName != ''">`CONTRACT_NAME` = #{contractName:VARCHAR}</if>  
+      <if test="projectType != null and projectType != ''">`PROJECT_TYPE` = #{projectType:VARCHAR}</if> 
+    </trim> 
+  </select>
+</mapper>

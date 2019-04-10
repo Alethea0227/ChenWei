@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_file">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo">
+        <result column="FILENO" property="fileNo" jdbcType="VARCHAR"/>
+        <result column="FILENAME" property="fileName" jdbcType="VARCHAR"/>
+        <result column="FILEPATH" property="filePath" jdbcType="VARCHAR"/>
+        <result column="UPLOADER" property="upLoader" jdbcType="VARCHAR"/>
+        <result column="FILEDESC" property="desc" jdbcType="VARCHAR"/>
+        <result column="UPLOADTIME" property="upLoadTime" jdbcType="DATE"/>
+    </resultMap>
+
+    <select id="selectFileInfo" parameterClass="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo"
+            resultMap="BaseResultMap">
+        SELECT * FROM tbl_file WHERE 1=1
+        <isNotEmpty property="fileNo" prepend="AND">
+            FILENO=#fileNo:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="fileName" prepend="AND">
+            FILENAME=#fileName:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="filePath" prepend="AND">
+            FILEPATH=#filePath:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="upLoader" prepend="AND">
+            UPLOADER=#upLoader:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="desc" prepend="AND">
+            FILEDESC=#desc:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="upLoadTime" prepend="AND">
+            UPLOADTIME=date_format(#upLoadTime:DATE#,'%Y-%m-%d')
+        </isNotEmpty>
+    </select>
+
+    <select id="selectFileInfoCount" parameterClass="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo"
+            resultClass="java.lang.Integer">
+        SELECT COUNT(*) FROM tbl_file WHERE 1=1
+        <isNotEmpty property="fileNo" prepend="AND">
+            FILENO=#fileNo:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="fileName" prepend="AND">
+            FILENAME=#fileName:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="filePath" prepend="AND">
+            FILEPATH=#filePath:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="upLoader" prepend="AND">
+            UPLOADER=#upLoader:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="desc" prepend="AND">
+            FILEDESC=#desc:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty property="upLoadTime" prepend="AND">
+            UPLOADTIME=date_format(#upLoadTime:DATE#,'%Y-%m-%d')
+        </isNotEmpty>
+    </select>
+
+    <select id="selectFileInfoByParmaryKey" parameterClass="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM tbl_file WHERE FILENO=#value:VARCHAR#
+    </select>
+
+    <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo">
+        INSERT INTO tbl_file(FILENO,FILENAME,FILEPATH,UPLOADER,FILEDESC,UPLOADTIME)
+        values (#fileNo:VARCHAR#,#fileName:VARCHAR#,#filePath:VARCHAR#,#upLoader:VARCHAR#,#desc:VARCHAR#,#upLoadTime:DATE#)
+    </insert>
+
+    <update id="update" parameterClass="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo">
+        UPDATE tbl_file
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="fileName">
+                FILENAME = #fileName:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend="," property="filePath">
+                FILEPATH = #filePath:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend="," property="upLoader">
+                UPLOADER = #upLoader:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend="," property="desc">
+                FILEDESC = #desc:VARCHAR#
+            </isNotNull>
+        </dynamic>
+        WHERE FILENO=#fileNo:VARCHAR#
+    </update>
+
+    <delete id="delete" parameterClass="java.lang.String">
+        DELETE FROM tbl_file WHERE FILENO=#value:VARCHAR#
+    </delete>
+
+</sqlMap>

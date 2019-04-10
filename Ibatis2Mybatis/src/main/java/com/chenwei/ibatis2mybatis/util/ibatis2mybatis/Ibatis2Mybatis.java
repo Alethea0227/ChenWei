@@ -86,12 +86,12 @@ public class Ibatis2Mybatis {
         if (StringUtils.isBlank(sourcePath)) {
             /*log.error("未指定源文件路径");
             return;*/
-            sourcePath = "/Users/cw/Documents/Ibatis2Mybatis/src/main/resources/source";
+            sourcePath = "/Users/cw/Documents/code/cw/ChenWei/Ibatis2Mybatis/src/main/resources/source";
         }
         if (StringUtils.isBlank(targetPath)) {
             /*log.error("未指定目标文件路径");
             return;*/
-            targetPath = "/Users/cw/Documents/Ibatis2Mybatis/src/main/resources/mapper";
+            targetPath = "/Users/cw/Documents/code/cw/ChenWei/Ibatis2Mybatis/src/main/resources/mapper";
         }
         render(sourcePath);
     }

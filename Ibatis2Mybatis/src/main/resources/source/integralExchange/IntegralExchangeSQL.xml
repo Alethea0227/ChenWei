@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_exchange" >
+	<resultMap id="ExchangeResultMap" class="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange" >
+		<result column="EXCHANGE_ID" property="exchangeId" jdbcType="VARCHAR" />
+		<result column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
+		<result column="DEPARTMENT_ID" property="departId" jdbcType="VARCHAR" />
+		<result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+		<result column="EMPLOYEE_NAME" property="employeeName" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ACCOUNT" property="productAccount" jdbcType="VARCHAR" />
+		<result column="PRODUCT_INTEGRAL" property="productIntegral" jdbcType="VARCHAR" />
+		<!--<result property="companyName" column="COMPANY_NAME" jdbcType="VARCHAR"/>
+		<result property="departName" column="DEPART_NAME" jdbcType="VARCHAR"/>
+		<result property="projectName" column="PROJECT_NAME" jdbcType="VARCHAR"/>
+		<result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR"/>-->
+	</resultMap>
+	<resultMap id="ExchangeResultMap1" class="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange" >
+		<result column="EXCHANGE_ID" property="exchangeId" jdbcType="VARCHAR" />
+		<result column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
+		<result column="DEPARTMENT_ID" property="departId" jdbcType="VARCHAR" />
+		<result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+		<result column="EMPLOYEE_NAME" property="employeeName" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ACCOUNT" property="productAccount" jdbcType="VARCHAR" />
+		<result column="PRODUCT_INTEGRAL" property="productIntegral" jdbcType="VARCHAR" />
+		<!--<result property="companyName" column="COMPANY_NAME" jdbcType="VARCHAR"/>
+		<result property="departName" column="DEPART_NAME" jdbcType="VARCHAR"/>-->
+		<!--<result property="projectName" column="PROJECT_NAME" jdbcType="VARCHAR"/>-->
+		<result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR"/>
+	</resultMap>
+	<resultMap id="ExchangeResultMap2" class="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange" >
+		<result column="EXCHANGE_ID" property="exchangeId" jdbcType="VARCHAR" />
+		<result column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
+		<result column="DEPARTMENT_ID" property="departId" jdbcType="VARCHAR" />
+		<result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+		<!--<result column="EMPLOYEE_NAME" property="employeeName" jdbcType="VARCHAR" />-->
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ACCOUNT" property="productAccount" jdbcType="VARCHAR" />
+		<result column="PRODUCT_INTEGRAL" property="productIntegral" jdbcType="VARCHAR" />
+		<!--<result property="companyName" column="COMPANY_NAME" jdbcType="VARCHAR"/>
+		<result property="departName" column="DEPART_NAME" jdbcType="VARCHAR"/>
+		<result property="projectName" column="PROJECT_NAME" jdbcType="VARCHAR"/>
+		<result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR"/>-->
+	</resultMap>
+	<resultMap id="mapResult" class="java.util.HashMap">
+		<result property="projectId" column="PROJECT_ID" javaType="java.lang.String"></result>
+		<result property="departId" column="DEPARTMENT_ID" javaType="java.lang.String"/>
+		<result property="companyId" column="BEYOND_COMPANY" javaType="java.lang.String"/>
+	</resultMap>
+	<resultMap id="integralExchangeMap" class="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange">
+		<result column="EXCHANGE_ID" property="exchangeId" jdbcType="VARCHAR" />
+		<result column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
+		<result column="DEPARTMENT_ID" property="departId" jdbcType="VARCHAR" />
+		<result column="PROJECT_ID" property="projectId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ACCOUNT" property="productAccount" jdbcType="VARCHAR" />
+		<result column="PRODUCT_INTEGRAL" property="productIntegral" jdbcType="VARCHAR" />
+		<result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+		<result property="product" resultMap="tbl_exchange.ProductResultMap"></result>
+	</resultMap>
+	<resultMap id="ProductResultMap" class="com.i2shopping.i2work.operation.core.integralExchange.model.Product">
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+		<result column="PRODUCT_IMG" property="imageId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_REMARK" property="productRemark" jdbcType="VARCHAR" />
+		<result column="PRODUCT_DETAIL" property="productDetail" jdbcType="VARCHAR" />
+		<result column="PRODUCT_INTEGRAL" property="productIntegral" jdbcType="VARCHAR" />
+	</resultMap>
+	<!--<resultMap id="employeeResult" class="com.i2shopping.i2work.employee.model.EmployeeInfo">
+		<result column="EMPLOYEE_ID" property="employeeId"/>
+	</resultMap>-->
+	<select id="selectByEmployeeId" resultMap="integralExchangeMap" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange">
+		SELECT * FROM tbl_exchange e JOIN tbl_product p
+		ON e.product_id=p.product_id
+		WHERE employee_id=#employeeId:VARCHAR#
+	</select>
+	<select id="selectByIntegralExchange" resultMap="ExchangeResultMap1" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange">
+		SELECT E.exchange_id,e.company_id,e.department_id,e.project_id,E.employee_id,e.product_id,e.product_account,e.product_integral,i.employee_name,p.product_name
+		FROM TBL_EXCHANGE E,tbl_employee_info i,tbl_product p
+		WHERE 1=1
+		and e.employee_id = i.employee_id
+		and e.product_id = p.product_id
+		<isNotEmpty prepend="and" property="employeeName">
+			E.EMPLOYEE_ID=ANY (
+			SELECT EMPLOYEE_ID
+			FROM tbl_employee_info
+			WHERE EMPLOYEE_NAME like concat('%', #employeeName:VARCHAR#, '%')
+			)
+		
+		</isNotEmpty>
+		<isNotNull prepend="and" property="companyId">
+			e.COMPANY_ID=#companyId:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="departId">
+			e.DEPARTMENT_ID=#departId:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="projectId">
+			e.PROJECT_ID=#projectId:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="productId">
+			e.PRODUCT_ID=#productId:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="exchangeId">
+			e.exchange_id=#exchangeId:VARCHAR #
+		</isNotNull>
+	</select>
+	<select id="selectByIntegralExchange1" resultMap="ExchangeResultMap" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange">
+		SELECT E.exchange_id,e.company_id,e.department_id,e.project_id,E.employee_id,e.product_id,e.product_account,e.product_integral,i.employee_name
+		FROM TBL_EXCHANGE E,tbl_employee_info i
+		WHERE 1=1
+		and e.employee_id = i.employee_id
+		<isNotEmpty prepend="and" property="employeeName">
+			E.EMPLOYEE_ID=ANY (
+			SELECT EMPLOYEE_ID
+			FROM tbl_employee_info
+			WHERE EMPLOYEE_NAME like concat('%', #employeeName:VARCHAR#, '%')
+			)
+		
+		</isNotEmpty>
+		<isNotNull prepend="and" property="companyId">
+			e.COMPANY_ID=#companyId:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="departId">
+			e.DEPARTMENT_ID=#departId:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="projectId">
+			e.PROJECT_ID=#projectId:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="productId">
+			e.PRODUCT_ID=#productId:VARCHAR#
+		</isNotNull>
+		
+	</select>
+	<select id="selectExchangeCountByIntegralExchange" resultClass="java.lang.Integer" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange">
+		SELECT COUNT(1)
+		FROM TBL_EXCHANGE
+		WHERE 1=1
+		<isNotEmpty prepend="and" property="employeeName">
+			EMPLOYEE_Id=ANY (
+			SELECT EMPLOYEE_ID
+			FROM tbl_employee_info
+			WHERE EMPLOYEE_NAME like concat('%', #employeeName:VARCHAR#, '%')
+			)
+		
+		</isNotEmpty>
+		<isNotNull prepend="and" property="companyId">
+			COMPANY_ID=#companyId:CARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="departId">
+			DEPARTMENT_ID=#departId:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="projectId">
+			PROJECT_ID=#projectId:VARCHAR#
+		</isNotNull>
+		<isNotNull prepend="and" property="productId">
+			PRODUCT_ID=#productId:VARCHAR#
+		</isNotNull>
+	</select>
+	<select id="exportExchange" resultClass="java.util.HashMap" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange">
+		SELECT com.NAME,dep.DEPARTMENT_NAME,pj.project_name,ei.EMPLOYEE_NAME,pd.PRODUCT_NAME,exc.PRODUCT_ACCOUNT,exc.PRODUCT_INTEGRAL
+		FROM tbl_exchange exc
+		LEFT JOIN tbl_company com ON com.ID=exc.COMPANY_ID
+		LEFT JOIN tbl_department_info dep ON dep.DEPARTMENT_ID=exc.DEPARTMENT_ID
+		LEFT JOIN tbl_project_info pj ON  pj.contract_no=exc.PROJECT_ID
+		LEFT JOIN tbl_product pd ON  pd.PRODUCT_ID=exc.PRODUCT_ID
+		LEFT JOIN tbl_employee_info ei ON  ei.employee_id=exc.employee_id
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="employeeName">
+				exc.EMPLOYEE_Id=ANY (
+				SELECT EMPLOYEE_ID
+				FROM tbl_employee_info
+				WHERE EMPLOYEE_NAME like concat('%', #employeeName:VARCHAR#, '%')
+				)
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="companyId">
+				exc.COMPANY_ID = #companyId:VARCHAR#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="departId">
+				exc.DEPARTMENT_ID = #departId:VARCHAR#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="projectId">
+				exc.PROJECT_ID = #projectId:VARCHAR#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="productId">
+				exc.PRODUCT_ID = #productId:VARCHAR#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<select id="getIntegral_2016" resultClass="java.lang.String" parameterClass="java.lang.String">
+		select sum(emp_integral)
+		from tbl_integral_item
+		where EMPLOYEE_ID=#employeeId:VARCHAR#
+		and (INTEGRAL_ITEM_ID like '2015%'
+		or INTEGRAL_ITEM_ID like '2016%')
+	</select>
+	<select id="getOutIntegral_2017" parameterClass="java.lang.String" resultClass="java.lang.String">
+		select sum(emp_integral)
+		from tbl_integral_item
+		where EMPLOYEE_ID=#empId:VARCHAR#
+		and INTEGRAL_ITEM_ID like '2017%'
+		AND EMP_INTEGRAL like '-%'
+	</select>
+	<select id="getIntegration" parameterClass="java.lang.String" resultClass="java.lang.String">
+		select integration
+		from tbl_lastyear_integral
+		WHERE employee_id=#employeeId:VARCHAR #
+	</select>
+	<insert id="addLastYearIntegral" parameterClass="java.util.HashMap">
+		INSERT INTO tbl_lastyear_integral
+		VALUES (#employeeId:VARCHAR #,#integral:VARCHAR #)
+	</insert>
+	<select id="selectDepartAndProjectName" parameterClass="java.lang.String" resultMap="mapResult">
+		Select pinfo.contract_no AS PROJECT_ID,dep.department_id AS DEPARTMENT_ID,dep.BEYOND_COMPANY
+		FROM tbl_department_info dep,tbl_project_etc etc,tbl_project_info pinfo,tbl_employee_info emp
+		where etc.contract_no=pinfo.contract_no
+		AND etc.employee_id=emp.employee_id
+		AND emp.department_id=dep.department_id
+		AND emp.employee_id=#employeeId:VARCHAR #
+	</select>
+	<insert id="addIntegralExchange" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.IntegralExchange">
+		INSERT into tbl_exchange(EXCHANGE_ID,COMPANY_ID,DEPARTMENT_ID,PROJECT_ID,EMPLOYEE_ID,PRODUCT_ID,PRODUCT_ACCOUNT,PRODUCT_INTEGRAL)
+		VALUES(#exchangeId:VARCHAR #,#companyId:VARCHAR #,#departId:VARCHAR #, #projectId:VARCHAR #,#employeeId:VARCHAR #,#productId:VARCHAR #,#productAccount:VARCHAR #,#productIntegral:VARCHAR #)
+	</insert>
+	<select id="getImages" parameterClass="java.lang.String" resultClass="java.lang.String">
+		SELECT product_image
+		from tbl_product_squ
+		where product_id=#productId:VARCHAR #
+	</select>
+	<select id="getIntegralExchange" parameterClass="java.util.HashMap" resultMap="ExchangeResultMap2">
+		SELECT *
+		FROM TBL_EXCHANGE
+		WHERE employee_id=#empId:VARCHAR #
+		AND product_id=#productId:VARCHAR #
+	</select>
+	<insert id="addOrder" parameterClass="java.util.HashMap">
+		INSERT INTO tbl_exchange_order
+		VALUES (#exchangeOrderId:VARCHAR #,#date:VARCHAR #,#list:VARCHAR #)
+	</insert>
+	<select id="getOrder" parameterClass="java.lang.String" resultClass="java.lang.String">
+		Select order_list
+		from tbl_exchange_order
+		where integral_exchange_id=#orderId:VARCHAR #
+	</select>
+	<update id="updateIntegral" parameterClass="java.util.HashMap">
+		UPDATE tbl_lastyear_integral
+		SET integration=#syjf:VARCHAR #
+		WHERE employee_id=#empId:VARCHAR #
+	</update>
+	<update id="updateEmployeeInfo" parameterClass="java.util.HashMap">
+		UPDATE tbl_employee_info
+		SET INTEGRATION=(SELECT inte.INTEGRATION
+		FROM (SELECT (INTEGRATION-#total:VARCHAR #) INTEGRATION
+		from tbl_employee_info
+		where employee_id=#empId:VARCHAR #
+		) inte
+		)WHERE EMPLOYEE_ID=#empId:VARCHAR #
+	</update>
+	<update id="updateIntegralExchange" parameterClass="java.util.HashMap">
+		UPDATE tbl_exchange
+		SET product_account=#total:VARCHAR #,product_integral=#integrals:VARCHAR #
+		WHERE exchange_id=#exchangeId:VARCHAR #
+	</update>
+	<update id="updateLastYearIntegral" parameterClass="java.util.HashMap">
+		UPDATE tbl_lastyear_integral
+		SET integration=#integral:VARCHAR #
+		WHERE employee_id=#empId:VARCHAR #
+	</update>
+	<!--<select id="getEmployeeInfo" resultMap="employeeResult">
+		SELECT
+		employee_id
+		FROM
+		tbl_employee_info
+		WHERE
+	IS_ON_DUTY = '01'
+	</select>-->
+</sqlMap>

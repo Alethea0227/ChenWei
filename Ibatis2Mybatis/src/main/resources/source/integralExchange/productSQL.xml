@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_product">
+	<resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.integralExchange.model.Product">
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+		<result column="PRODUCT_IMG" property="imageId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_REMARK" property="productRemark" jdbcType="VARCHAR" />
+		<result column="PRODUCT_DETAIL" property="productDetail" jdbcType="VARCHAR" />
+		<result column="PRODUCT_INTEGRAL" property="productIntegral" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="addProduct" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.Product">
+		INSERT  INTO tbl_product (product_id,product_name,product_img,product_remark,product_detail,product_integral)
+		VALUES (#productId:VARCHAR #,#productName:VARCHAR #,#imageId:VARCHAR #,#productRemark:VARCHAR #,
+		#productDetail:VARCHAR #,#productIntegral:VARCHAR #)
+	</insert>
+	<update id="updateProduct" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.Product" >
+		UPDATE  tbl_product set
+		product_name=#productName:VARCHAR #,
+		product_img=#imageId:VARCHAR #,
+		product_remark=#productRemark:VARCHAR #,
+		product_detail=#productDetail:VARCHAR #,
+		product_integral=#productIntegral:VARCHAR #
+		WHERE product_id=#productId:VARCHAR #
+	</update>
+	<select id="selectProduct" resultMap="BaseResultMap">
+		select * FROM tbl_product
+	</select>
+	<select id="getCount" resultClass="java.lang.Integer">
+		SELECT  COUNT(*) FROM tbl_product
+	</select>
+	<select id="selectByProductId" resultMap="BaseResultMap" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.Product">
+		select * FROM tbl_product where product_id=#productId:VARCHAR #
+	</select>
+	<delete id="deleteProduct" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.Product">
+		DELETE  FROM  tbl_product WHERE product_id=#productId:VARCHAR #
+	</delete>
+	<select id="selectAllProduct" resultMap="BaseResultMap">
+		SELECT * FROM tbl_product
+	</select>
+	<insert id="addProductSqu" parameterClass="com.i2shopping.i2work.operation.core.integralExchange.model.ProductSqu">
+		INSERT INTO tbl_product_squ(PRODUCT_ID,PRODUCT_IMAGE) VALUES (#productId:VARCHAR#,#productImage:VARCHAR#)
+	</insert>
+</sqlMap>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_employee_score">
+  <resultMap id="BaseMap" type="com.i2shopping.i2work.operation.core.employee.model.EmployeeScore">
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="EMPLOYEE_NAME" property="employeeName" jdbcType="VARCHAR"/>
+    <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+    <result column="project_actual_no" property="contractNo" jdbcType="VARCHAR"/>
+    <result column="DEPARTMENT_NAME" property="departmentName" jdbcType="VARCHAR"/>
+    <result property="averageScore" column="average_score" jdbcType="VARCHAR"/>
+    <result property="standardScore" column="standard_score" jdbcType="VARCHAR"/>
+  </resultMap>
+  <select id="selectEmployeeScore" resultMap="BaseMap" parameterType="com.i2shopping.i2work.operation.core.employee.model.EmployeeScore"> 
+    <!--select *
+        from (
+        select
+        format(avg(average_score), 2) as average_score,
+        format(avg(standard_score), 4) as standard_score,
+        employee_id
+        from tbl_employee_score
+        where score_date between #{beginTime:DATE} and #{endTime:DATE}
+        group by employee_id
+        ) ts, (select
+        t1.EMPLOYEE_ID,
+        t3.project_name,
+        t4.DEPARTMENT_NAME,
+        t1.EMPLOYEE_NAME,
+        t2.contract_no,
+        t3.department_id
+        from tbl_employee_info t1
+        left join tbl_project_etc t2 on t1.EMPLOYEE_ID = t2.employee_id
+        and t2.is_Leave='00'
+        left join tbl_project_info
+        t3 on t2.contract_no = t3.contract_no
+        left join tbl_department_info t4 on t3.department_id
+        = t4.DEPARTMENT_ID where t1.IS_ON_DUTY='01') te,
+        tbl_emp_organ_struct teos,tbl_employee_info te1
+        where ts.employee_id = te.EMPLOYEE_ID and te.DEPARTMENT_NAME != '' and te.project_name != ''
+        and teos.EMPLOYEE_ID = ts.employee_id and teos.PARENT_EMPLOYEE_ID
+        and te1.EMPLOYEE_ID=teos.PARENT_EMPLOYEE_ID
+        <isNotEmpty property="employeeName">
+            <![CDATA[
+        and EMPLOYEE_NAME like concat('%', #{employeeName:VARCHAR }, '%')
+       ]]>
+        </isNotEmpty>
+        <isNotEmpty property="verifyId">
+            and teos.PARENT_EMPLOYEE_ID=#{verifyId:VARCHAR}
+        </isNotEmpty>
+        <isNotEmpty property="departmentId">
+            and te.department_id = #{departmentId:VARCHAR}
+        </isNotEmpty>
+        <isNotEmpty property="contractNo">
+            and te.contract_No = #{contractNo:VARCHAR}
+        </isNotEmpty>
+        group by ts.employee_id
+        order by ts.standard_score desc--> select ts.*, te.*, teos.PARENT_EMPLOYEE_ID from ( select format(avg(average_score), 2) as average_score, format(avg(standard_score), 4) as standard_score, employee_id from tbl_employee_score where score_date between #{beginTime:DATE} and #{endTime:DATE} group by employee_id) ts left join (select t1.EMPLOYEE_ID, t3.project_name, t3.project_actual_no, t4.DEPARTMENT_NAME, t1.EMPLOYEE_NAME, t2.contract_no, t3.department_id from tbl_employee_info t1 left join tbl_project_etc t2 on t1.EMPLOYEE_ID = t2.employee_id and t2.is_Leave = '00' left join tbl_project_info t3 on t2.contract_no = t3.contract_no left join tbl_department_info t4 on t3.department_id = t4.DEPARTMENT_ID where t1.IS_ON_DUTY = '01' and t4.DEPARTMENT_NAME != '' and t3.project_name != '') te on ts.employee_id = te.EMPLOYEE_ID left join tbl_emp_organ_struct teos on teos.EMPLOYEE_ID = ts.employee_id left join tbl_employee_info te1 on te1.EMPLOYEE_ID = teos.PARENT_EMPLOYEE_ID where te.DEPARTMENT_NAME != '' and te.project_name != ''
+    <if test="employeeName != null and employeeName != ''"> <![CDATA[
+        and te.EMPLOYEE_NAME like concat('%', #{employeeName:VARCHAR }, '%')
+       ]]> </if>  
+    <if test="verifyId != null and verifyId != ''">and teos.PARENT_EMPLOYEE_ID=#{verifyId:VARCHAR}</if>  
+    <if test="departmentId != null and departmentId != ''">and te.department_id = #{departmentId:VARCHAR}</if>  
+    <if test="contractNo != null and contractNo != ''">and te.contract_No = #{contractNo:VARCHAR}</if> group by ts.employee_id order by ts.standard_score desc;
+  </select>
+  <select id="selectVerifyName" parameterType="com.i2shopping.i2work.operation.core.employee.model.EmployeeScore" resultType="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfo">select distinct t3.EMPLOYEE_ID as employeeId,t3.EMPLOYEE_NAME as employeeName from tbl_emp_organ_struct t1, tbl_project_etc t2, tbl_employee_info t3 where t2.contract_no = #{contractNo:VARCHAR} and t1.PARENT_EMPLOYEE_ID = t2.employee_id and t1.PARENT_EMPLOYEE_ID = t3.EMPLOYEE_ID</select>
+</mapper>

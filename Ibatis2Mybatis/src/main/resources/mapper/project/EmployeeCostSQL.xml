@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_employee_cost">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">
+    <result column="employeeCost_id" property="id" jdbcType="VARCHAR"/>
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="cost" property="cost" jdbcType="VARCHAR"/>
+    <result column="employee_level" property="level" jdbcType="VARCHAR"/>
+    <result column="price" property="price" jdbcType="VARCHAR"/>
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR"/>
+    <result column="salary" property="salary" jdbcType="VARCHAR"/>
+    <result column="social_sercurity_fund" property="socialSercurityFund" jdbcType="VARCHAR"/>
+    <result column="accumulation_fund" property="accumulationFund" jdbcType="VARCHAR"/>
+    <result column="meal_allowance" property="mealAllowance" jdbcType="VARCHAR"/>
+    <result column="housing_allowance" property="housingAllowance" jdbcType="VARCHAR"/>
+    <result column="other" property="other" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="employeeCostResult" extends="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">
+    <result column="EMAIL" property="imageId" jdbcType="VARCHAR"/>
+    <result column="employeeName" property="employeeName" jdbcType="VARCHAR"/>
+    <result column="projectName" property="projectName" jdbcType="VARCHAR"/>
+    <result column="projectActualNo" property="projectActualNo" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="result1" type="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfo">
+    <result property="isOnDuty" column="IS_ON_DUTY" jdbcType="CHAR"/>
+    <result property="boardingTime" column="BOARDING_TIME" jdbcType="DATE"/>
+    <result column="LEAVE_POST_TIME" property="leavePostTime" jdbcType="DATE"/>
+  </resultMap>
+  <resultMap id="result2" type="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome">
+    <result property="completeness" column="completeness" jdbcType="VARCHAR"/>
+    <result property="totalCost" column="total_cost" jdbcType="VARCHAR"/>
+    <result property="totalIncome" column="total_income" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List">employeeCost_id, employee_id, cost, employee_level, price, contract_no</sql>
+  <select id="countCostListByPage" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost" resultType="java.lang.Integer">select count(*) FROM tbl_employee_cost a, tbl_employee_info b, tbl_project_info c WHERE a.employee_id = b.EMPLOYEE_ID
+    <if test="employeeName != null">and a.employee_name = #{employeeName:VARCHAR}</if> AND a.contract_no = c.contract_no
+  </select>
+  <select id="selectCostListByPage" resultMap="employeeCostResult" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">SELECT a.*, b.EMPLOYEE_NAME AS employeeName, b.EMAIL, c.project_name AS projectName, c.project_actual_no AS projectActualNo FROM tbl_employee_cost a, tbl_employee_info b, tbl_project_info c WHERE a.employee_id = b.EMPLOYEE_ID
+    <if test="employeeName != null">and a.employee_name = #{employeeName:VARCHAR}</if> AND a.contract_no = c.contract_no
+  </select>
+  <insert id="addEmployeeCost" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">insert into tbl_employee_cost (employeeCost_id, employee_id, cost, contract_no, salary, social_sercurity_fund, accumulation_fund, meal_allowance, housing_allowance, other, employee_name) values (#{id:VARCHAR}, #{employeeId:VARCHAR}, #{cost:VARCHAR}, #{contractNo:VARCHAR}, #{salary:VARCHAR}, #{socialSercurityFund:VARCHAR}, #{accumulationFund:VARCHAR}, #{mealAllowance:VARCHAR}, #{housingAllowance:VARCHAR}, #{other:VARCHAR}, #{employeeName:VARCHAR})</insert>
+  <insert id="addEmployeeIncome" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">insert into tbl_employee_cost (employeeCost_id, employee_id, employee_level, price, contract_no) values (#{id:VARCHAR}, #{employeeId:VARCHAR}, #{level:VARCHAR}, #{price:VARCHAR}, #{contractNo:VARCHAR})</insert>
+  <insert id="insertSelective" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">insert into tbl_employee_cost (employeeCost_id, employee_id, employee_level, price, contract_no) values (#{id:VARCHAR}, #{employeeId:VARCHAR}, #{level:VARCHAR}, #{price:VARCHAR}, #{contractNo:VARCHAR})</insert>
+  <insert id="insertCost" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">insert into tbl_employee_cost (employeeCost_id, employee_id, cost, contract_no, salary, social_sercurity_fund, accumulation_fund, meal_allowance, housing_allowance, other, employee_name) values (#{id:VARCHAR}, #{employeeId:VARCHAR}, #{cost:VARCHAR}, #{contractNo:VARCHAR}, #{salary:VARCHAR}, #{socialSercurityFund:VARCHAR}, #{accumulationFund:VARCHAR}, #{mealAllowance:VARCHAR}, #{housingAllowance:VARCHAR}, #{other:VARCHAR}, #{employeeName:VARCHAR})</insert>
+  <update id="editEmployeeCost" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">update tbl_employee_cost set salary = #{salary:VARCHAR}
+    <if test="socialSercurityFund != null and socialSercurityFund != ''">social_sercurity_fund = #{socialSercurityFund:VARCHAR} ,</if>  
+    <if test="accumulationFund != null and accumulationFund != ''">accumulation_fund = #{accumulationFund:VARCHAR} ,</if>  
+    <if test="mealAllowance != null and mealAllowance != ''">meal_allowance = #{mealAllowance:VARCHAR} ,</if>  
+    <if test="housingAllowance != null and housingAllowance != ''">housing_allowance = #{housingAllowance:VARCHAR} ,</if>  
+    <if test="other != null and other != ''">other = #{other:VARCHAR} ,</if> where employeeCost_id = #{id:VARCHAR}
+  </update>
+  <update id="editEmployeeIncome" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">update tbl_employee_cost set employee_level = #{level:VARCHAR}, price = #{price:VARCHAR} where employeeCost_id = #{id:VARCHAR}</update>
+  <update id="updateEmployeeCost" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">update tbl_employee_cost set cost = #{cost:VARCHAR}, contract_no = #{contractNo:VARCHAR} where employeeCost_id = #{id:VARCHAR}</update>
+  <update id="updateEmployeeIncome" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">update tbl_employee_cost set employee_level = #{level:VARCHAR}, price = #{price:VARCHAR}, contract_no = #{contractNo:VARCHAR} where employeeCost_id = #{id:VARCHAR}</update>
+  <update id="updateRecord" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">update tbl_employee_cost set employee_level = #{level:VARCHAR}, price = #{price:VARCHAR}, contract_no = #{contractNo:VARCHAR} where employeeCost_id = #{id:VARCHAR}</update>
+  <update id="updateCost" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">update tbl_employee_cost set cost = #{cost:VARCHAR}, contract_no = #{contractNo:VARCHAR} where employeeCost_id = #{id:VARCHAR}</update>
+  <select id="selectemployeeCostById" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost" resultMap="BaseResultMap">select * from tbl_employee_cost where employee_id = #{employeeId:VARCHAR}</select>
+  <select id="selectObject" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost" resultMap="BaseResultMap">select * from tbl_employee_cost where employee_id = #{employeeId:VARCHAR}</select>
+  <select id="selectEmployeeJoinTime" parameterType="java.lang.String" resultMap="result1">select BOARDING_TIME, LEAVE_POST_TIME, IS_ON_DUTY from tbl_employee_info where EMPLOYEE_ID = #{value:VARCHAR}</select>
+  <!--查询当日考勤数-->
+  <select id="selcetInwork" parameterType="com.i2shopping.i2work.operation.core.project.model.InworkRecord" resultType="java.lang.String">select inwork from tbl_inwork_record where inwork_date = #{inworkDate:VARCHAR} AND employee_id = #{employeeId:VARCHAR}</select>
+  <select id="selcetProjectType" parameterType="java.lang.String" resultType="java.lang.String">select project_type from tbl_contract_info where contract_no = #{value:VARCHAR}</select>
+  <select id="selectProjectInfo" parameterType="java.lang.String" resultMap="result2">select a.total_cost, a.total_income, b.completeness from tbl_project_cost a, tbl_project_pre_amount b where a.contract_no = #{value:VARCHAR} and b.project_no = #{value:VARCHAR}</select>
+  <delete id="deleteEmployeeCost" parameterType="com.i2shopping.i2work.operation.core.project.model.EmployeeCost">delete from tbl_employee_cost where employeeCost_id = #{id:VARCHAR}</delete>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_sensitivity_record">
+  <resultMap id="EmployeeActionLog" type="com.i2shopping.i2work.operation.core.aop.model.EmployeeActionLog">
+    <result column="employee_name" property="employeeName" jdbcType="VARCHAR"/>
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="operation_date" property="operationDate" jdbcType="TIMESTAMP"/>
+    <result column="operation_url" property="operationUrl" jdbcType="VARCHAR"/>
+    <result column="typename" property="typeName" jdbcType="VARCHAR"/>
+    <result column="operation" property="operation" jdbcType="VARCHAR"/>
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="SensitivityOperation" type="com.i2shopping.i2work.operation.core.aop.model.SensitivityOperation">
+    <result column="operation" property="operation" jdbcType="VARCHAR"/>
+    <result column="value" property="value" jdbcType="VARCHAR"/>
+    <result column="intercept" property="intercept" jdbcType="BIT"/>
+  </resultMap>
+  <insert id="InsertNewAction" parameterType="com.i2shopping.i2work.operation.core.aop.model.EmployeeActionLog">insert into tbl_sensitivity_record(id,operation_date,employee_id,employee_name,operation_url,typename,operation) values (#{id:VARCHAR},#{operationDate:TIMESTAMP},#{employeeId:VARCHAR},#{employeeName:VARCHAR},#{operationUrl:VARCHAR},#{typeName:VARCHAR},#{operation:VARCHAR})</insert>
+  <select id="SelectAllAction" resultMap="EmployeeActionLog">select * from tbl_sensitivity_record</select>
+  <select id="selectValuebyOperation" parameterType="java.lang.String" resultType="java.lang.String">SELECT value from tbl_sensitivity_operation WHERE operation=#{operation:VARCHAR}</select>
+  <select id="selectInterceptbyOperation" parameterType="java.lang.String" resultType="java.lang.Boolean">SELECT intercept from tbl_sensitivity_operation WHERE operation=#{operation:VARCHAR}</select>
+  <insert id="insertSensitivityOperation" parameterType="com.i2shopping.i2work.operation.core.aop.model.SensitivityOperation">insert into tbl_sensitivity_operation(operation,value,intercept) values (#{operation:VARCHAR},#{value:VARCHAR},#{intercept:BIT})</insert>
+  <delete id="deleteSensitivityOperation" parameterType="java.lang.String">delete from tbl_sensitivity_operation where operation=#{operation:VARCHAR}</delete>
+  <select id="selectAllOperationValue" resultMap="SensitivityOperation">SELECT * from tbl_sensitivity_operation</select>
+  <update id="updateOperation" parameterType="com.i2shopping.i2work.operation.core.aop.model.SensitivityOperation">UPDATE tbl_sensitivity_operation set value=#{value:VARCHAR},intercept=#{intercept:BIT} where operaation=#{operation:VARCHAR}</update>
+</mapper>

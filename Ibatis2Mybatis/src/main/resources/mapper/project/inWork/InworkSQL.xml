@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  Generate by autoSQLMap Powered by duxing@Taobao -->
+<mapper namespace="tbl_inwork">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.InWork">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+    <result column="inwork_date" property="inworkDate" jdbcType="VARCHAR"/>
+    <result column="month_inwork" property="monthInwork" jdbcType="VARCHAR"/>
+    <result column="all_inwork" property="allInwork" jdbcType="VARCHAR"/>
+    <result column="customer_month_inwork" property="customerMonthInwork" jdbcType="VARCHAR"/>
+    <result column="customer_all_inwork" property="customerAllInwork" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.InworkVo">
+    <association column="project_no" property="contractInfoVo" select="tbl_contract_info.selectByProjectNo"/>
+  </resultMap>
+  <sql id="Base_Column_List">id, project_no, inwork_date, month_inwork, all_inwork, customer_month_inwork, customer_all_inwork</sql>
+  <select id="selectByPrimaryKey" resultMap="VoResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_inwork where id = #{id:VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_inwork where id = #{id:VARCHAR}</delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.project.model.InWork">insert into tbl_inwork 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">id ,</if>  
+      <if test="projectNo != null and projectNo != ''">project_no ,</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date ,</if>  
+      <if test="monthInwork != null and monthInwork != ''">month_inwork ,</if>  
+      <if test="allInwork != null and allInwork != ''">all_inwork ,</if>  
+      <if test="customerMonthInwork != null and customerMonthInwork != ''">customer_month_inwork ,</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">customer_all_inwork ,</if> )
+    </trim> VALUES 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">#{id:VARCHAR} ,</if>  
+      <if test="projectNo != null and projectNo != ''">#{projectNo:VARCHAR} ,</if>  
+      <if test="inworkDate != null and inworkDate != ''">#{inworkDate:VARCHAR} ,</if>  
+      <if test="monthInwork != null and monthInwork != ''">#{monthInwork:VARCHAR} ,</if>  
+      <if test="allInwork != null and allInwork != ''">#{allInwork:VARCHAR} ,</if>  
+      <if test="customerMonthInwork != null and customerMonthInwork != ''">#{customerMonthInwork:VARCHAR} ,</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">#{customerAllInwork:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.i2shopping.i2work.operation.core.project.model.InWork">update tbl_inwork 
+    <trim prefix="set"> 
+      <if test="projectNo != null and projectNo != ''">project_no=#{projectNo:VARCHAR} ,</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date=#{inworkDate:VARCHAR} ,</if>  
+      <if test="monthInwork != null and monthInwork != ''">month_inwork=#{monthInwork:VARCHAR} ,</if>  
+      <if test="allInwork != null and allInwork != ''">all_inwork=#{allInwork:VARCHAR} ,</if>  
+      <if test="customerMonthInwork != null and customerMonthInwork != ''">customer_month_inwork=#{customerMonthInwork:VARCHAR} ,</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">customer_all_inwork=#{customerAllInwork:VARCHAR} ,</if> 
+    </trim> where id = #{id:VARCHAR}
+  </update>
+  <select id="queryList" parameterType="com.i2shopping.i2work.operation.core.project.model.InWork" resultMap="VoResultMap">select 
+    <include refid="Base_Column_List"/> FROM `tbl_inwork` WHERE 1=1 
+    <trim> 
+      <if test="id != null and id != ''">id=#{id:VARCHAR}</if>  
+      <if test="projectNo != null and projectNo != ''">project_no=#{projectNo:VARCHAR}</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date=#{inworkDate:VARCHAR}</if>  
+      <if test="monthInwork != null and monthInwork != ''">month_inwork=#{monthInwork:VARCHAR}</if>  
+      <if test="allInwork != null and allInwork != ''">all_inwork=#{allInwork:VARCHAR}</if>  
+      <if test="customerMonthInwork != null and customerMonthInwork != ''">customer_month_inwork=#{customerMonthInwork:VARCHAR}</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">customer_all_inwork=#{customerAllInwork:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <select id="queryCount" parameterType="com.i2shopping.i2work.operation.core.project.model.InWork" resultType="java.lang.Integer">SELECT COUNT(*) FROM `tbl_inwork` WHERE 1=1
+    <trim> 
+      <if test="id != null and id != ''">#{id:VARCHAR}</if>  
+      <if test="projectNo != null and projectNo != ''">project_no=#{projectNo:VARCHAR}</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date=#{inworkDate:VARCHAR}</if>  
+      <if test="monthInwork != null and monthInwork != ''">month_inwork=#{monthInwork:VARCHAR}</if>  
+      <if test="allInwork != null and allInwork != ''">all_inwork=#{allInwork:VARCHAR}</if>  
+      <if test="customerMonthInwork != null and customerMonthInwork != ''">customer_month_inwork=#{customerMonthInwork:VARCHAR}</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">customer_all_inwork=#{customerAllInwork:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <select id="baseList" parameterType="com.i2shopping.i2work.operation.core.project.model.InWork" resultMap="VoResultMap">select a.* from tbl_inwork a where 1=1
+    <trim> 
+      <if test="id != null and id != ''">id=#{id:VARCHAR}</if>  
+      <if test="projectNo != null and projectNo != ''">project_no=#{projectNo:VARCHAR}</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date=#{inworkDate:VARCHAR}</if>  
+      <if test="monthInwork != null and monthInwork != ''">month_inwork=#{monthInwork:VARCHAR}</if>  
+      <if test="allInwork != null and allInwork != ''">all_inwork=#{allInwork:VARCHAR}</if>  
+      <if test="customerMonthInwork != null and customerMonthInwork != ''">customer_month_inwork=#{customerMonthInwork:VARCHAR}</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">customer_all_inwork=#{customerAllInwork:VARCHAR}</if> 
+    </trim> AND not exists(SELECT * FROM tbl_inwork b WHERE a.project_no = b.project_no AND b.inwork_date&gt;a.inwork_date)
+  </select>
+  <select id="baseCount" parameterType="com.i2shopping.i2work.operation.core.project.model.InWork" resultType="java.lang.Integer">select COUNT(1) from tbl_inwork a where 1=1
+    <trim> 
+      <if test="id != null and id != ''">id=#{id:VARCHAR}</if>  
+      <if test="projectNo != null and projectNo != ''">project_no=#{projectNo:VARCHAR}</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date=#{inworkDate:VARCHAR}</if>  
+      <if test="monthInwork != null and monthInwork != ''">month_inwork=#{monthInwork:VARCHAR}</if>  
+      <if test="allInwork != null and allInwork != ''">all_inwork=#{allInwork:VARCHAR}</if>  
+      <if test="customerMonthInwork != null and customerMonthInwork != ''">customer_month_inwork=#{customerMonthInwork:VARCHAR}</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">customer_all_inwork=#{customerAllInwork:VARCHAR}</if> 
+    </trim> AND not exists(SELECT * FROM tbl_inwork b WHERE a.project_no = b.project_no AND b.inwork_date&gt;a.inwork_date)
+  </select>
+  <update id="updateAllInWork" parameterType="com.i2shopping.i2work.operation.core.project.model.InWork">update tbl_inwork 
+    <trim prefix="set"> 
+      <if test="allInwork != null and allInwork != ''">all_inwork=#{allInwork:VARCHAR} ,</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">customer_all_inwork=#{customerAllInwork:VARCHAR} ,</if> 
+    </trim> where project_no = #{projectNo:VARCHAR}
+  </update>
+  <select id="selectInworkVo" parameterType="com.i2shopping.i2work.operation.core.project.model.InWork" resultMap="VoResultMap">select a.* from tbl_inwork a where 1=1
+    <trim> 
+      <if test="id != null and id != ''">id=#{id:VARCHAR}</if>  
+      <if test="projectNo != null and projectNo != ''">project_no=#{projectNo:VARCHAR}</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date=#{inworkDate:VARCHAR}</if>  
+      <if test="monthInwork != null and monthInwork != ''">month_inwork=#{monthInwork:VARCHAR}</if>  
+      <if test="allInwork != null and allInwork != ''">all_inwork=#{allInwork:VARCHAR}</if>  
+      <if test="customerMonthInwork != null and customerMonthInwork != ''">customer_month_inwork=#{customerMonthInwork:VARCHAR}</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">customer_all_inwork=#{customerAllInwork:VARCHAR}</if> 
+    </trim> AND not exists(SELECT * FROM tbl_inwork b WHERE a.project_no = b.project_no AND b.inwork_date&gt;a.inwork_date)
+  </select>
+  <select id="countInworkVo" parameterType="com.i2shopping.i2work.operation.core.project.model.InWork" resultType="java.lang.Integer">select count(id) from tbl_inwork a where 1=1
+    <trim> 
+      <if test="id != null and id != ''">id=#{id:VARCHAR}</if>  
+      <if test="projectNo != null and projectNo != ''">project_no=#{projectNo:VARCHAR}</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date=#{inworkDate:VARCHAR}</if>  
+      <if test="monthInwork != null and monthInwork != ''">month_inwork=#{monthInwork:VARCHAR}</if>  
+      <if test="allInwork != null and allInwork != ''">all_inwork=#{allInwork:VARCHAR}</if>  
+      <if test="customerMonthInwork != null and customerMonthInwork != ''">customer_month_inwork=#{customerMonthInwork:VARCHAR}</if>  
+      <if test="customerAllInwork != null and customerAllInwork != ''">customer_all_inwork=#{customerAllInwork:VARCHAR}</if> 
+    </trim> AND not exists(SELECT * FROM tbl_inwork b WHERE a.project_no = b.project_no AND b.inwork_date&gt;a.inwork_date)
+  </select>
+</mapper>

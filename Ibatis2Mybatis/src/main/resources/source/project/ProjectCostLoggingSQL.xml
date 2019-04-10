@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_project_cost_logging">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="cost_logging_date" property="costLoggingDate" jdbcType="VARCHAR"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+        <result column="all_salary" property="allSalary" jdbcType="VARCHAR"/>
+        <result column="all_expense" property="allExpense" jdbcType="VARCHAR"/>
+        <result column="purchase_amount" property="purchaseAmount" jdbcType="VARCHAR"/>
+        <result column="amount_in_total" property="amountInTotal" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="TEXT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, cost_logging_date, project_no, project_name, all_salary, all_expense, purchase_amount, 
+    amount_in_total,summary
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_project_cost_logging
+        where id = #id:VARCHAR#
+    </select>
+    <delete id="deleteByPrimaryKey" parameterClass="java.lang.String">
+    delete from tbl_project_cost_logging
+    where id = #id:VARCHAR#
+  </delete>
+    <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging">
+        insert into tbl_project_cost_logging
+        <dynamic prepend="(">
+            <isNotNull prepend="," property="id">id</isNotNull>
+            <isNotNull prepend="," property="costLoggingDate">cost_logging_date</isNotNull>
+            <isNotNull prepend="," property="projectNo">project_no</isNotNull>
+            <isNotNull prepend="," property="projectName">project_name</isNotNull>
+            <isNotNull prepend="," property="allSalary">all_salary</isNotNull>
+            <isNotNull prepend="," property="allExpense">all_expense</isNotNull>
+            <isNotNull prepend="," property="purchaseAmount">purchase_amount</isNotNull>
+            <isNotNull prepend="," property="amountInTotal">amount_in_total</isNotNull>
+            <isNotNull prepend="," property="summary">summary</isNotNull>
+            )
+        </dynamic>
+        values
+        <dynamic prepend="(">
+            <isNotNull prepend="," property="id">#id:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="costLoggingDate">#costLoggingDate:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectNo">#projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectName">#projectName:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="allSalary">#allSalary:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="allExpense">#allExpense:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="purchaseAmount">#purchaseAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="amountInTotal">#amountInTotal:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="summary">#summary:TEXT#</isNotNull>
+            )
+        </dynamic>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging">
+        update tbl_project_cost_logging
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="costLoggingDate">cost_logging_date = #costLoggingDate:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectNo">project_no = #projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectName">project_name = #projectName:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="allSalary">all_salary = #allSalary:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="allExpense">all_expense = #allExpense:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="purchaseAmount">purchase_amount = #purchaseAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="amountInTotal">amount_in_total = #amountInTotal:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="summary">summary = #summary:TEXT#</isNotNull>
+        </dynamic>
+        where id = #id:VARCHAR#
+    </update>
+
+    <select id="selectSelective" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_project_cost_logging where 1=1
+        <dynamic>
+            <isNotNull prepend=" AND " property="id">id = #id:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="costLoggingDate">cost_logging_date = #costLoggingDate:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="projectNo">project_no = #projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="projectName">project_name = #projectName:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="allSalary">all_salary = #allSalary:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="allExpense">all_expense = #allExpense:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="purchaseAmount">purchase_amount = #purchaseAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="amountInTotal">amount_in_total = #amountInTotal:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="summary">summary = #summary:TEXT#</isNotNull>
+        </dynamic>
+    </select>
+    <select id="count" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectCostLogging"
+            resultClass="java.lang.Integer">
+        select count(id)
+        from tbl_project_cost_logging where 1=1
+        <dynamic>
+            <isNotNull prepend=" AND " property="id">id = #id:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="costLoggingDate">cost_logging_date = #costLoggingDate:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="projectNo">project_no = #projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="projectName">project_name = #projectName:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="allSalary">all_salary = #allSalary:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="allExpense">all_expense = #allExpense:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="purchaseAmount">purchase_amount = #purchaseAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="amountInTotal">amount_in_total = #amountInTotal:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="summary">summary = #summary:TEXT#</isNotNull>
+        </dynamic>
+    </select>
+
+</sqlMap>

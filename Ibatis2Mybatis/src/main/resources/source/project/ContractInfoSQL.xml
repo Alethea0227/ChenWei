@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  Generate by autoSQLMap Powered by duxing@Taobao -->
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_contract_info">
+
+    <typeAlias alias="TblContractInfoDO" type="com.i2shopping.i2work.operation.core.contract.model.ContractInfo"/>
+
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.contract.model.ContractInfo">
+        <result property="id" column="ID" jdbcType="VARCHAR"/>
+        <result property="currentYear" column="CURRENT_YEAR" jdbcType="VARCHAR"/>
+        <result property="employeeId" column="EMPLOYEE_ID" jdbcType="VARCHAR"/>
+        <result property="departmentId" column="DEPARTMENT_ID" jdbcType="VARCHAR"/>
+        <result property="customerId" column="CUSTOMER_ID" jdbcType="VARCHAR"/>
+        <result property="isbid" column="ISBID" jdbcType="VARCHAR"/>
+        <result property="projectActualNo" column="PROJECT_ACTUAL_NO" jdbcType="VARCHAR"/>
+        <result property="actualNoPs" column="ACTUAL_NO_PS" jdbcType="VARCHAR"/>
+        <result property="contractNo" column="CONTRACT_NO" jdbcType="VARCHAR"/>
+        <result property="projectName" column="PROJECT_NAME" jdbcType="VARCHAR"/>
+        <result property="contractMoney" column="CONTRACT_MONEY" jdbcType="VARCHAR"/>
+        <result property="signTime" column="SIGN_TIME" jdbcType="VARCHAR"/>
+        <result property="startTime" column="START_TIME" jdbcType="VARCHAR"/>
+        <result property="endTime" column="END_TIME" jdbcType="VARCHAR"/>
+        <result property="rate" column="RATE" jdbcType="VARCHAR"/>
+        <result property="prove" column="PROVE" jdbcType="VARCHAR"/>
+        <result property="type" column="TYPE" jdbcType="VARCHAR"/>
+        <result property="initialTestTime" column="INITIAL_TEST_TIME" jdbcType="VARCHAR"/>
+        <result property="finalTime" column="FINAL_TIME" jdbcType="VARCHAR"/>
+        <result property="payStyle" column="PAY_STYLE" jdbcType="VARCHAR"/>
+        <result property="contractName" column="CONTRACT_NAME" jdbcType="VARCHAR"/>
+        <result property="projectType" column="project_type" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="VoResultMap" class="com.i2shopping.i2work.operation.core.contract.model.ContractInfoVo" extends="BaseResultMap">
+        <result property="projectInfo" column="CONTRACT_NO" select="tbl_project_info.selectByPrimaryKeyS"/>
+        <result property="customerInfo" column="CUSTOMER_ID" select="tbl_customer_info.selectByPrimaryKey"/>
+        <result property="projectPreAmount" column="CONTRACT_NO" select="tbl_project_pre_amount.selectByProjectNo"/>
+    </resultMap>
+
+    <sql id="allCols">
+        `ID` ,`CURRENT_YEAR`,`EMPLOYEE_ID`,`DEPARTMENT_ID`,`CUSTOMER_ID`,`ISBID`
+        ,`PROJECT_ACTUAL_NO`,`ACTUAL_NO_PS`,`CONTRACT_NO`,`PROJECT_NAME`,`CONTRACT_MONEY`
+        ,`SIGN_TIME`,`START_TIME`,`END_TIME`,`RATE` ,`PROVE`,`TYPE`,`INITIAL_TEST_TIME`
+        ,`FINAL_TIME`,`PAY_STYLE`,`CONTRACT_NAME`,`PROJECT_TYPE`
+    </sql>
+
+    <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.contract.model.ContractInfo">
+        INSERT INTO `tbl_contract_info`
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="id">ID</isNotEmpty>
+            <isNotEmpty prepend="," property="currentYear">CURRENT_YEAR</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">EMPLOYEE_ID</isNotEmpty>
+            <isNotEmpty prepend="," property="departmentId">DEPARTMENT_ID</isNotEmpty>
+            <isNotEmpty prepend="," property="customerId">CUSTOMER_ID</isNotEmpty>
+            <isNotEmpty prepend="," property="isbid">ISBID</isNotEmpty>
+            <isNotEmpty prepend="," property="projectActualNo">PROJECT_ACTUAL_NO</isNotEmpty>
+            <isNotEmpty prepend="," property="actualNoPs">ACTUAL_NO_PS</isNotEmpty>
+            <isNotEmpty prepend="," property="contractNo">CONTRACT_NO</isNotEmpty>
+            <isNotEmpty prepend="," property="projectName">PROJECT_NAME</isNotEmpty>
+            <isNotEmpty prepend="," property="contractMoney">CONTRACT_MONEY</isNotEmpty>
+            <isNotEmpty prepend="," property="signTime">SIGN_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="startTime">START_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="endTime">END_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="rate">RATE</isNotEmpty>
+            <isNotEmpty prepend="," property="prove">PROVE</isNotEmpty>
+            <isNotEmpty prepend="," property="type">TYPE</isNotEmpty>
+            <isNotEmpty prepend="," property="initialTestTime">INITIAL_TEST_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="finalTime">FINAL_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="payStyle">PAY_STYLE</isNotEmpty>
+            <isNotEmpty prepend="," property="contractName">CONTRACT_NAME</isNotEmpty>
+            <isNotEmpty prepend="," property="projectType">project_type</isNotEmpty>
+            )
+        </dynamic>
+        VALUES
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="id">#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="currentYear">#currentYear:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">#employeeId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="departmentId">#departmentId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="customerId">#customerId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="isbid">#isbid:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="projectActualNo">#projectActualNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="actualNoPs">#actualNoPs:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="contractNo">#contractNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="projectName">#projectName:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="contractMoney">#contractMoney:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="signTime">#signTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="startTime">#startTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="endTime">#endTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="rate">#rate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="prove">#prove:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="type">#type:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="initialTestTime">#initialTestTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="finalTime">#finalTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="payStyle">#payStyle:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="contractName">#contractName:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="projectType">#projectType:VARCHAR#</isNotEmpty>
+            )
+        </dynamic>
+    </insert>
+
+    <insert id="export" parameterClass="com.i2shopping.i2work.operation.core.contract.model.ContractAndPre">
+        INSERT INTO `tbl_contract_info`
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="id">ID</isNotEmpty>
+            <isNotEmpty prepend="," property="currentYear">CURRENT_YEAR</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">EMPLOYEE_ID</isNotEmpty>
+            <isNotEmpty prepend="," property="departmentId">DEPARTMENT_ID</isNotEmpty>
+            <isNotEmpty prepend="," property="customerId">CUSTOMER_ID</isNotEmpty>
+            <isNotEmpty prepend="," property="isbid">ISBID</isNotEmpty>
+            <isNotEmpty prepend="," property="projectActualNo">PROJECT_ACTUAL_NO</isNotEmpty>
+            <isNotEmpty prepend="," property="actualNoPs">ACTUAL_NO_PS</isNotEmpty>
+            <isNotEmpty prepend="," property="contractNo">CONTRACT_NO</isNotEmpty>
+            <isNotEmpty prepend="," property="projectName">PROJECT_NAME</isNotEmpty>
+            <isNotEmpty prepend="," property="contractMoney">CONTRACT_MONEY</isNotEmpty>
+            <isNotEmpty prepend="," property="signTime">SIGN_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="startTime">START_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="endTime">END_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="rate">RATE</isNotEmpty>
+            <isNotEmpty prepend="," property="prove">PROVE</isNotEmpty>
+            <isNotEmpty prepend="," property="type">TYPE</isNotEmpty>
+            <isNotEmpty prepend="," property="initialTestTime">INITIAL_TEST_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="finalTime">FINAL_TIME</isNotEmpty>
+            <isNotEmpty prepend="," property="payStyle">PAY_STYLE</isNotEmpty>
+            <isNotEmpty prepend="," property="contractName">CONTRACT_NAME</isNotEmpty>
+            <isNotEmpty prepend="," property="projectType">project_type</isNotEmpty>
+            )
+        </dynamic>
+        VALUES
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="id">#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="currentYear">#currentYear:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">#employeeId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="departmentId">#departmentId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="customerId">#customerId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="isbid">#isbid:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="projectActualNo">#projectActualNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="actualNoPs">#actualNoPs:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="contractNo">#contractNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="projectName">#projectName:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="contractMoney">#contractMoney:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="signTime">#signTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="startTime">#startTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="endTime">#endTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="rate">#rate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="prove">#prove:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="type">#type:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="initialTestTime">#initialTestTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="finalTime">#finalTime:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="payStyle">#payStyle:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="contractName">#contractName:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="projectType">#projectType:VARCHAR#</isNotEmpty>
+            )
+        </dynamic>
+    </insert>
+
+    <update id="update" parameterClass="com.i2shopping.i2work.operation.core.contract.model.ContractInfo">
+        UPDATE `tbl_contract_info`
+        <dynamic prepend="set">
+            <isNotEmpty property="currentYear" prepend=" , ">
+                `CURRENT_YEAR` = #currentYear:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="employeeId" prepend=" , ">
+                `EMPLOYEE_ID` = #employeeId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="departmentId" prepend=" , ">
+                `DEPARTMENT_ID` = #departmentId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="customerId" prepend=" , ">
+                `CUSTOMER_ID` = #customerId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="isbid" prepend=" , ">
+                `ISBID` = #isbid:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectActualNo" prepend=" , ">
+                `PROJECT_ACTUAL_NO` = #projectActualNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="actualNoPs" prepend=" , ">
+                `ACTUAL_NO_PS` = #actualNoPs:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractNo" prepend=" , ">
+                `CONTRACT_NO` = #contractNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectName" prepend=" , ">
+                `PROJECT_NAME` = #projectName:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractMoney" prepend=" , ">
+                `CONTRACT_MONEY` = #contractMoney:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="signTime" prepend=" , ">
+                `SIGN_TIME` = #signTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="startTime" prepend=" , ">
+                `START_TIME` = #startTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="endTime" prepend=" , ">
+                `END_TIME` = #endTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="rate" prepend=" , ">
+                `RATE` = #rate:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="prove" prepend=" , ">
+                `PROVE` = #prove:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="type" prepend=" , ">
+                `TYPE` = #type:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="initialTestTime" prepend=" , ">
+                `INITIAL_TEST_TIME` = #initialTestTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="finalTime" prepend=" , ">
+                `FINAL_TIME` = #finalTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="payStyle" prepend=" , ">
+                `PAY_STYLE` = #payStyle:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractName" prepend=" , ">
+                `CONTRACT_NAME` = #contractName:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectType" prepend=" , ">
+                `PROJECT_TYPE` = #projectType:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+        WHERE `ID` = #id:VARCHAR#;
+    </update>
+
+    <select id="select" resultMap="BaseResultMap" parameterClass="java.lang.String">
+        <![CDATA[
+        SELECT
+        ]]>
+        <include refid="allCols"/>
+        <![CDATA[
+        FROM tbl_contract_info WHERE ID = #id:VARCHAR#;
+        ]]>
+    </select>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        <![CDATA[
+        SELECT
+        ]]>
+        <include refid="allCols"/>
+        <![CDATA[
+        FROM `tbl_contract_info` WHERE 1
+        ]]>
+        <dynamic>
+            <isNotEmpty property="currentYear" prepend=" AND ">
+                `CURRENT_YEAR` = #currentYear:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="employeeId" prepend=" AND ">
+                `EMPLOYEE_ID` = #employeeId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="departmentId" prepend=" AND ">
+                `DEPARTMENT_ID` = #departmentId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="customerId" prepend=" AND ">
+                `CUSTOMER_ID` = #customerId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="isbid" prepend=" AND ">
+                `ISBID` = #isbid:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectActualNo" prepend=" AND ">
+                `PROJECT_ACTUAL_NO` = #projectActualNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="actualNoPs" prepend=" AND ">
+                `ACTUAL_NO_PS` = #actualNoPs:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractNo" prepend=" AND ">
+                `CONTRACT_NO` = #contractNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectName" prepend=" AND ">
+                `PROJECT_NAME` like concat('%', #projectName:VARCHAR #, '%')
+            </isNotEmpty>
+            <isNotEmpty property="contractMoney" prepend=" AND ">
+                `CONTRACT_MONEY` = #contractMoney#
+            </isNotEmpty>
+            <isNotEmpty property="signTime" prepend=" AND ">
+                `SIGN_TIME` = #signTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="startTime" prepend=" AND ">
+                `START_TIME` = #startTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="endTime" prepend=" AND ">
+                `END_TIME` = #endTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="rate" prepend=" AND ">
+                `RATE` = #rate:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="prove" prepend=" AND ">
+                `PROVE` = #prove:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="type" prepend=" AND ">
+                `TYPE` = #type:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="initialTestTime" prepend=" AND ">
+                `INITIAL_TEST_TIME` = #initialTestTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="finalTime" prepend=" AND ">
+                `FINAL_TIME` = #finalTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="payStyle" prepend=" AND ">
+                `PAY_STYLE` = #payStyle:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractName" prepend=" AND ">
+                `CONTRACT_NAME` = #contractName:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectType" prepend=" AND ">
+                `PROJECT_TYPE` = #projectType:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+
+
+    </select>
+
+
+    <select id="selectVo" resultMap="VoResultMap">
+        <![CDATA[
+        SELECT
+        ]]>
+        <include refid="allCols"/>
+        <![CDATA[
+        FROM `tbl_contract_info` WHERE 1
+        ]]>
+        <dynamic>
+            <isNotEmpty property="currentYear" prepend=" AND ">
+                `CURRENT_YEAR` = #currentYear:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="employeeId" prepend=" AND ">
+                `EMPLOYEE_ID` = #employeeId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="departmentId" prepend=" AND ">
+                `DEPARTMENT_ID` = #departmentId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="customerId" prepend=" AND ">
+                `CUSTOMER_ID` = #customerId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="isbid" prepend=" AND ">
+                `ISBID` = #isbid:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectActualNo" prepend=" AND ">
+                `PROJECT_ACTUAL_NO` = #projectActualNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="actualNoPs" prepend=" AND ">
+                `ACTUAL_NO_PS` = #actualNoPs:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractNo" prepend=" AND ">
+                `CONTRACT_NO` = #contractNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectName" prepend=" AND ">
+                `PROJECT_NAME` like concat('%', #projectName:VARCHAR #, '%')
+            </isNotEmpty>
+            <isNotEmpty property="contractMoney" prepend=" AND ">
+                `CONTRACT_MONEY` = #contractMoney#
+            </isNotEmpty>
+            <isNotEmpty property="signTime" prepend=" AND ">
+                `SIGN_TIME` = #signTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="startTime" prepend=" AND ">
+                `START_TIME` = #startTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="endTime" prepend=" AND ">
+                `END_TIME` = #endTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="rate" prepend=" AND ">
+                `RATE` = #rate:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="prove" prepend=" AND ">
+                `PROVE` = #prove:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="type" prepend=" AND ">
+                `TYPE` = #type:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="initialTestTime" prepend=" AND ">
+                `INITIAL_TEST_TIME` = #initialTestTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="finalTime" prepend=" AND ">
+                `FINAL_TIME` = #finalTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="payStyle" prepend=" AND ">
+                `PAY_STYLE` = #payStyle:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractName" prepend=" AND ">
+                `CONTRACT_NAME` = #contractName:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectType" prepend=" AND ">
+                `PROJECT_TYPE` = #projectType:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+    </select>
+
+
+    <select id="queryCount" resultClass="java.lang.Integer">
+        <![CDATA[
+        SELECT
+        COUNT(*)
+        FROM `tbl_contract_info` WHERE  1
+        ]]>
+        <dynamic>
+            <isNotEmpty property="id" prepend=" AND ">
+                `ID` = #id:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="currentYear" prepend=" AND ">
+                `CURRENT_YEAR` = #currentYear:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="employeeId" prepend=" AND ">
+                `EMPLOYEE_ID` = #employeeId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="departmentId" prepend=" AND ">
+                `DEPARTMENT_ID` = #departmentId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="customerId" prepend=" AND ">
+                `CUSTOMER_ID` = #customerId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="isbid" prepend=" AND ">
+                `ISBID` = #isbid:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectActualNo" prepend=" AND ">
+                `PROJECT_ACTUAL_NO` = #projectActualNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="actualNoPs" prepend=" AND ">
+                `ACTUAL_NO_PS` = #actualNoPs:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractNo" prepend=" AND ">
+                `CONTRACT_NO` = #contractNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectName" prepend=" AND ">
+                `PROJECT_NAME` like concat('%', #projectName:VARCHAR #, '%')
+            </isNotEmpty>
+            <isNotEmpty property="contractMoney" prepend=" AND ">
+                `CONTRACT_MONEY` = #contractMoney#
+            </isNotEmpty>
+            <isNotEmpty property="signTime" prepend=" AND ">
+                `SIGN_TIME` = #signTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="startTime" prepend=" AND ">
+                `START_TIME` = #startTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="endTime" prepend=" AND ">
+                `END_TIME` = #endTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="rate" prepend=" AND ">
+                `RATE` = #rate:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="prove" prepend=" AND ">
+                `PROVE` = #prove:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="type" prepend=" AND ">
+                `TYPE` = #type:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="initialTestTime" prepend=" AND ">
+                `INITIAL_TEST_TIME` = #initialTestTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="finalTime" prepend=" AND ">
+                `FINAL_TIME` = #finalTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="payStyle" prepend=" AND ">
+                `PAY_STYLE` = #payStyle:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractName" prepend=" AND ">
+                `CONTRACT_NAME` = #contractName:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectType" prepend=" AND ">
+                `PROJECT_TYPE` = #projectType:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+    </select>
+
+    <update id="delete">
+        UPDATE `tbl_contract_info` SET `{DELETE_KEY}` = '1' WHERE `ID` = #id:VARCHAR#;
+    </update>
+
+    <select id="selectByProjectNo" parameterClass="java.lang.String" resultMap="VoResultMap">
+        select <include refid="allCols"/>
+        from tbl_contract_info
+        where CONTRACT_NO=#value:VARCHAR#
+    </select>
+
+    <select id="queryContractVo" resultMap="VoResultMap" parameterClass="com.i2shopping.i2work.operation.core.contract.model.ContractInfo">
+        SELECT
+        <include refid="allCols"/>
+        FROM `tbl_contract_info` WHERE 1
+        <dynamic>
+            <isNotEmpty property="currentYear" prepend=" AND ">
+                `CURRENT_YEAR` = #currentYear:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="employeeId" prepend=" AND ">
+                `EMPLOYEE_ID` = #employeeId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="departmentId" prepend=" AND ">
+                `DEPARTMENT_ID` = #departmentId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="customerId" prepend=" AND ">
+                `CUSTOMER_ID` = #customerId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="isbid" prepend=" AND ">
+                `ISBID` = #isbid:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectActualNo" prepend=" AND ">
+                `PROJECT_ACTUAL_NO` = #projectActualNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="actualNoPs" prepend=" AND ">
+                `ACTUAL_NO_PS` = #actualNoPs:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractNo" prepend=" AND ">
+                `CONTRACT_NO` = #contractNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectName" prepend=" AND ">
+                `PROJECT_NAME` like concat('%', #projectName:VARCHAR #, '%')
+            </isNotEmpty>
+            <isNotEmpty property="contractMoney" prepend=" AND ">
+                `CONTRACT_MONEY` = #contractMoney#
+            </isNotEmpty>
+            <isNotEmpty property="signTime" prepend=" AND ">
+                `SIGN_TIME` = #signTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="startTime" prepend=" AND ">
+                `START_TIME` = #startTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="endTime" prepend=" AND ">
+                `END_TIME` = #endTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="rate" prepend=" AND ">
+                `RATE` = #rate:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="prove" prepend=" AND ">
+                `PROVE` = #prove:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="type" prepend=" AND ">
+                `TYPE` = #type:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="initialTestTime" prepend=" AND ">
+                `INITIAL_TEST_TIME` = #initialTestTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="finalTime" prepend=" AND ">
+                `FINAL_TIME` = #finalTime:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="payStyle" prepend=" AND ">
+                `PAY_STYLE` = #payStyle:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="contractName" prepend=" AND ">
+                `CONTRACT_NAME` = #contractName:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty property="projectType" prepend=" AND ">
+                `PROJECT_TYPE` = #projectType:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+
+
+    </select>
+</sqlMap>

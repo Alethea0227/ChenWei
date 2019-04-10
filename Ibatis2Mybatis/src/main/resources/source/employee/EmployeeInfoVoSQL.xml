@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_employee_info_vo" >
+  <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfoVo" >
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_NAME" property="employeeName" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_GRADE" property="employeeGrade" jdbcType="CHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="CHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="CARDID" property="cardid" jdbcType="VARCHAR" />
+    <result column="DEPARTMENT_ID" property="departmentId" jdbcType="CHAR" />
+    <result column="IMAGE_ID" property="imageId" jdbcType="VARCHAR" />
+    <result property="isOnDuty" column="IS_ON_DUTY" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <!--<select id="selectEmployee"  resultMap="BaseResultMapC" >-->
+
+    <!--SELECT contract_no,project_name,plan_start_date,plan_end_date FROM `tbl_project_info`-->
+
+    <!--WHERE (SELECT DATEDIFF(NOW(),plan_start_date)) &lt; 7-->
+
+    <!--AND (SELECT DATEDIFF(NOW(),plan_start_date)) &gt; 0-->
+
+  <!--</select>-->
+
+  <select id="selectByEmployeeId" resultMap="BaseResultMap" parameterClass="java.lang.String">
+    SELECT *
+    FROM tbl_employee_info
+    WHERE EMPLOYEE_ID=#value:VARCHAR#
+  </select>
+  <select id="selectByEmployeeIdForOther" resultMap="BaseResultMap" parameterClass="java.lang.String">
+    SELECT *
+    FROM tbl_employee_info
+    WHERE EMPLOYEE_ID=#value:VARCHAR#
+  </select>
+
+
+  <select id="selectByEmployeeInfoVo" parameterClass="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfoVo" resultMap="BaseResultMap">
+    SELECT fo.*
+    FROM  tbl_employee_info fo,tbl_project_etc etc
+    WHERE fo.EMPLOYEE_ID = etc.EMPLOYEE_ID AND  etc.is_leave='00'
+    <dynamic>
+      <isNotEmpty prepend="and" property="properties.contract_no">
+        etc.contract_no=#properties.contract_no:VARCHAR#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="employeeGrade">
+        fo.EMPLOYEE_GRADE=#employeeGrade:VARCHAR#
+      </isNotEmpty>
+    </dynamic>
+  </select>
+  <select id="countEmployeeVo" resultClass="java.lang.Integer" parameterClass="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfoVo">
+    SELECT count(1)
+    from tbl_employee_info
+    <dynamic prepend="where">
+      <isNotEmpty property="isOnDuty">
+        IS_ON_DUTY=#isOnDuty:VARCHAR#
+      </isNotEmpty>
+    </dynamic>
+  </select>
+  <select id="selectByAllEmployeeVo" resultMap="BaseResultMap" parameterClass="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfoVo">
+    SELECT *
+    from tbl_employee_info
+    <dynamic prepend="where">
+      <isNotEmpty property="isOnDuty">
+        IS_ON_DUTY=#isOnDuty:VARCHAR#
+      </isNotEmpty>
+    </dynamic>
+  </select>
+</sqlMap>

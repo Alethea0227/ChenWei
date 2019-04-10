@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_customer_supposed_income">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="income_date" property="incomeDate" jdbcType="TIMESTAMP"/>
+        <result column="customer_id" property="customerId" jdbcType="VARCHAR"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="supposed_income" property="supposedIncome" jdbcType="VARCHAR"/>
+        <result column="already_income" property="alreadyIncome" jdbcType="VARCHAR"/>
+        <result column="not_income" property="notIncome" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="result1" class="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome"
+               extends="BaseResultMap">
+        <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+        <result property="customerShortName" column="customer_fullName" jdbcType="VARCHAR"/>
+        <result property="projectActualNo" column="project_actual_no" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="result2" class="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome">
+        <result property="projectName" column="short_project_name"/>
+        <result property="projectActualNo" column="project_actual_no"/>
+        <result property="departmentName" column="DEPARTMENT_NAME"/>
+        <result property="customerShortName" column="customer_fullName"/>
+        <result property="preAmount" column="pre_contract_amount"/>
+        <result property="preManMonth" column="pre_man_month"/>
+        <result property="completeness" column="completeness"/>
+        <result property="totalCost" column="total_cost"/>
+        <result property="inwork" column="month_inwork"/>
+    </resultMap>
+	<resultMap id="result3" class="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome">
+		<result property="departmentName" column="DEPARTMENT_NAME"/>
+		<result property="preAmount" column="pre_contract_amount"/>
+		<result property="preManMonth" column="pre_man_month"/>
+		<result property="beginTime" column="plan_start_date"/>
+		<result property="endTiem" column="plan_end_date"/>
+		<result property="customerTotalmanm" column="customer_all_inwork"/>
+		<result property="inworkTotalManMonth" column="all_inwork"/>
+		<result property="customerCurrentMM" column="customer_month_inwork"/>
+		<result property="inworkCurrentMM" column="month_inwork"/>
+		<result property="totalCost" column="total_cost"/>
+		<result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+	</resultMap>
+	<resultMap id="result4" class="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome">
+		<result property="customerTotalmanm" column="customer_all_inwork"/>
+		<result property="inworkTotalManMonth" column="all_inwork"/>
+		<result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+	</resultMap>
+    <sql id="Base_Column_List">
+    id, income_date, customer_name, project_no, project_name, supposed_income, already_income, 
+    not_income
+  </sql>
+    <select id="list" parameterClass="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome"
+            resultMap="result1">
+  SELECT
+	a.*,
+	b.project_actual_no,
+	b.project_name,
+	c.customer_fullName
+FROM
+	tbl_customer_supposed_income a,
+	tbl_project_info b,
+	tbl_customer_info c
+WHERE
+	a.project_no = b.contract_no
+	AND a.customer_id = c.customer_id
+		<isNotNull property="projectNo">
+			and b.project_actual_no=#projectNo:VARCHAR#
+		</isNotNull>
+		<isNotNull property="projectName">
+			and b.project_name LIKE '%$projectName$%'
+		</isNotNull>
+		<isNotNull property="customerShortName">
+			and c.customer_fullName LIKE '%$customerShortName$%'
+		</isNotNull>
+		<isNotNull prepend="AND" property="incomeDate">
+			a.income_date= #incomeDate:VARCHAR#
+		</isNotNull>
+</select>
+    <select id="countss" parameterClass="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome"
+            resultClass="java.lang.Integer">
+    SELECT
+	count(*)
+FROM
+	tbl_customer_supposed_income a,
+	tbl_project_info b,
+	tbl_customer_info c
+WHERE
+	a.project_no = b.contract_no
+	AND a.customer_id = c.customer_id
+		<isNotNull property="projectNo">
+			and b.project_actual_no=#projectNo:VARCHAR#
+		</isNotNull>
+		<isNotNull property="projectName">
+			and b.project_name LIKE '%$projectName$%'
+		</isNotNull>
+		<isNotNull property="customerShortName">
+			and c.customer_fullName LIKE '%$customerShortName$%'
+		</isNotNull>
+		<isNotNull prepend="AND" property="incomeDate">
+			a.income_date= #incomeDate:VARCHAR#
+		</isNotNull>
+</select>
+    <select id="selcetRecord" parameterClass="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome"
+            resultMap="BaseResultMap">
+        select * from tbl_customer_supposed_income where project_no = #projectNo:varchar#
+    </select>
+    <update id="updateRecord" parameterClass="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome">
+        update tbl_customer_supposed_income
+        set income_date=#incomeDate:VARCHAR#, already_income=#alreadyIncome:VARCHAR#, not_income=#notIncome:VARCHAR#
+        where project_no = #projectNo:VARCHAR#
+    </update>
+    <select id="selectObject" parameterClass="java.lang.String" resultMap="BaseResultMap">
+                select * from tbl_customer_supposed_income where project_no = #projectNo:varchar#
+    </select>
+    <select id="selectRecordList" resultMap="result2">
+        SELECT
+	a.short_project_name,
+	a.project_actual_no,
+	b.DEPARTMENT_NAME,
+	c.customer_fullName,
+	e.pre_contract_amount,
+	e.pre_man_month,
+	e.completeness,
+	f.total_cost,
+	g.month_inwork
+FROM
+	tbl_project_info a,
+	tbl_department_info b,
+	tbl_customer_info c,
+	tbl_contract_info d,
+	tbl_project_pre_amount e,
+	tbl_project_cost f,
+	tbl_inwork g
+WHERE
+	d.contract_no = a.contract_no
+	AND a.department_id = b.DEPARTMENT_ID
+	AND d.customer_id = c.customer_id
+	AND d.contract_no = e.project_no
+	AND d.contract_no = f.contract_no
+	AND d.project_type = '0'
+	AND d.contract_no = g.project_no
+    </select>
+    <select id="countRecordList" resultClass="java.lang.Integer">
+        SELECT
+	count( * )
+FROM
+	tbl_project_info a,
+	tbl_department_info b,
+	tbl_customer_info c,
+	tbl_contract_info d,
+	tbl_project_pre_amount e,
+	tbl_project_cost f,
+	tbl_inwork g
+WHERE
+	d.contract_no = a.contract_no
+	AND a.department_id = b.DEPARTMENT_ID
+	AND d.customer_id = c.customer_id 
+	AND d.contract_no = e.project_no
+	AND d.contract_no = f.contract_no
+	AND d.project_type = '0'
+	AND d.contract_no = g.project_no
+    </select>
+	<select id="countInfoProject" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT
+	count(*)
+FROM
+	tbl_project_info a,
+	tbl_department_info b,
+	tbl_contract_info d,
+	tbl_project_pre_amount e,
+	tbl_project_cost f,
+	tbl_inwork g
+WHERE
+	d.contract_no = a.contract_no
+	AND a.department_id = b.DEPARTMENT_ID
+	AND d.contract_no = e.project_no
+	AND d.contract_no = f.contract_no
+	AND d.project_type = '1'
+	AND d.contract_no = g.project_no
+	AND g.inwork_date = #value:VARCHAR#
+	</select>
+	<select id="selectInfoProject" parameterClass="java.lang.String" resultMap="result3">
+		SELECT
+	b.DEPARTMENT_NAME,
+	e.pre_contract_amount,
+	e.pre_man_month,
+	a.plan_start_date,
+	a.plan_end_date,
+	g.customer_all_inwork,
+	g.all_inwork,
+	g.customer_month_inwork,
+	g.month_inwork,
+	f.total_cost,
+	g.project_no
+FROM
+	tbl_project_info a,
+	tbl_department_info b,
+	tbl_contract_info d,
+	tbl_project_pre_amount e,
+	tbl_project_cost f,
+	tbl_inwork g
+WHERE
+	d.contract_no = a.contract_no
+	AND a.department_id = b.DEPARTMENT_ID
+	AND d.contract_no = e.project_no
+	AND d.contract_no = f.contract_no
+	AND d.project_type = '1'
+	AND d.contract_no = g.project_no
+	AND g.inwork_date = #value:VARCHAR#
+	</select>
+	<select id="selectpreMonth" parameterClass="java.lang.String" resultMap="result4">
+		SELECT
+		g.project_no,
+	g.customer_all_inwork,
+	g.all_inwork
+FROM
+	tbl_inwork g
+WHERE
+	g.inwork_date = #value:VARCHAR#
+	</select>
+</sqlMap>

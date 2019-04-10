@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_project_income_confirm">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="income_confirm_date" property="incomeConfirmDate" jdbcType="TIMESTAMP"/>
+    <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+    <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR"/>
+    <result column="contract_name" property="contractName" jdbcType="VARCHAR"/>
+    <result column="purchase_income_amount" property="purchaseIncomeAmount" jdbcType="VARCHAR"/>
+    <result column="slef_dev_income_amount" property="slefDevIncomeAmount" jdbcType="VARCHAR"/>
+    <result column="summary" property="summary" jdbcType="TEXT"/>
+  </resultMap>
+  <sql id="Base_Column_List">id, income_confirm_date, project_no, project_name, contract_no, contract_name, purchase_income_amount, slef_dev_income_amount,summary</sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_project_income_confirm where id = #{id:VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_project_income_confirm where id = #{id:VARCHAR}</delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm">insert into tbl_project_income_confirm 
+    <trim prefix="("> 
+      <if test="id != null">id ,</if>  
+      <if test="incomeConfirmDate != null">income_confirm_date ,</if>  
+      <if test="projectNo != null">project_no ,</if>  
+      <if test="projectName != null">project_name ,</if>  
+      <if test="contractNo != null">contract_no ,</if>  
+      <if test="contractName != null">contract_name ,</if>  
+      <if test="purchaseIncomeAmount != null">purchase_income_amount ,</if>  
+      <if test="slefDevIncomeAmount != null">slef_dev_income_amount ,</if>  
+      <if test="summary != null">summary ,</if> )
+    </trim> values 
+    <trim prefix="("> 
+      <if test="id != null">#{id:VARCHAR} ,</if>  
+      <if test="incomeConfirmDate != null">#{incomeConfirmDate:TIMESTAMP} ,</if>  
+      <if test="projectNo != null">#{projectNo:VARCHAR} ,</if>  
+      <if test="projectName != null">#{projectName:VARCHAR} ,</if>  
+      <if test="contractNo != null">#{contractNo:VARCHAR} ,</if>  
+      <if test="contractName != null">#{contractName:VARCHAR} ,</if>  
+      <if test="purchaseIncomeAmount != null">#{purchaseIncomeAmount:VARCHAR} ,</if>  
+      <if test="slefDevIncomeAmount != null">#{slefDevIncomeAmount:VARCHAR} ,</if>  
+      <if test="summary != null">#{summary:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm">update tbl_project_income_confirm 
+    <trim prefix="set"> 
+      <if test="incomeConfirmDate != null">income_confirm_date = #{incomeConfirmDate:TIMESTAMP} ,</if>  
+      <if test="projectNo != null">project_no = #{projectNo:VARCHAR} ,</if>  
+      <if test="projectName != null">project_name = #{projectName:VARCHAR} ,</if>  
+      <if test="contractNo != null">contract_no = #{contractNo:VARCHAR} ,</if>  
+      <if test="contractName != null">contract_name = #{contractName:VARCHAR} ,</if>  
+      <if test="purchaseIncomeAmount != null">purchase_income_amount = #{purchaseIncomeAmount:VARCHAR} ,</if>  
+      <if test="slefDevIncomeAmount != null">slef_dev_income_amount = #{slefDevIncomeAmount:VARCHAR} ,</if>  
+      <if test="summary != null">summary = #{summary:TEXT} ,</if> 
+    </trim> where id = #{id:VARCHAR}
+  </update>
+  <select id="selectSelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm" resultMap="BaseResultMap">select 
+    <include refid="Base_Column_List"/> from tbl_project_income_confirm where 1=1 
+    <trim> 
+      <if test="incomeConfirmDate != null">income_confirm_date = #{incomeConfirmDate:TIMESTAMP}</if>  
+      <if test="id != null">id = #{id:VARCHAR}</if>  
+      <if test="projectNo != null">project_no = #{projectNo:VARCHAR}</if>  
+      <if test="projectName != null">project_name = #{projectName:VARCHAR}</if>  
+      <if test="contractNo != null">contract_no = #{contractNo:VARCHAR}</if>  
+      <if test="contractName != null">contract_name = #{contractName:VARCHAR}</if>  
+      <if test="purchaseIncomeAmount != null">purchase_income_amount = #{purchaseIncomeAmount:VARCHAR}</if>  
+      <if test="slefDevIncomeAmount != null">slef_dev_income_amount = #{slefDevIncomeAmount:VARCHAR} ,</if>  
+      <if test="summary != null">summary = #{summary:TEXT} ,</if> 
+    </trim> 
+  </select>
+  <select id="count" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectIncomeConfirm" resultType="java.lang.Integer">select count(id) from tbl_project_income_confirm where 1=1
+    <trim> 
+      <if test="incomeConfirmDate != null">income_confirm_date = #{incomeConfirmDate:TIMESTAMP}</if>  
+      <if test="id != null">id = #{id:VARCHAR}</if>  
+      <if test="projectNo != null">project_no = #{projectNo:VARCHAR}</if>  
+      <if test="projectName != null">project_name = #{projectName:VARCHAR}</if>  
+      <if test="contractNo != null">contract_no = #{contractNo:VARCHAR}</if>  
+      <if test="contractName != null">contract_name = #{contractName:VARCHAR}</if>  
+      <if test="purchaseIncomeAmount != null">purchase_income_amount = #{purchaseIncomeAmount:VARCHAR}</if>  
+      <if test="slefDevIncomeAmount != null">slef_dev_income_amount = #{slefDevIncomeAmount:VARCHAR}</if>  
+      <if test="summary != null">summary = #{summary:TEXT}</if> 
+    </trim> 
+  </select>
+</mapper>

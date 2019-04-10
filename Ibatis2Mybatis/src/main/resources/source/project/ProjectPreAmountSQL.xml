@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_project_pre_amount">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.project.model.ProjectPreAmount">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="pre_contract_amount" property="preContractAmount" jdbcType="VARCHAR"/>
+        <result column="pre_man_month" property="preManMonth" jdbcType="VARCHAR"/>
+        <result column="pre_amount" property="preAmount" jdbcType="VARCHAR"/>
+        <result column="project_begin_time" property="projectBeginTime" jdbcType="TIMESTAMP"/>
+        <result column="project_end_time" property="projectEndTime" jdbcType="TIMESTAMP"/>
+        <result column="completeness" property="completeness" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, project_no, pre_contract_amount, pre_man_month, pre_amount, project_begin_time, project_end_time,
+    completeness
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_project_pre_amount
+        where id = #id:VARCHAR#
+    </select>
+    <delete id="deleteByPrimaryKey" parameterClass="java.lang.String">
+    delete from tbl_project_pre_amount
+    where id = #id:VARCHAR#
+  </delete>
+    <insert id="insertSelective" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectPreAmount">
+        insert into tbl_project_pre_amount
+        <dynamic prepend="(">
+            <isNotNull prepend="," property="id">id</isNotNull>
+            <isNotNull prepend="," property="projectNo">project_no</isNotNull>
+            <isNotNull prepend="," property="preContractAmount">pre_contract_amount</isNotNull>
+            <isNotNull prepend="," property="preManMonth">pre_man_month</isNotNull>
+            <isNotNull prepend="," property="preAmount">pre_amount</isNotNull>
+            <isNotNull prepend="," property="projectBeginTime">project_begin_time</isNotNull>
+            <isNotNull prepend="," property="projectEndTime">project_end_time</isNotNull>
+            <isNotNull prepend="," property="completeness">completeness</isNotNull>
+            )
+        </dynamic>
+        values
+        <dynamic prepend="(">
+            <isNotNull prepend="," property="id">#id:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectNo">#projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="preContractAmount">#preContractAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="preManMonth">#preManMonth:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="preAmount">#preAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectBeginTime">#projectBeginTime:TIMESTAMP#</isNotNull>
+            <isNotNull prepend="," property="projectEndTime">#projectEndTime:TIMESTAMP#</isNotNull>
+            <isNotNull prepend="," property="completeness">#completeness:VARCHAR#</isNotNull>
+            )
+        </dynamic>
+    </insert>
+
+    <insert id="export" parameterClass="com.i2shopping.i2work.operation.core.contract.model.ContractAndPre">
+        insert into tbl_project_pre_amount
+        <dynamic prepend="(">
+            <isNotNull prepend="," property="preId">id</isNotNull>
+            <isNotNull prepend="," property="contractNo">project_no</isNotNull>
+            <isNotNull prepend="," property="preContractAmount">pre_contract_amount</isNotNull>
+            <isNotNull prepend="," property="preManMonth">pre_man_month</isNotNull>
+            <isNotNull prepend="," property="preAmount">pre_amount</isNotNull>
+            <isNotNull prepend="," property="projectBeginTime">project_begin_time</isNotNull>
+            <isNotNull prepend="," property="projectEndTime">project_end_time</isNotNull>
+            <isNotNull prepend="," property="completeness">completeness</isNotNull>
+            )
+        </dynamic>
+        values
+        <dynamic prepend="(">
+            <isNotNull prepend="," property="preId">#id:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="contractNo">#contractNo:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="preContractAmount">#preContractAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="preManMonth">#preManMonth:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="preAmount">#preAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectBeginTime">#projectBeginTime:TIMESTAMP#</isNotNull>
+            <isNotNull prepend="," property="projectEndTime">#projectEndTime:TIMESTAMP#</isNotNull>
+            <isNotNull prepend="," property="completeness">#completeness:VARCHAR#</isNotNull>
+            )
+        </dynamic>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectPreAmount">
+        update tbl_project_pre_amount
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="projectNo">project_no = #projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="preContractAmount">pre_contract_amount = #preContractAmount:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend="," property="preManMonth">pre_man_month = #preManMonth:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="preAmount">pre_amount = #preAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend="," property="projectBeginTime">project_begin_time = #projectBeginTime:TIMESTAMP#
+            </isNotNull>
+            <isNotNull prepend="," property="projectEndTime">project_end_time = #projectEndTime:TIMESTAMP#</isNotNull>
+            <isNotNull prepend="," property="completeness">completeness = #completeness:VARCHAR#</isNotNull>
+        </dynamic>
+        where id = #id:VARCHAR#
+    </update>
+
+    <select id="selectSelective" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectPreAmount"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_project_pre_amount
+        where 1=1
+        <dynamic>
+            <isNotNull prepend=" AND " property="id">id = #id:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="projectNo">project_no = #projectNo:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="preContractAmount">pre_contract_amount = #preContractAmount:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="preManMonth">pre_man_month = #preManMonth:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="preAmount">pre_amount = #preAmount:VARCHAR#</isNotNull>
+            <isNotNull prepend=" AND " property="projectBeginTime">project_begin_time = #projectBeginTime:TIMESTAMP#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="projectEndTime">project_end_time = #projectEndTime:TIMESTAMP#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="completeness">completeness = #completeness:VARCHAR#</isNotNull>
+        </dynamic>
+    </select>
+
+    <select id="selectByProjectNo" parameterClass="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_project_pre_amount
+        where project_no=#value:VARCHAR#
+    </select>
+</sqlMap>

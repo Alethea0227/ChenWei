@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  Generate by autoSQLMap Powered by duxing@Taobao -->
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_inwork">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.project.model.InWork">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="inwork_date" property="inworkDate" jdbcType="VARCHAR"/>
+        <result column="month_inwork" property="monthInwork" jdbcType="VARCHAR"/>
+        <result column="all_inwork" property="allInwork" jdbcType="VARCHAR"/>
+        <result column="customer_month_inwork" property="customerMonthInwork" jdbcType="VARCHAR"/>
+        <result column="customer_all_inwork" property="customerAllInwork" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="VoResultMap" class="com.i2shopping.i2work.operation.core.project.model.InworkVo" extends="BaseResultMap">
+        <result column="project_no" property="contractInfoVo" select="tbl_contract_info.selectByProjectNo"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, project_no, inwork_date, month_inwork, all_inwork, customer_month_inwork, customer_all_inwork
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="VoResultMap" parameterClass="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_inwork
+        where id = #id:VARCHAR#
+    </select>
+    <delete id="deleteByPrimaryKey" parameterClass="java.lang.String">
+    delete from tbl_inwork
+    where id = #id:VARCHAR#
+  </delete>
+    <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.project.model.InWork">
+        insert into tbl_inwork
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="id">id</isNotEmpty>
+            <isNotEmpty prepend="," property="projectNo">project_no</isNotEmpty>
+            <isNotEmpty prepend="," property="inworkDate">inwork_date</isNotEmpty>
+            <isNotEmpty prepend="," property="monthInwork">month_inwork</isNotEmpty>
+            <isNotEmpty prepend="," property="allInwork">all_inwork</isNotEmpty>
+            <isNotEmpty prepend="," property="customerMonthInwork">customer_month_inwork</isNotEmpty>
+            <isNotEmpty prepend="," property="customerAllInwork">customer_all_inwork</isNotEmpty>
+            )
+        </dynamic>
+        VALUES
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="id">#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="projectNo">#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="inworkDate">#inworkDate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="monthInwork">#monthInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="allInwork">#allInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="customerMonthInwork">#customerMonthInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="customerAllInwork">#customerAllInwork:VARCHAR#</isNotEmpty>
+            )
+        </dynamic>
+    </insert>
+    <update id="updateByPrimaryKey" parameterClass="com.i2shopping.i2work.operation.core.project.model.InWork">
+        update tbl_inwork
+        <dynamic prepend="set">
+            <isNotEmpty prepend="," property="projectNo">project_no=#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="inworkDate">inwork_date=#inworkDate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="monthInwork">month_inwork=#monthInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="allInwork">all_inwork=#allInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="customerMonthInwork">customer_month_inwork=#customerMonthInwork:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="customerAllInwork">customer_all_inwork=#customerAllInwork:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+        where id = #id:VARCHAR#
+    </update>
+
+    <select id="queryList" parameterClass="com.i2shopping.i2work.operation.core.project.model.InWork" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM `tbl_inwork` WHERE 1=1
+        <dynamic>
+            <isNotEmpty prepend=" AND " property="id">id=#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="projectNo">project_no=#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="inworkDate">inwork_date=#inworkDate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="monthInwork">month_inwork=#monthInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="allInwork">all_inwork=#allInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerMonthInwork">
+                customer_month_inwork=#customerMonthInwork:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerAllInwork">customer_all_inwork=#customerAllInwork:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+    </select>
+
+    <select id="queryCount" parameterClass="com.i2shopping.i2work.operation.core.project.model.InWork"
+            resultClass="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM `tbl_inwork` WHERE 1=1
+        <dynamic>
+            <isNotEmpty prepend=" AND " property="id">#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="projectNo">project_no=#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="inworkDate">inwork_date=#inworkDate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="monthInwork">month_inwork=#monthInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="allInwork">all_inwork=#allInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerMonthInwork">
+                customer_month_inwork=#customerMonthInwork:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerAllInwork">customer_all_inwork=#customerAllInwork:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+    </select>
+    <select id="baseList" parameterClass="com.i2shopping.i2work.operation.core.project.model.InWork" resultMap="VoResultMap">
+        select a.*
+        from tbl_inwork a
+        where 1=1
+        <dynamic>
+            <isNotEmpty prepend=" AND " property="id">id=#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="projectNo">project_no=#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="inworkDate">inwork_date=#inworkDate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="monthInwork">month_inwork=#monthInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="allInwork">all_inwork=#allInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerMonthInwork">
+                customer_month_inwork=#customerMonthInwork:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerAllInwork">customer_all_inwork=#customerAllInwork:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+        AND not exists(SELECT * FROM tbl_inwork b WHERE a.project_no = b.project_no	AND b.inwork_date>a.inwork_date)
+    </select>
+    <select id="baseCount" parameterClass="com.i2shopping.i2work.operation.core.project.model.InWork"
+            resultClass="java.lang.Integer">
+        select  COUNT(1)
+        from tbl_inwork a
+        where 1=1
+        <dynamic>
+            <isNotEmpty prepend=" AND " property="id">id=#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="projectNo">project_no=#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="inworkDate">inwork_date=#inworkDate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="monthInwork">month_inwork=#monthInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="allInwork">all_inwork=#allInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerMonthInwork">
+                customer_month_inwork=#customerMonthInwork:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerAllInwork">customer_all_inwork=#customerAllInwork:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+        AND not exists(SELECT * FROM tbl_inwork b WHERE a.project_no = b.project_no	AND b.inwork_date>a.inwork_date)
+    </select>
+
+    <update id="updateAllInWork" parameterClass="com.i2shopping.i2work.operation.core.project.model.InWork">
+        update tbl_inwork
+        <dynamic prepend="set">
+            <isNotEmpty prepend="," property="allInwork">all_inwork=#allInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="customerAllInwork">customer_all_inwork=#customerAllInwork:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+        where project_no = #projectNo:VARCHAR#
+    </update>
+
+    <select id="selectInworkVo" parameterClass="com.i2shopping.i2work.operation.core.project.model.InWork" resultMap="VoResultMap">
+        select a.*
+        from tbl_inwork a
+        where 1=1
+        <dynamic>
+            <isNotEmpty prepend=" AND " property="id">id=#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="projectNo">project_no=#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="inworkDate">inwork_date=#inworkDate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="monthInwork">month_inwork=#monthInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="allInwork">all_inwork=#allInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerMonthInwork">
+                customer_month_inwork=#customerMonthInwork:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerAllInwork">customer_all_inwork=#customerAllInwork:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+        AND not exists(SELECT * FROM tbl_inwork b WHERE a.project_no = b.project_no	AND b.inwork_date>a.inwork_date)
+    </select>
+
+    <select id="countInworkVo" parameterClass="com.i2shopping.i2work.operation.core.project.model.InWork" resultClass="java.lang.Integer">
+        select count(id)
+        from tbl_inwork a
+        where 1=1
+        <dynamic>
+            <isNotEmpty prepend=" AND " property="id">id=#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="projectNo">project_no=#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="inworkDate">inwork_date=#inworkDate:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="monthInwork">month_inwork=#monthInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="allInwork">all_inwork=#allInwork:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerMonthInwork">
+                customer_month_inwork=#customerMonthInwork:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerAllInwork">customer_all_inwork=#customerAllInwork:VARCHAR#
+            </isNotEmpty>
+        </dynamic>
+        AND not exists(SELECT * FROM tbl_inwork b WHERE a.project_no = b.project_no	AND b.inwork_date>a.inwork_date)
+    </select>
+
+
+</sqlMap>

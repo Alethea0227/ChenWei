@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_employee_info_vo">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfoVo">
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="EMPLOYEE_NAME" property="employeeName" jdbcType="VARCHAR"/>
+    <result column="EMPLOYEE_GRADE" property="employeeGrade" jdbcType="CHAR"/>
+    <result column="MOBILE" property="mobile" jdbcType="CHAR"/>
+    <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+    <result column="CARDID" property="cardid" jdbcType="VARCHAR"/>
+    <result column="DEPARTMENT_ID" property="departmentId" jdbcType="CHAR"/>
+    <result column="IMAGE_ID" property="imageId" jdbcType="VARCHAR"/>
+    <result property="isOnDuty" column="IS_ON_DUTY" jdbcType="VARCHAR"/>
+  </resultMap>
+  <!--<select id="selectEmployee"  resultMap="BaseResultMapC" >-->
+  <!--SELECT contract_no,project_name,plan_start_date,plan_end_date FROM `tbl_project_info`-->
+  <!--WHERE (SELECT DATEDIFF(NOW(),plan_start_date)) &lt; 7-->
+  <!--AND (SELECT DATEDIFF(NOW(),plan_start_date)) &gt; 0-->
+  <!--</select>-->
+  <select id="selectByEmployeeId" resultMap="BaseResultMap" parameterType="java.lang.String">SELECT * FROM tbl_employee_info WHERE EMPLOYEE_ID=#{value:VARCHAR}</select>
+  <select id="selectByEmployeeIdForOther" resultMap="BaseResultMap" parameterType="java.lang.String">SELECT * FROM tbl_employee_info WHERE EMPLOYEE_ID=#{value:VARCHAR}</select>
+  <select id="selectByEmployeeInfoVo" parameterType="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfoVo" resultMap="BaseResultMap">SELECT fo.* FROM tbl_employee_info fo,tbl_project_etc etc WHERE fo.EMPLOYEE_ID = etc.EMPLOYEE_ID AND etc.is_leave='00'
+    <trim> 
+      <if test="properties.contract_no != null and properties.contract_no != ''">and etc.contract_no=#{properties.contract_no:VARCHAR}</if>  
+      <if test="employeeGrade != null and employeeGrade != ''">and fo.EMPLOYEE_GRADE=#{employeeGrade:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <select id="countEmployeeVo" resultType="java.lang.Integer" parameterType="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfoVo">SELECT count(1) from tbl_employee_info
+    <trim prefix="where"> 
+      <if test="isOnDuty != null and isOnDuty != ''">IS_ON_DUTY=#{isOnDuty:VARCHAR}</if> 
+    </trim> 
+  </select>
+  <select id="selectByAllEmployeeVo" resultMap="BaseResultMap" parameterType="com.i2shopping.i2work.operation.core.employee.model.EmployeeInfoVo">SELECT * from tbl_employee_info
+    <trim prefix="where"> 
+      <if test="isOnDuty != null and isOnDuty != ''">IS_ON_DUTY=#{isOnDuty:VARCHAR}</if> 
+    </trim> 
+  </select>
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_shoppingcar">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.integralExchange.model.Cart">
+    <result column="SHOPPINGCAR_ID" property="shoppingCartId" jdbcType="VARCHAR"/>
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_ACCOUNT" property="productAcconut" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_INTEGRAL" property="productInteGral" jdbcType="VARCHAR"/>
+    <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="BaseResultMap222" type="com.i2shopping.i2work.operation.core.integralExchange.model.Cart">
+    <result column="SHOPPINGCAR_ID" property="shoppingCartId" jdbcType="VARCHAR"/>
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_ACCOUNT" property="productAcconut" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_INTEGRAL" property="productInteGral" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="ressss" type="com.i2shopping.i2work.operation.core.integralExchange.model.Product">
+    <result property="productId" column="product_Id" jdbcType="VARCHAR"/>
+    <result property="productName" column="product_Name" jdbcType="VARCHAR"/>
+    <result property="productImg" column="product_Img" jdbcType="VARCHAR"/>
+    <result property="productRemark" column="product_Remark" jdbcType="VARCHAR"/>
+    <result property="productDetail" column="product_Detail" jdbcType="VARCHAR"/>
+    <result property="productIntegral" column="product_Integral" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="BaseResultMap1" type="com.i2shopping.i2work.operation.core.integralExchange.model.Cart">
+    <result column="SHOPPINGCAR_ID" property="shoppingCartId" jdbcType="VARCHAR"/>
+    <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_ACCOUNT" property="productAcconut" jdbcType="VARCHAR"/>
+    <result column="PRODUCT_INTEGRAL" property="productInteGral" jdbcType="VARCHAR"/>
+    <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+    <result property="product" resultMap="tbl_shoppingcar.ressss"/>
+  </resultMap>
+  <select id="selectById" parameterType="com.i2shopping.i2work.operation.core.integralExchange.model.Cart" resultMap="BaseResultMap">SELECT * from tbl_shoppingcar WHERE EMPLOYEE_ID=#{employeeId:VARCHAR } AND PRODUCT_ID=#{productId:VARCHAR } AND status="0"</select>
+  <select id="selectById1" parameterType="com.i2shopping.i2work.operation.core.integralExchange.model.Cart" resultMap="BaseResultMap222">SELECT s.shoppingcar_id,s.employee_id,s.product_id,s.product_account,s.product_integral,p.product_name from tbl_shoppingcar s,tbl_product p WHERE s.product_id = p.product_id AND shoppingcar_id=#{shoppingCartId:VARCHAR }</select>
+  <update id="updateCart" parameterType="com.i2shopping.i2work.operation.core.integralExchange.model.Cart">UPDATE tbl_shoppingcar set PRODUCT_ACCOUNT=#{productAcconut:VARCHAR }, PRODUCT_INTEGRAL=#{productInteGral:VARCHAR } WHERE EMPLOYEE_ID=#{employeeId:VARCHAR } AND PRODUCT_ID=#{productId:VARCHAR }</update>
+  <update id="updateCartStatus" parameterType="com.i2shopping.i2work.operation.core.integralExchange.model.Cart">UPDATE tbl_shoppingcar SET STATUS='1' WHERE EMPLOYEE_ID=#{employeeId:VARCHAR }</update>
+  <insert id="addToCart" parameterType="com.i2shopping.i2work.operation.core.integralExchange.model.Cart">INSERT into tbl_shoppingcar VALUES ( #{shoppingCartId:VARCHAR }, #{employeeId:VARCHAR }, #{productId:VARCHAR }, #{productAcconut:VARCHAR }, #{productInteGral:VARCHAR }, #{status:VARCHAR } )</insert>
+  <delete id="deleteCart" parameterType="com.i2shopping.i2work.operation.core.integralExchange.model.Cart">DELETE FROM tbl_shoppingcar where EMPLOYEE_ID=#{employeeId:VARCHAR } AND PRODUCT_ID=#{productId:VARCHAR } AND status="0"</delete>
+  <select id="showCart" parameterType="com.i2shopping.i2work.operation.core.integralExchange.model.Cart" resultMap="BaseResultMap1">SELECT * from tbl_shoppingcar s JOIN tbl_product p on s.product_id=p.product_id WHERE s.EMPLOYEE_ID=#{employeeId:VARCHAR } AND s.status="0"</select>
+  <delete id="deleteAll" parameterType="com.i2shopping.i2work.operation.core.integralExchange.model.Cart">DELETE FROM tbl_shoppingcar where EMPLOYEE_ID=#{employeeId:VARCHAR } AND status="0"</delete>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_file">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo">
+    <result column="FILENO" property="fileNo" jdbcType="VARCHAR"/>
+    <result column="FILENAME" property="fileName" jdbcType="VARCHAR"/>
+    <result column="FILEPATH" property="filePath" jdbcType="VARCHAR"/>
+    <result column="UPLOADER" property="upLoader" jdbcType="VARCHAR"/>
+    <result column="FILEDESC" property="desc" jdbcType="VARCHAR"/>
+    <result column="UPLOADTIME" property="upLoadTime" jdbcType="DATE"/>
+  </resultMap>
+  <select id="selectFileInfo" parameterType="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo" resultMap="BaseResultMap">SELECT * FROM tbl_file WHERE 1=1 
+    <if test="fileNo != null and fileNo != ''">FILENO=#{fileNo:VARCHAR}</if>  
+    <if test="fileName != null and fileName != ''">FILENAME=#{fileName:VARCHAR}</if>  
+    <if test="filePath != null and filePath != ''">FILEPATH=#{filePath:VARCHAR}</if>  
+    <if test="upLoader != null and upLoader != ''">UPLOADER=#{upLoader:VARCHAR}</if>  
+    <if test="desc != null and desc != ''">FILEDESC=#{desc:VARCHAR}</if>  
+    <if test="upLoadTime != null and upLoadTime != ''">UPLOADTIME=date_format(#{upLoadTime:DATE},'%Y-%m-%d')</if> 
+  </select>
+  <select id="selectFileInfoCount" parameterType="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo" resultType="java.lang.Integer">SELECT COUNT(*) FROM tbl_file WHERE 1=1 
+    <if test="fileNo != null and fileNo != ''">FILENO=#{fileNo:VARCHAR}</if>  
+    <if test="fileName != null and fileName != ''">FILENAME=#{fileName:VARCHAR}</if>  
+    <if test="filePath != null and filePath != ''">FILEPATH=#{filePath:VARCHAR}</if>  
+    <if test="upLoader != null and upLoader != ''">UPLOADER=#{upLoader:VARCHAR}</if>  
+    <if test="desc != null and desc != ''">FILEDESC=#{desc:VARCHAR}</if>  
+    <if test="upLoadTime != null and upLoadTime != ''">UPLOADTIME=date_format(#{upLoadTime:DATE},'%Y-%m-%d')</if> 
+  </select>
+  <select id="selectFileInfoByParmaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">SELECT * FROM tbl_file WHERE FILENO=#{value:VARCHAR}</select>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo">INSERT INTO tbl_file(FILENO,FILENAME,FILEPATH,UPLOADER,FILEDESC,UPLOADTIME) values (#{fileNo:VARCHAR},#{fileName:VARCHAR},#{filePath:VARCHAR},#{upLoader:VARCHAR},#{desc:VARCHAR},#{upLoadTime:DATE})</insert>
+  <update id="update" parameterType="com.i2shopping.i2work.operation.core.fileInfo.model.FileInfo">UPDATE tbl_file 
+    <trim prefix="set"> 
+      <if test="fileName != null">FILENAME = #{fileName:VARCHAR} ,</if>  
+      <if test="filePath != null">FILEPATH = #{filePath:VARCHAR} ,</if>  
+      <if test="upLoader != null">UPLOADER = #{upLoader:VARCHAR} ,</if>  
+      <if test="desc != null">FILEDESC = #{desc:VARCHAR} ,</if> 
+    </trim> WHERE FILENO=#{fileNo:VARCHAR}
+  </update>
+  <delete id="delete" parameterType="java.lang.String">DELETE FROM tbl_file WHERE FILENO=#{value:VARCHAR}</delete>
+</mapper>

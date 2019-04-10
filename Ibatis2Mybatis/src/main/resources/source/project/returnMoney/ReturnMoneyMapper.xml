@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_project_return_money">
+    <typeAlias alias="ReturnMoney" type="com.i2shopping.i2work.operation.core.project.model.ReturnMoney"/>
+    <resultMap id="BaseResultMap" class="ReturnMoney">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="return_date" property="returnDate" jdbcType="TIMESTAMP"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+        <result column="contract_no" property="contractNo" jdbcType="VARCHAR"/>
+        <result column="contract_name" property="contractName" jdbcType="VARCHAR"/>
+        <result column="return_amount" property="returnAmount" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="PageListMap" class="ReturnMoney" extends="BaseResultMap">
+        <result property="supposedIncome" column="supposed_income" jdbcType="VARCHAR"/>
+        <result property="notIncome" column="not_income" jdbcType="VARCHAR"/>
+        <result property="customerShortName" column="customer_fullName" jdbcType="VARCHAR"/>
+        <result property="departmentName" column="DEPARTMENT_NAME" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="count" resultClass="java.lang.Integer" parameterClass="ReturnMoney">
+        select count(*) from tbl_project_return_money
+        where 1=1
+        <isNotEmpty property="projectNo">
+            and project_no=#projectNo:varchar #
+        </isNotEmpty>
+        <isNotEmpty property="contractNo">
+            and contract_no= #contractNo:varchar #
+        </isNotEmpty>
+        <isNotNull property="projectName">
+            and a.project_name LIKE '%$projectName$%'
+        </isNotNull>
+        <isNotNull property="contractName">
+            and a.contract_name LIKE '%$contractName$%'
+        </isNotNull>
+        <isNotNull property="departmentName">
+            and c.department_id LIKE '%$contractName$%'
+        </isNotNull>
+        <isNotNull property="customerShortName">
+            and d.customer_fullName LIKE '%$customerShortName$%'
+        </isNotNull>
+        <isNotNull prepend="AND" property="returnDate">
+            a.return_date= #returnDate:VARCHAR#
+        </isNotNull>
+    </select>
+
+    <select id="selectPageList" parameterClass="ReturnMoney" resultMap="PageListMap">
+        SELECT
+        a.*,
+        b.supposed_income,
+        b.not_income,
+        d.customer_fullName,
+        e.DEPARTMENT_NAME
+        FROM
+        tbl_project_return_money a,
+        tbl_customer_supposed_income b,
+        tbl_project_info c,
+        tbl_customer_info d,
+        tbl_department_info e
+        WHERE
+        a.project_no = b.project_no
+        AND a.project_no = c.contract_no
+        AND b.customer_id = d.customer_id
+        AND c.department_id = e.DEPARTMENT_ID
+        <isNotEmpty property="projectNo">
+            and project_no=#projectNo:varchar #
+        </isNotEmpty>
+        <isNotEmpty property="contractNo">
+            and contract_no= #contractNo:varchar #
+        </isNotEmpty>
+        <isNotNull property="projectName">
+            and a.project_name LIKE '%$projectName$%'
+        </isNotNull>
+        <isNotNull property="contractName">
+            and a.contract_name LIKE '%$contractName$%'
+        </isNotNull>
+        <isNotNull property="departmentName">
+            and c.department_id LIKE '%$contractName$%'
+        </isNotNull>
+        <isNotNull property="customerShortName">
+            and d.customer_fullName LIKE '%$customerShortName$%'
+        </isNotNull>
+        <isNotNull prepend="AND" property="returnDate">
+            a.return_date= #returnDate:VARCHAR#
+        </isNotNull>
+    </select>
+
+    <insert id="insert" parameterClass="ReturnMoney">
+        insert into tbl_project_return_money(id,return_date, project_no, project_name, contract_no, contract_name, return_amount)
+        values (
+        #id:varchar #,
+        #returnDate: timestamp #,
+        #projectNo:varchar #,
+        #projectName:varchar #,
+        #contractNo:varchar #,
+        #contractName:varchar #,
+        #returnAmount:varchar #
+        );
+    </insert>
+    <update id="update" parameterClass="ReturnMoney">
+        update tbl_project_return_money set
+        id =#id:varchar #
+        <isNotEmpty prepend="," property="returnDate">
+            return_date=#returnDate:timestamp #
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="projectNo">
+            project_no=#projectNo:timestamp #
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="projectName">
+            project_name=#projectName:timestamp #
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="contractNo">
+            contract_no=#contractNo:timestamp #
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="contractName">
+            contract_name=#contractName:timestamp #
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="returnAmount">
+            return_amount=#returnAmount:timestamp #
+        </isNotEmpty>
+        where id=#id:varchar #
+    </update>
+    <select id="selectById" parameterClass="java.lang.String" resultMap="BaseResultMap">
+        select * from tbl_project_return_money where id =#id:varchar #;
+    </select>
+</sqlMap>

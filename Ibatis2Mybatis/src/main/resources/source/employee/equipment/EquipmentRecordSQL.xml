@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_equipment_record">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecord">
+        <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+        <result column="EQUIMENT_ID" property="equipmentId" jdbcType="VARCHAR"/>
+        <result column="RECORD_ID" property="recordId" jdbcType="VARCHAR"/>
+        <result column="RECORD_BEGIN" property="recordBegin" jdbcType="TIMESTAMP"/>
+        <result column="RECORD_END" property="recordEnd" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="VoResultMap" class="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecordVo" extends="BaseResultMap">
+        <result column="EMPLOYEE_ID" property="employeeInfo" select="tbl_employee_info.selectEmpProject"/>
+        <result column="EQUIMENT_ID" property="equipmentInfo" select="tbl_equipment_info.selectBaseByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    EMPLOYEE_ID, EQUIMENT_ID, RECORD_ID, RECORD_BEGIN, RECORD_END
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_equipment_record
+        where RECORD_ID = #recordId:VARCHAR#
+    </select>
+
+    <select id="select" resultMap="BaseResultMap"
+            parameterClass="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecord">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_equipment_record where 1 = 1
+        <isNotEmpty prepend=" AND" property="employeeId">
+            EMPLOYEE_ID = #employeeId:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND" property="equipmentId">
+            EQUIMENT_ID = #equipmentId:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND" property="recordId">
+            RECORD_ID = #recordId:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND" property="recordBegin">
+            RECORD_BEGIN = #recordBegin:TIMESTAMP#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND" property="recordEnd">
+            RECORD_END = #recordEnd:TIMESTAMP#
+        </isNotEmpty>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterClass="java.lang.String">
+      delete from tbl_equipment_record
+      where RECORD_ID = #recordId:VARCHAR#
+    </delete>
+
+    <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecord">
+        insert into tbl_equipment_record
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="employeeId">
+                EMPLOYEE_ID
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentId">
+                EQUIMENT_ID
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="recordId">
+                RECORD_ID
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="recordBegin">
+                RECORD_BEGIN
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="recordEnd">
+                RECORD_END
+            </isNotEmpty>
+            )
+        </dynamic>
+        VALUES
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="employeeId">
+                #employeeId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentId">
+                #equipmentId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="recordId">
+                #recordId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="recordBegin">
+                #recordBegin:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="recordEnd">
+                #recordEnd:TIMESTAMP#
+            </isNotEmpty>
+            )
+        </dynamic>
+    </insert>
+
+    <update id="update" parameterClass="com.i2shopping.i2work.operation.core.employee.model.EquipmentRecord">
+        update tbl_equipment_record
+        <dynamic prepend="set">
+            <isNotEmpty prepend="," property="employeeId">
+                EMPLOYEE_ID = #employeeId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentId">
+                EQUIMENT_ID = #equipmentId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="recordId">
+                RECORD_ID = #recordId:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="recordBegin">
+                RECORD_BEGIN = #recordBegin:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="recordEnd">
+                RECORD_END = #recordEnd:TIMESTAMP#
+            </isNotEmpty>
+        </dynamic>
+        where RECORD_ID = #recordId:VARCHAR#
+    </update>
+
+    <select id="export" resultMap="VoResultMap" parameterClass="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tbl_equipment_record
+        WHERE employee_id = #eid :VARCHAR# ORDER BY RECORD_BEGIN DESC
+    </select>
+
+</sqlMap>

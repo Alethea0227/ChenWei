@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_equipment_info">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">
+        <result column="EQUIPMENT_ID" property="equipmentId" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_TYPE" property="equipmentType" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_SERIAL" property="equipmentSerial" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_PROVIDER" property="equipmentProvider" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_COM" property="equipmentCom" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_ORDER_NO" property="equipmentOrderNo" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_BRAND" property="equipmentBrand" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_MODEL" property="equipmentModel" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_PURCHASE" property="equipmentPurchase" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_USE_TYPE" property="equipmentUseType" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_RENT" property="equipmentRent" jdbcType="VARCHAR"/>
+        <result column="EQUIPMENT_IMAGE" property="equipmentImage" jdbcType="VARCHAR"/>
+        <result column="EMPLOYEE_ID" property="employeeId" jdbcType="VARCHAR"/>
+        <result column="RECORD_ID" property="recordId" jdbcType="VARCHAR"/>
+        <result column="ISDELE" property="isDele" jdbcType="VARCHAR"/>
+        <result column="ORDER_BEGINTIME" property="orderBegintime" jdbcType="TIMESTAMP"/>
+        <result column="ORDER_ENDTIME" property="orderEndtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="VoResultMap" class="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfoVo"
+               extends="BaseResultMap">
+        <result column="EMPLOYEE_ID" property="employeeInfo" select="tbl_employee_info.selectEmpProject"/>
+        <result column="RECORD_ID" property="equipmentRecord" select="tbl_equipment_record.selectByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    EQUIPMENT_ID, EQUIPMENT_TYPE, EQUIPMENT_SERIAL, EQUIPMENT_PROVIDER, EQUIPMENT_COM, 
+    EQUIPMENT_ORDER_NO, EQUIPMENT_BRAND, EQUIPMENT_MODEL, EQUIPMENT_PURCHASE, EQUIPMENT_USE_TYPE, 
+    EQUIPMENT_RENT, EQUIPMENT_IMAGE, EMPLOYEE_ID, RECORD_ID, ISDELE, ORDER_BEGINTIME, ORDER_ENDTIME
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="VoResultMap" parameterClass="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_equipment_info
+        where EQUIPMENT_ID = #equipmentId:VARCHAR#
+        AND ISDELE = '0'
+    </select>
+
+    <select id="selectBaseByPrimaryKey" resultMap="BaseResultMap" parameterClass="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_equipment_info
+        where EQUIPMENT_ID = #equipmentId:VARCHAR#
+    </select>
+
+    <select id="select" resultMap="VoResultMap"
+            parameterClass="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_equipment_info where 1=1
+        AND ISDELE = '0'
+        <isNotEmpty prepend=" AND " property="equipmentId">EQUIPMENT_ID = #equipmentId:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentType">EQUIPMENT_TYPE = #equipmentType:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentSerial">EQUIPMENT_SERIAL = #equipmentSerial:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentProvider">EQUIPMENT_PROVIDER = #equipmentProvider:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentCom">EQUIPMENT_COM = #equipmentCom:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentOrderNo">EQUIPMENT_ORDER_NO = #equipmentOrderNo:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentBrand">EQUIPMENT_BRAND = #equipmentBrand:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentModel">EQUIPMENT_MODEL = #equipmentModel:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentPurchase">EQUIPMENT_PURCHASE = #equipmentPurchase:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentUseType">EQUIPMENT_USE_TYPE = #equipmentUseType:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentRent">EQUIPMENT_RENT = #equipmentRent:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentImage">EQUIPMENT_IMAGE = #equipmentImage:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="employeeId">EMPLOYEE_ID = #employeeId:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="recordId">RECORD_ID = #recordId:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="orderBegintime">ORDER_BEGINTIME = #orderBegintime:TIMESTAMP#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="orderEndtime">ORDER_ENDTIME = #orderEndtime:TIMESTAMP#</isNotEmpty>
+    </select>
+
+    <select id="count" resultClass="java.lang.Integer">
+        select count(EQUIPMENT_ID)
+        from tbl_equipment_info where 1=1
+        AND ISDELE = '0'
+        <isNotEmpty prepend=" AND " property="equipmentId">EQUIPMENT_ID = #equipmentId:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentType">EQUIPMENT_TYPE = #equipmentType:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentSerial">EQUIPMENT_SERIAL = #equipmentSerial:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentProvider">EQUIPMENT_PROVIDER = #equipmentProvider:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentCom">EQUIPMENT_COM = #equipmentCom:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentOrderNo">EQUIPMENT_ORDER_NO = #equipmentOrderNo:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentBrand">EQUIPMENT_BRAND = #equipmentBrand:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentModel">EQUIPMENT_MODEL = #equipmentModel:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentPurchase">EQUIPMENT_PURCHASE = #equipmentPurchase:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentUseType">EQUIPMENT_USE_TYPE = #equipmentUseType:VARCHAR#
+        </isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentRent">EQUIPMENT_RENT = #equipmentRent:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="equipmentImage">EQUIPMENT_IMAGE = #equipmentImage:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="employeeId">EMPLOYEE_ID = #employeeId:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="recordId">RECORD_ID = #recordId:VARCHAR#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="orderBegintime">ORDER_BEGINTIME = #orderBegintime:TIMESTAMP#</isNotEmpty>
+        <isNotEmpty prepend=" AND " property="orderEndtime">ORDER_ENDTIME = #orderEndtime:TIMESTAMP#</isNotEmpty>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterClass="java.lang.String">
+    delete from tbl_equipment_info
+    where EQUIPMENT_ID = #equipmentId:VARCHAR#
+     AND ISDELE = '0'
+  </delete>
+
+    <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">
+        insert into tbl_equipment_info
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="equipmentId">EQUIPMENT_ID</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentType">EQUIPMENT_TYPE</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentSerial">EQUIPMENT_SERIAL</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentProvider">EQUIPMENT_PROVIDER</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentCom">EQUIPMENT_COM</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentOrderNo">EQUIPMENT_ORDER_NO</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentBrand">EQUIPMENT_BRAND</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentModel">EQUIPMENT_MODEL</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentPurchase">EQUIPMENT_PURCHASE</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentUseType">EQUIPMENT_USE_TYPE</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentRent">EQUIPMENT_RENT</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentImage">EQUIPMENT_IMAGE</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">EMPLOYEE_ID</isNotEmpty>
+            <isNotEmpty prepend="," property="recordId">RECORD_ID</isNotEmpty>
+            <isNotEmpty prepend="," property="isDele">ISDELE</isNotEmpty>
+            <isNotEmpty prepend="," property="orderBegintime">ORDER_BEGINTIME</isNotEmpty>
+            <isNotEmpty prepend="," property="orderEndtime">ORDER_ENDTIME</isNotEmpty>
+            )
+        </dynamic>
+        VALUES
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="equipmentId">#equipmentId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentType">#equipmentType:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentSerial">#equipmentSerial:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentProvider">#equipmentProvider:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentCom">#equipmentCom:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentOrderNo">#equipmentOrderNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentBrand">#equipmentBrand:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentModel">#equipmentModel:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentPurchase">#equipmentPurchase:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentUseType">#equipmentUseType:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentRent">#equipmentRent:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentImage">#equipmentImage:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">#employeeId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="recordId">#recordId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="isDele">#isDele:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="orderBegintime">#orderBegintime:TIMESTAMP#</isNotEmpty>
+            <isNotEmpty prepend="," property="orderEndtime">#orderEndtime:TIMESTAMP#</isNotEmpty>
+            )
+        </dynamic>
+    </insert>
+
+    <update id="update" parameterClass="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">
+        update tbl_equipment_info
+        <dynamic prepend="set">
+            <isNotEmpty prepend="," property="equipmentType">EQUIPMENT_TYPE = #equipmentType:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentSerial">EQUIPMENT_SERIAL = #equipmentSerial:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentProvider">EQUIPMENT_PROVIDER = #equipmentProvider:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentCom">EQUIPMENT_COM = #equipmentCom:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentOrderNo">EQUIPMENT_ORDER_NO = #equipmentOrderNo:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentBrand">EQUIPMENT_BRAND = #equipmentBrand:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentModel">EQUIPMENT_MODEL = #equipmentModel:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentPurchase">EQUIPMENT_PURCHASE = #equipmentPurchase:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentUseType">EQUIPMENT_USE_TYPE = #equipmentUseType:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentRent">EQUIPMENT_RENT = #equipmentRent:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="equipmentImage">EQUIPMENT_IMAGE = #equipmentImage:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">EMPLOYEE_ID = #employeeId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="recordId">RECORD_ID = #recordId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="isDele">ISDELE = #isDele:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="orderBegintime">ORDER_BEGINTIME = #orderBegintime:TIMESTAMP#</isNotEmpty>
+            <isNotEmpty prepend="," property="orderEndtime">ORDER_ENDTIME = #orderEndtime:TIMESTAMP#</isNotEmpty>
+        </dynamic>
+        where EQUIPMENT_ID = #equipmentId:VARCHAR#
+    </update>
+
+    <update id="updateByPrimaryKey" parameterClass="com.i2shopping.i2work.operation.core.employee.model.EquipmentInfo">
+    update tbl_equipment_info
+    set EQUIPMENT_TYPE = #equipmentType:VARCHAR#,
+      EQUIPMENT_SERIAL = #equipmentSerial:VARCHAR#,
+      EQUIPMENT_PROVIDER = #equipmentProvider:VARCHAR#,
+      EQUIPMENT_COM = #equipmentCom:VARCHAR#,
+      EQUIPMENT_ORDER_NO = #equipmentOrderNo:VARCHAR#,
+      EQUIPMENT_BRAND = #equipmentBrand:VARCHAR#,
+      EQUIPMENT_MODEL = #equipmentModel:VARCHAR#,
+      EQUIPMENT_PURCHASE = #equipmentPurchase:VARCHAR#,
+      EQUIPMENT_USE_TYPE = #equipmentUseType:VARCHAR#,
+      EQUIPMENT_RENT = #equipmentRent:VARCHAR#,
+      EQUIPMENT_IMAGE = #equipmentImage:VARCHAR#,
+      EMPLOYEE_ID = #employeeId:VARCHAR#,
+      RECORD_ID = #recordId:VARCHAR#,
+      ISDELE = #isDele:VARCHAR#,
+      ORDER_BEGINTIME = #orderBegintime:TIMESTAMP#,
+      ORDER_ENDTIME = #orderEndtime:TIMESTAMP#
+    where EQUIPMENT_ID = #equipmentId:VARCHAR#
+  </update>
+
+</sqlMap>

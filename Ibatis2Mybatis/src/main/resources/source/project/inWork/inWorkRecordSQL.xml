@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  Generate by autoSQLMap Powered by duxing@Taobao -->
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_inwork_record" >
+  <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.project.model.InworkRecord" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="project_no" property="projectNo" jdbcType="VARCHAR" />
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR" />
+    <result column="inwork_date" property="inworkDate" jdbcType="VARCHAR" />
+    <result column="inwork" property="inwork" jdbcType="VARCHAR" />
+    <result column="department_inwork" property="departmentInwork" jdbcType="VARCHAR" />
+    <result column="customer_confirm" property="customerConfirm" jdbcType="VARCHAR" />
+    <result column="inwork_customer_confirm" property="inworkCustomerConfirm" jdbcType="VARCHAR" />
+    <result column="public_inwork" property="publicInwork" jdbcType="VARCHAR" />
+    <result column="department_remark" property="departmentRemark" jdbcType="VARCHAR" />
+    <result column="personnel_remark" property="personnelRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="VoResultMap" class="com.i2shopping.i2work.operation.core.project.model.InworkRecordVo" extends="BaseResultMap">
+    <result property="projectInfo" column="project_no" select="tbl_project_info.selectByPrimaryKeyS"></result>
+    <result property="employeeInfoVo" column="employee_id" select="tbl_employee_info_vo.selectByEmployeeId"></result>
+    <result property="contractInfo" column="project_no" select="tbl_contract_info.selectByProjectNo"></result>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, project_no, employee_id, inwork_date, inwork, department_inwork, customer_confirm, 
+    inwork_customer_confirm, public_inwork, department_remark, personnel_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_inwork_record
+    where id = #id:VARCHAR#
+  </select>
+
+  <select id="selectVoByPrimaryKey" resultMap="VoResultMap" parameterClass="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from tbl_inwork_record
+    where id = #id:VARCHAR#
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterClass="java.lang.String" >
+    delete from tbl_inwork_record
+    where id = #id:VARCHAR#
+  </delete>
+  <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.project.model.InworkRecord" >
+    insert into tbl_inwork_record
+    <dynamic prepend="(">
+      <isNotEmpty prepend="," property="id">id</isNotEmpty>
+      <isNotEmpty prepend="," property="projectNo">project_no</isNotEmpty>
+      <isNotEmpty prepend="," property="employeeId">employee_id</isNotEmpty>
+      <isNotEmpty prepend="," property="inworkDate">inwork_date</isNotEmpty>
+      <isNotEmpty prepend="," property="inwork">inwork</isNotEmpty>
+      <isNotEmpty prepend="," property="departmentInwork">department_inwork</isNotEmpty>
+      <isNotEmpty prepend="," property="customerConfirm">customer_confirm</isNotEmpty>
+      <isNotEmpty prepend="," property="inworkCustomerConfirm">inwork_customer_confirm</isNotEmpty>
+      <isNotEmpty prepend="," property="publicInwork">public_inwork</isNotEmpty>
+      <isNotEmpty prepend="," property="departmentRemark">department_remark</isNotEmpty>
+      <isNotEmpty prepend="," property="personnelRemark">personnel_remark</isNotEmpty>
+      )
+    </dynamic>
+    VALUES
+    <dynamic prepend="(">
+      <isNotEmpty prepend="," property="id">#id:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="projectNo">#projectNo:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="employeeId">#employeeId:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="inworkDate">#inworkDate:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="inwork"> #inwork:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="departmentInwork">#departmentInwork:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="customerConfirm">#customerConfirm:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="inworkCustomerConfirm">#inworkCustomerConfirm:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="publicInwork"> #publicInwork:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="departmentRemark">#departmentRemark:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="personnelRemark"> #personnelRemark:VARCHAR#</isNotEmpty>
+      )
+    </dynamic>
+  </insert>
+  <update id="update" parameterClass="com.i2shopping.i2work.operation.core.project.model.InworkRecord" >
+    update tbl_inwork_record
+    <dynamic prepend="set">
+      <isNotEmpty prepend="," property="projectNo">project_no = #projectNo:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="employeeId"> employee_id = #employeeId:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="inworkDate">inwork_date = #inworkDate:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="inwork">inwork = #inwork:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="departmentInwork">department_inwork = #departmentInwork:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="customerConfirm">customer_confirm = #customerConfirm:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="inworkCustomerConfirm">inwork_customer_confirm = #inworkCustomerConfirm:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="publicInwork">public_inwork = #publicInwork:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="departmentRemark">department_remark = #departmentRemark:VARCHAR#</isNotEmpty>
+      <isNotEmpty prepend="," property="personnelRemark">personnel_remark = #personnelRemark:VARCHAR#</isNotEmpty>
+    </dynamic>
+    where id = #id:VARCHAR#
+  </update>
+  <select id="select" parameterClass="com.i2shopping.i2work.operation.core.project.model.InworkRecord" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from tbl_inwork_record where 1=1
+    <isNotEmpty prepend=" AND " property="id">id = #id:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="projectNo">project_no = #projectNo:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="employeeId"> employee_id = #employeeId:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inworkDate">inwork_date = #inworkDate:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inwork">inwork = #inwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="departmentInwork">department_inwork = #departmentInwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="customerConfirm">customer_confirm = #customerConfirm:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inworkCustomerConfirm">inwork_customer_confirm = #inworkCustomerConfirm:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="publicInwork">public_inwork = #publicInwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="departmentRemark">department_remark = #departmentRemark:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="personnelRemark">personnel_remark = #personnelRemark:VARCHAR#</isNotEmpty>
+  </select>
+
+  <select id="selectVo" parameterClass="com.i2shopping.i2work.operation.core.project.model.InworkRecord" resultMap="VoResultMap">
+    select <include refid="Base_Column_List" />
+    from tbl_inwork_record where 1=1
+    <isNotEmpty prepend=" AND " property="id">id = #id:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="projectNo">project_no = #projectNo:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="employeeId"> employee_id = #employeeId:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inworkDate">inwork_date = #inworkDate:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inwork">inwork = #inwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="departmentInwork">department_inwork = #departmentInwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="customerConfirm">customer_confirm = #customerConfirm:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inworkCustomerConfirm">inwork_customer_confirm = #inworkCustomerConfirm:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="publicInwork">public_inwork = #publicInwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="departmentRemark">department_remark = #departmentRemark:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="personnelRemark">personnel_remark = #personnelRemark:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="properties.startTime">inwork_date >= #properties.startTime:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="properties.endTime">#properties.endTime:VARCHAR# >= inwork_date</isNotEmpty>
+    AND project_no in (
+    select DISTINCT contract_no from tbl_contract_info
+    )
+  </select>
+
+  <select id="count" parameterClass="com.i2shopping.i2work.operation.core.project.model.InworkRecord" resultClass="java.lang.Integer">
+    select count(id)
+    from tbl_inwork_record where 1=1
+    <isNotEmpty prepend=" AND " property="id">id = #id:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="projectNo">project_no = #projectNo:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="employeeId"> employee_id = #employeeId:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inworkDate">inwork_date = #inworkDate:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inwork">inwork = #inwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="departmentInwork">department_inwork = #departmentInwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="customerConfirm">customer_confirm = #customerConfirm:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inworkCustomerConfirm">inwork_customer_confirm = #inworkCustomerConfirm:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="publicInwork">public_inwork = #publicInwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="departmentRemark">department_remark = #departmentRemark:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="personnelRemark">personnel_remark = #personnelRemark:VARCHAR#</isNotEmpty>
+  </select>
+
+  <select id="countVo" parameterClass="com.i2shopping.i2work.operation.core.project.model.InworkRecord" resultClass="java.lang.Integer">
+    select count(id)
+    from tbl_inwork_record where 1=1
+    <isNotEmpty prepend=" AND " property="id">id = #id:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="projectNo">project_no = #projectNo:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="employeeId"> employee_id = #employeeId:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inworkDate">inwork_date = #inworkDate:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inwork">inwork = #inwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="departmentInwork">department_inwork = #departmentInwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="customerConfirm">customer_confirm = #customerConfirm:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="inworkCustomerConfirm">inwork_customer_confirm = #inworkCustomerConfirm:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="publicInwork">public_inwork = #publicInwork:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="departmentRemark">department_remark = #departmentRemark:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="personnelRemark">personnel_remark = #personnelRemark:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="properties.startTime">inwork_date >= #properties.startTime:VARCHAR#</isNotEmpty>
+    <isNotEmpty prepend=" AND " property="properties.endTime">#properties.endTime:VARCHAR# >= inwork_date</isNotEmpty>
+    AND project_no in (
+    select DISTINCT contract_no from tbl_contract_info
+    )
+  </select>
+
+</sqlMap>

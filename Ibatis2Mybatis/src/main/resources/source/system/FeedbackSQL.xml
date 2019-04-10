@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="TBL_FEEDBACK" >
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.system.model.Feedback" >
+        <result column="feedback_id" property="feedbackId" jdbcType="VARCHAR" />
+        <result column="feedback_type" property="feedbackType" jdbcType="VARCHAR" />
+        <result column="feedback_image" property="feedbackImage" jdbcType="VARCHAR" />
+        <result column="feedback_content" property="feedbackContent" jdbcType="VARCHAR" />
+        <result column="feedback_desc" property="feedbackDesc" jdbcType="VARCHAR" />
+        <result column="feedback_time" property="feedbackTime" jdbcType="VARCHAR" />
+        <result column="feedback_show" property="feedbackShow" jdbcType="VARCHAR" />
+        <result column="feedback_email" property="feedbackEmail" jdbcType="VARCHAR" />
+        <result column="employees_id" property="employeesId" jdbcType="VARCHAR" />
+        <result column="remark_name" property="remarkName" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="com.i2shopping.i2work.operation.core.system.model.Feedback" >
+        select * from tbl_feedback where feedback_id = #feedbackId:VARCHAR#
+    </select>
+    <select id="findFeedbackCount"  resultClass="java.lang.Integer" parameterClass="com.i2shopping.i2work.operation.core.system.model.Feedback">
+        select  count(*) from tbl_feedback where 1=1
+    </select>
+    <select id="findFeedbackList" resultMap="BaseResultMap" parameterClass="com.i2shopping.i2work.operation.core.system.model.Feedback">
+        select * from tbl_feedback where 1=1
+    </select>
+</sqlMap>

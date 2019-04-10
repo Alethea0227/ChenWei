@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="tbl_project_pre_record">
+    <resultMap id="BaseResultMap" class="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+        <result column="employee_id" property="employeeId" jdbcType="VARCHAR"/>
+        <result column="be_pre_contract_amount" property="bePreContractAmount" jdbcType="VARCHAR"/>
+        <result column="be_pre_man_month" property="bePreManMonth" jdbcType="VARCHAR"/>
+        <result column="be_pre_amount" property="bePreAmount" jdbcType="VARCHAR"/>
+        <result column="be_project_begin_time" property="beProjectBeginTime" jdbcType="TIMESTAMP"/>
+        <result column="be_project_end_time" property="beProjectEndTime" jdbcType="TIMESTAMP"/>
+        <result column="be_completeness" property="beCompleteness" jdbcType="VARCHAR"/>
+        <result column="af_pre_contract_amount" property="afPreContractAmount" jdbcType="VARCHAR"/>
+        <result column="af_pre_man_month" property="afPreManMonth" jdbcType="VARCHAR"/>
+        <result column="af_pre_amount" property="afPreAmount" jdbcType="VARCHAR"/>
+        <result column="af_project_begin_time" property="afProjectBeginTime" jdbcType="TIMESTAMP"/>
+        <result column="af_project_end_time" property="afProjectEndTime" jdbcType="TIMESTAMP"/>
+        <result column="af_completeness" property="afCompleteness" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, project_no, employee_id, be_pre_contract_amount, be_pre_man_month, be_pre_amount, 
+    be_project_begin_time, be_project_end_time, be_completeness, af_pre_contract_amount, 
+    af_pre_man_month, af_pre_amount, af_project_begin_time, af_project_end_time, af_completeness
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_project_pre_record
+        where id =#id:VARCHAR#
+    </select>
+    <delete id="deleteByPrimaryKey" parameterClass="java.lang.String">
+    delete from tbl_project_pre_record
+    where id =#id:VARCHAR#
+  </delete>
+    <insert id="insert" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord">
+        insert into tbl_project_pre_record
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="id">id</isNotEmpty>
+            <isNotEmpty prepend="," property="projectNo">project_no</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">employee_id</isNotEmpty>
+            <isNotEmpty prepend="," property="bePreContractAmount">be_pre_contract_amount</isNotEmpty>
+            <isNotEmpty prepend="," property="bePreManMonth">be_pre_man_month</isNotEmpty>
+            <isNotEmpty prepend="," property="bePreAmount">be_pre_amount</isNotEmpty>
+            <isNotEmpty prepend="," property="beProjectBeginTime">be_project_begin_time</isNotEmpty>
+            <isNotEmpty prepend="," property="beProjectEndTime">be_project_end_time</isNotEmpty>
+            <isNotEmpty prepend="," property="beCompleteness">be_completeness</isNotEmpty>
+            <isNotEmpty prepend="," property="afPreContractAmount">af_pre_contract_amount</isNotEmpty>
+            <isNotEmpty prepend="," property="afPreManMonth">af_pre_man_month</isNotEmpty>
+            <isNotEmpty prepend="," property="afPreAmount">af_pre_amount</isNotEmpty>
+            <isNotEmpty prepend="," property="afProjectBeginTime">af_project_begin_time</isNotEmpty>
+            <isNotEmpty prepend="," property="afProjectEndTime">af_project_end_time</isNotEmpty>
+            <isNotEmpty prepend="," property="afCompleteness">af_completeness</isNotEmpty>
+            )
+        </dynamic>
+        values
+        <dynamic prepend="(">
+            <isNotEmpty prepend="," property="id">#id:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="projectNo">#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">#employeeId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="bePreContractAmount">#bePreContractAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="bePreManMonth">#bePreManMonth:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="bePreAmount">#bePreAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="beProjectBeginTime">#beProjectBeginTime:TIMESTAMP#</isNotEmpty>
+            <isNotEmpty prepend="," property="beProjectEndTime">#beProjectEndTime:TIMESTAMP#</isNotEmpty>
+            <isNotEmpty prepend="," property="beCompleteness">#beCompleteness:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="afPreContractAmount">#afPreContractAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="afPreManMonth">#afPreManMonth:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="afPreAmount">#afPreAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="afProjectBeginTime">#afProjectBeginTime:TIMESTAMP#</isNotEmpty>
+            <isNotEmpty prepend="," property="afProjectEndTime">#afProjectEndTime:TIMESTAMP#</isNotEmpty>
+            <isNotEmpty prepend="," property="afCompleteness">#afCompleteness:VARCHAR#</isNotEmpty>
+            )
+        </dynamic>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord">
+        update tbl_project_pre_record
+        <dynamic prepend="set">
+            <isNotEmpty prepend="," property="projectNo">project_no =#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="employeeId">employee_id =#employeeId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="bePreContractAmount">be_pre_contract_amount
+                =#bePreContractAmount:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="bePreManMonth">be_pre_man_month =#bePreManMonth:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="bePreAmount">be_pre_amount =#bePreAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="beProjectBeginTime">be_project_begin_time
+                =#beProjectBeginTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="beProjectEndTime">be_project_end_time =#beProjectEndTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="beCompleteness">be_completeness =#beCompleteness:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="afPreContractAmount">af_pre_contract_amount
+                =#afPreContractAmount:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="afPreManMonth">af_pre_man_month =#afPreManMonth:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="afPreAmount">af_pre_amount =#afPreAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend="," property="afProjectBeginTime">af_project_begin_time
+                =#afProjectBeginTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="afProjectEndTime">af_project_end_time =#afProjectEndTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="afCompleteness">af_completeness =#afCompleteness:VARCHAR#</isNotEmpty>
+        </dynamic>
+        where id =#id:VARCHAR#
+    </update>
+
+    <select id="select" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_project_pre_record where 1 = 1
+        <dynamic>
+            <isNotEmpty prepend=" AND " property="projectNo">project_no =#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="employeeId">employee_id =#employeeId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="bePreContractAmount">be_pre_contract_amount
+                =#bePreContractAmount:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="bePreManMonth">be_pre_man_month =#bePreManMonth:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="bePreAmount">be_pre_amount =#bePreAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="beProjectBeginTime">be_project_begin_time
+                =#beProjectBeginTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="beProjectEndTime">be_project_end_time =#beProjectEndTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="beCompleteness">be_completeness =#beCompleteness:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afPreContractAmount">af_pre_contract_amount
+                =#afPreContractAmount:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afPreManMonth">af_pre_man_month =#afPreManMonth:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afPreAmount">af_pre_amount =#afPreAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afProjectBeginTime">af_project_begin_time
+                =#afProjectBeginTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afProjectEndTime">af_project_end_time =#afProjectEndTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afCompleteness">af_completeness =#afCompleteness:VARCHAR#</isNotEmpty>
+        </dynamic>
+    </select>
+
+    <select id="count" resultClass="java.lang.Integer" parameterClass="com.i2shopping.i2work.operation.core.project.model.ProjectPreRecord">
+        select count(id)
+        from tbl_project_pre_record where 1 = 1
+        <dynamic>
+            <isNotEmpty prepend=" AND " property="projectNo">project_no =#projectNo:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="employeeId">employee_id =#employeeId:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="bePreContractAmount">be_pre_contract_amount
+                =#bePreContractAmount:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="bePreManMonth">be_pre_man_month =#bePreManMonth:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="bePreAmount">be_pre_amount =#bePreAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="beProjectBeginTime">be_project_begin_time
+                =#beProjectBeginTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="beProjectEndTime">be_project_end_time =#beProjectEndTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="beCompleteness">be_completeness =#beCompleteness:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afPreContractAmount">af_pre_contract_amount
+                =#afPreContractAmount:VARCHAR#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afPreManMonth">af_pre_man_month =#afPreManMonth:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afPreAmount">af_pre_amount =#afPreAmount:VARCHAR#</isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afProjectBeginTime">af_project_begin_time
+                =#afProjectBeginTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afProjectEndTime">af_project_end_time =#afProjectEndTime:TIMESTAMP#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="afCompleteness">af_completeness =#afCompleteness:VARCHAR#</isNotEmpty>
+        </dynamic>
+    </select>
+
+</sqlMap>

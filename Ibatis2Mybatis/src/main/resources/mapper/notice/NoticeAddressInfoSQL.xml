@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_otherNotice">
+  <resultMap id="downloadAddress" type="com.i2shopping.i2work.operation.core.noticeInfo.model.NoticeInfo">
+    <result column="sharImageAddress" property="sharImageAddress" jdbcType="VARCHAR"/>
+    <result column="but_type" property="butType" jdbcType="VARCHAR"/>
+    <result column="downloadAddress" property="downloadAddress" jdbcType="VARCHAR"/>
+  </resultMap>
+  <select id="selectAddressInfo" resultMap="downloadAddress" parameterType="java.lang.String">SELECT * FROM tbl_notice_info WHERE publish_type=#{type:VARCHAR}</select>
+</mapper>

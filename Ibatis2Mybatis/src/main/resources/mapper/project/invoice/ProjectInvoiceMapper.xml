@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tbl_project_invoice">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="invoice_date" property="invoiceDate" jdbcType="TIMESTAMP"/>
+    <result column="customer_no" property="customerNo" jdbcType="VARCHAR"/>
+    <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+    <result column="invoice_no" property="invoiceNo" jdbcType="VARCHAR"/>
+    <result column="notax_amount" property="notaxAmount" jdbcType="VARCHAR"/>
+    <result column="tax_rate" property="taxRate" jdbcType="VARCHAR"/>
+    <result column="tax_amount" property="taxAmount" jdbcType="VARCHAR"/>
+    <result column="tatal_amount" property="tatalAmount" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="BaseResultMap1" extends="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice">
+    <association property="projectInfo" column="project_no" select="tbl_project_invoice.selectProjectInfoByContrcatno"/>
+    <association property="customerInfo" column="customer_no" select="tbl_project_invoice.selectCustomerInfoById"/>
+  </resultMap>
+  <resultMap id="result1" type="com.i2shopping.i2work.operation.core.project.model.ProjectInfo">
+    <result property="projectActualNo" column="project_actual_no" jdbcType="VARCHAR"/>
+    <result property="shortProjectName" column="short_project_name" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="result2" type="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">
+    <result property="customerFullname" column="customer_fullName" jdbcType="VARCHAR"/>
+    <result property="customerId" column="customer_id" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="result3" type="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice">
+    <result property="customerNo" column="customer_id" jdbcType="VARCHAR"/>
+  </resultMap>
+  <select id="selectProjectList" resultType="com.i2shopping.i2work.operation.core.project.model.ProjectInfo">select contract_no as contractNo, short_project_name as shortProjectName from tbl_project_info -- where plan_end_date &gt; now()</select>
+  <select id="selectCustomerList" resultType="com.i2shopping.i2work.operation.core.customer.model.CustomerInfo">select customer_id as customerId,customer_fullName as customerShortname from tbl_customer_info</select>
+  <select id="selectProjectInfoByContrcatno" parameterType="java.lang.String" resultMap="result1">select project_actual_no, short_project_name from tbl_project_info where contract_no=#{value:VARHCAR}</select>
+  <select id="selectCustomerInfoById" parameterType="java.lang.String" resultMap="result2">select * from tbl_customer_info where customer_id=#{value:VARHCAR}</select>
+  <select id="selectForList" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice" resultMap="BaseResultMap1">select * from tbl_project_invoice d where 1=1 
+    <if test="taxRate != null">and d.tax_rate=#{taxRate:varchar}</if>  
+    <if test="invoiceNo != null">and d.invoice_no=#{invoiceNo:varchar}</if>  
+    <if test="invoiceDate != null">d.invoice_date= #{invoiceDate:VARCHAR}</if> 
+  </select>
+  <select id="count" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice" resultType="java.lang.Integer">select count(1) from tbl_project_invoice where 1=1
+    <if test="customerNo != null">and customer_no=#{customerNo:varchar}</if>  
+    <if test="projectNo != null">and project_no=#{projectNo:varchar}</if>  
+    <if test="taxRate != null">and tax_rate=#{taxRate:varchar}</if>  
+    <if test="invoiceNo != null">and invoice_no=#{invoiceNo:varchar}</if>  
+    <if test="invoiceDate != null">invoice_date= #{invoiceDate:VARCHAR}</if> 
+  </select>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice">insert into tbl_project_invoice (id, invoice_date, customer_no, project_no, invoice_no, notax_amount, tax_rate, tax_amount, tatal_amount) values (#{id:VARCHAR}, #{invoiceDate:VARCHAR}, #{customerNo:VARCHAR}, #{projectNo:VARCHAR}, #{invoiceNo:VARCHAR}, #{notaxAmount:VARCHAR}, #{taxRate:VARCHAR}, #{taxAmount:VARCHAR}, #{tatalAmount:VARCHAR})</insert>
+  <insert id="insertSelective" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice">insert into tbl_project_invoice (id, invoice_date, customer_no, project_no, invoice_no, notax_amount, tax_rate, tax_amount, tatal_amount) values (#{id:VARCHAR}, #{invoiceDate:VARCHAR}, #{customerNo:VARCHAR}, #{projectNo:VARCHAR}, #{invoiceNo:VARCHAR}, #{notaxAmount:VARCHAR}, #{taxRate:VARCHAR}, #{taxAmount:VARCHAR}, #{tatalAmount:VARCHAR})</insert>
+  <delete id="deleteRecord" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice">delete from tbl_project_invoice where id = #{id:VARCHAR}</delete>
+  <select id="selectRecordInfo" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice" resultMap="BaseResultMap">select * from tbl_project_invoice where id = #{id:VARCHAR}</select>
+  <update id="updateRecord" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice">update tbl_project_invoice set invoice_date = #{invoiceDate:VARCHAR}, customer_no = #{customerNo:VARCHAR}, project_no = #{projectNo:VARCHAR}, invoice_no = #{invoiceNo:VARCHAR}, notax_amount = #{notaxAmount:VARCHAR}, tax_rate = #{taxRate:VARCHAR}, tax_amount = #{taxAmount:VARCHAR}, tatal_amount = #{tatalAmount:VARCHAR} where id = #{id:VARCHAR}</update>
+  <select id="selectCustomer" parameterType="java.lang.String" resultMap="result3">select customer_id from tbl_contract_info where contract_no = #{id:VARCHAR}</select>
+  <insert id="insertRecord" parameterType="com.i2shopping.i2work.operation.core.project.model.CustomerSupposedIncome">insert into tbl_customer_supposed_income (id, income_date, customer_id, project_no, supposed_income, not_income, already_income) values (#{id:VARCHAR}, #{incomeDate:VARCHAR}, #{customerId:VARCHAR}, #{projectNo:VARCHAR}, #{supposedIncome:VARCHAR}, #{notIncome:VARCHAR}, '0')</insert>
+  <select id="selcetRecord" parameterType="com.i2shopping.i2work.operation.core.project.model.ProjectInvoice" resultMap="BaseResultMap">select * from tbl_project_invoice where project_no = #{projectNo:VARCHAR}</select>
+</mapper>

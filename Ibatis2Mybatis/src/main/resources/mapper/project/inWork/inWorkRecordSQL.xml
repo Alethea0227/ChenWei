@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  Generate by autoSQLMap Powered by duxing@Taobao -->
+<mapper namespace="tbl_inwork_record">
+  <resultMap id="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.InworkRecord">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="project_no" property="projectNo" jdbcType="VARCHAR"/>
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR"/>
+    <result column="inwork_date" property="inworkDate" jdbcType="VARCHAR"/>
+    <result column="inwork" property="inwork" jdbcType="VARCHAR"/>
+    <result column="department_inwork" property="departmentInwork" jdbcType="VARCHAR"/>
+    <result column="customer_confirm" property="customerConfirm" jdbcType="VARCHAR"/>
+    <result column="inwork_customer_confirm" property="inworkCustomerConfirm" jdbcType="VARCHAR"/>
+    <result column="public_inwork" property="publicInwork" jdbcType="VARCHAR"/>
+    <result column="department_remark" property="departmentRemark" jdbcType="VARCHAR"/>
+    <result column="personnel_remark" property="personnelRemark" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.i2shopping.i2work.operation.core.project.model.InworkRecordVo">
+    <association property="projectInfo" column="project_no" select="tbl_project_info.selectByPrimaryKeyS"/>
+    <association property="employeeInfoVo" column="employee_id" select="tbl_employee_info_vo.selectByEmployeeId"/>
+    <association property="contractInfo" column="project_no" select="tbl_contract_info.selectByProjectNo"/>
+  </resultMap>
+  <sql id="Base_Column_List">id, project_no, employee_id, inwork_date, inwork, department_inwork, customer_confirm, inwork_customer_confirm, public_inwork, department_remark, personnel_remark</sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_inwork_record where id = #{id:VARCHAR}
+  </select>
+  <select id="selectVoByPrimaryKey" resultMap="VoResultMap" parameterType="java.lang.String">select 
+    <include refid="Base_Column_List"/> from tbl_inwork_record where id = #{id:VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">delete from tbl_inwork_record where id = #{id:VARCHAR}</delete>
+  <insert id="insert" parameterType="com.i2shopping.i2work.operation.core.project.model.InworkRecord">insert into tbl_inwork_record 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">id ,</if>  
+      <if test="projectNo != null and projectNo != ''">project_no ,</if>  
+      <if test="employeeId != null and employeeId != ''">employee_id ,</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date ,</if>  
+      <if test="inwork != null and inwork != ''">inwork ,</if>  
+      <if test="departmentInwork != null and departmentInwork != ''">department_inwork ,</if>  
+      <if test="customerConfirm != null and customerConfirm != ''">customer_confirm ,</if>  
+      <if test="inworkCustomerConfirm != null and inworkCustomerConfirm != ''">inwork_customer_confirm ,</if>  
+      <if test="publicInwork != null and publicInwork != ''">public_inwork ,</if>  
+      <if test="departmentRemark != null and departmentRemark != ''">department_remark ,</if>  
+      <if test="personnelRemark != null and personnelRemark != ''">personnel_remark ,</if> )
+    </trim> VALUES 
+    <trim prefix="("> 
+      <if test="id != null and id != ''">#{id:VARCHAR} ,</if>  
+      <if test="projectNo != null and projectNo != ''">#{projectNo:VARCHAR} ,</if>  
+      <if test="employeeId != null and employeeId != ''">#{employeeId:VARCHAR} ,</if>  
+      <if test="inworkDate != null and inworkDate != ''">#{inworkDate:VARCHAR} ,</if>  
+      <if test="inwork != null and inwork != ''">#{inwork:VARCHAR} ,</if>  
+      <if test="departmentInwork != null and departmentInwork != ''">#{departmentInwork:VARCHAR} ,</if>  
+      <if test="customerConfirm != null and customerConfirm != ''">#{customerConfirm:VARCHAR} ,</if>  
+      <if test="inworkCustomerConfirm != null and inworkCustomerConfirm != ''">#{inworkCustomerConfirm:VARCHAR} ,</if>  
+      <if test="publicInwork != null and publicInwork != ''">#{publicInwork:VARCHAR} ,</if>  
+      <if test="departmentRemark != null and departmentRemark != ''">#{departmentRemark:VARCHAR} ,</if>  
+      <if test="personnelRemark != null and personnelRemark != ''">#{personnelRemark:VARCHAR} ,</if> )
+    </trim> 
+  </insert>
+  <update id="update" parameterType="com.i2shopping.i2work.operation.core.project.model.InworkRecord">update tbl_inwork_record 
+    <trim prefix="set"> 
+      <if test="projectNo != null and projectNo != ''">project_no = #{projectNo:VARCHAR} ,</if>  
+      <if test="employeeId != null and employeeId != ''">employee_id = #{employeeId:VARCHAR} ,</if>  
+      <if test="inworkDate != null and inworkDate != ''">inwork_date = #{inworkDate:VARCHAR} ,</if>  
+      <if test="inwork != null and inwork != ''">inwork = #{inwork:VARCHAR} ,</if>  
+      <if test="departmentInwork != null and departmentInwork != ''">department_inwork = #{departmentInwork:VARCHAR} ,</if>  
+      <if test="customerConfirm != null and customerConfirm != ''">customer_confirm = #{customerConfirm:VARCHAR} ,</if>  
+      <if test="inworkCustomerConfirm != null and inworkCustomerConfirm != ''">inwork_customer_confirm = #{inworkCustomerConfirm:VARCHAR} ,</if>  
+      <if test="publicInwork != null and publicInwork != ''">public_inwork = #{publicInwork:VARCHAR} ,</if>  
+      <if test="departmentRemark != null and departmentRemark != ''">department_remark = #{departmentRemark:VARCHAR} ,</if>  
+      <if test="personnelRemark != null and personnelRemark != ''">personnel_remark = #{personnelRemark:VARCHAR} ,</if> 
+    </trim> where id = #{id:VARCHAR}
+  </update>
+  <select id="select" parameterType="com.i2shopping.i2work.operation.core.project.model.InworkRecord" resultMap="BaseResultMap">select 
+    <include refid="Base_Column_List"/> from tbl_inwork_record where 1=1 
+    <if test="id != null and id != ''">id = #{id:VARCHAR}</if>  
+    <if test="projectNo != null and projectNo != ''">project_no = #{projectNo:VARCHAR}</if>  
+    <if test="employeeId != null and employeeId != ''">employee_id = #{employeeId:VARCHAR}</if>  
+    <if test="inworkDate != null and inworkDate != ''">inwork_date = #{inworkDate:VARCHAR}</if>  
+    <if test="inwork != null and inwork != ''">inwork = #{inwork:VARCHAR}</if>  
+    <if test="departmentInwork != null and departmentInwork != ''">department_inwork = #{departmentInwork:VARCHAR}</if>  
+    <if test="customerConfirm != null and customerConfirm != ''">customer_confirm = #{customerConfirm:VARCHAR}</if>  
+    <if test="inworkCustomerConfirm != null and inworkCustomerConfirm != ''">inwork_customer_confirm = #{inworkCustomerConfirm:VARCHAR}</if>  
+    <if test="publicInwork != null and publicInwork != ''">public_inwork = #{publicInwork:VARCHAR}</if>  
+    <if test="departmentRemark != null and departmentRemark != ''">department_remark = #{departmentRemark:VARCHAR}</if>  
+    <if test="personnelRemark != null and personnelRemark != ''">personnel_remark = #{personnelRemark:VARCHAR}</if> 
+  </select>
+  <select id="selectVo" parameterType="com.i2shopping.i2work.operation.core.project.model.InworkRecord" resultMap="VoResultMap">select 
+    <include refid="Base_Column_List"/> from tbl_inwork_record where 1=1 
+    <if test="id != null and id != ''">id = #{id:VARCHAR}</if>  
+    <if test="projectNo != null and projectNo != ''">project_no = #{projectNo:VARCHAR}</if>  
+    <if test="employeeId != null and employeeId != ''">employee_id = #{employeeId:VARCHAR}</if>  
+    <if test="inworkDate != null and inworkDate != ''">inwork_date = #{inworkDate:VARCHAR}</if>  
+    <if test="inwork != null and inwork != ''">inwork = #{inwork:VARCHAR}</if>  
+    <if test="departmentInwork != null and departmentInwork != ''">department_inwork = #{departmentInwork:VARCHAR}</if>  
+    <if test="customerConfirm != null and customerConfirm != ''">customer_confirm = #{customerConfirm:VARCHAR}</if>  
+    <if test="inworkCustomerConfirm != null and inworkCustomerConfirm != ''">inwork_customer_confirm = #{inworkCustomerConfirm:VARCHAR}</if>  
+    <if test="publicInwork != null and publicInwork != ''">public_inwork = #{publicInwork:VARCHAR}</if>  
+    <if test="departmentRemark != null and departmentRemark != ''">department_remark = #{departmentRemark:VARCHAR}</if>  
+    <if test="personnelRemark != null and personnelRemark != ''">personnel_remark = #{personnelRemark:VARCHAR}</if>  
+    <if test="properties.startTime != null and properties.startTime != ''">inwork_date &gt;= #{properties.startTime:VARCHAR}</if>  
+    <if test="properties.endTime != null and properties.endTime != ''">#{properties.endTime:VARCHAR} &gt;= inwork_date</if> AND project_no in ( select DISTINCT contract_no from tbl_contract_info )
+  </select>
+  <select id="count" parameterType="com.i2shopping.i2work.operation.core.project.model.InworkRecord" resultType="java.lang.Integer">select count(id) from tbl_inwork_record where 1=1
+    <if test="id != null and id != ''">id = #{id:VARCHAR}</if>  
+    <if test="projectNo != null and projectNo != ''">project_no = #{projectNo:VARCHAR}</if>  
+    <if test="employeeId != null and employeeId != ''">employee_id = #{employeeId:VARCHAR}</if>  
+    <if test="inworkDate != null and inworkDate != ''">inwork_date = #{inworkDate:VARCHAR}</if>  
+    <if test="inwork != null and inwork != ''">inwork = #{inwork:VARCHAR}</if>  
+    <if test="departmentInwork != null and departmentInwork != ''">department_inwork = #{departmentInwork:VARCHAR}</if>  
+    <if test="customerConfirm != null and customerConfirm != ''">customer_confirm = #{customerConfirm:VARCHAR}</if>  
+    <if test="inworkCustomerConfirm != null and inworkCustomerConfirm != ''">inwork_customer_confirm = #{inworkCustomerConfirm:VARCHAR}</if>  
+    <if test="publicInwork != null and publicInwork != ''">public_inwork = #{publicInwork:VARCHAR}</if>  
+    <if test="departmentRemark != null and departmentRemark != ''">department_remark = #{departmentRemark:VARCHAR}</if>  
+    <if test="personnelRemark != null and personnelRemark != ''">personnel_remark = #{personnelRemark:VARCHAR}</if> 
+  </select>
+  <select id="countVo" parameterType="com.i2shopping.i2work.operation.core.project.model.InworkRecord" resultType="java.lang.Integer">select count(id) from tbl_inwork_record where 1=1
+    <if test="id != null and id != ''">id = #{id:VARCHAR}</if>  
+    <if test="projectNo != null and projectNo != ''">project_no = #{projectNo:VARCHAR}</if>  
+    <if test="employeeId != null and employeeId != ''">employee_id = #{employeeId:VARCHAR}</if>  
+    <if test="inworkDate != null and inworkDate != ''">inwork_date = #{inworkDate:VARCHAR}</if>  
+    <if test="inwork != null and inwork != ''">inwork = #{inwork:VARCHAR}</if>  
+    <if test="departmentInwork != null and departmentInwork != ''">department_inwork = #{departmentInwork:VARCHAR}</if>  
+    <if test="customerConfirm != null and customerConfirm != ''">customer_confirm = #{customerConfirm:VARCHAR}</if>  
+    <if test="inworkCustomerConfirm != null and inworkCustomerConfirm != ''">inwork_customer_confirm = #{inworkCustomerConfirm:VARCHAR}</if>  
+    <if test="publicInwork != null and publicInwork != ''">public_inwork = #{publicInwork:VARCHAR}</if>  
+    <if test="departmentRemark != null and departmentRemark != ''">department_remark = #{departmentRemark:VARCHAR}</if>  
+    <if test="personnelRemark != null and personnelRemark != ''">personnel_remark = #{personnelRemark:VARCHAR}</if>  
+    <if test="properties.startTime != null and properties.startTime != ''">inwork_date &gt;= #{properties.startTime:VARCHAR}</if>  
+    <if test="properties.endTime != null and properties.endTime != ''">#{properties.endTime:VARCHAR} &gt;= inwork_date</if> AND project_no in ( select DISTINCT contract_no from tbl_contract_info )
+  </select>
+</mapper>
